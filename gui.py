@@ -37,5 +37,5 @@ entry2
 
 root.mainloop()
 
-O rodrigo é um manso!
+O ze e um manso!
 
