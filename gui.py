@@ -1,6 +1,10 @@
 from tkinter import *
 import sys
 
+def command1():
+    if entry1.get() == 'admin' and entry2.get() == 'password' or entry1.get() == 'test' and entry2.get() == 'pass':
+        root.deiconify()
+        top.destroy()
 
 def command2():
     top.destroy()
@@ -26,4 +30,3 @@ entry2.bind('<Return>', command1)
 
 root.mainloop()
 
-name = "Boas pessoal"
