@@ -28,6 +28,13 @@ button = Button(top, text='Cancel', command= lambda:command2())
 
 entry2.bind('<Return>', command1)
 
+label = Label(top, text='Copyright Jose Lourenco, Rodrigo Mendes', font={'Arial', 9})
+
+label1.pack()
+label2.pack()
+entry1.pack()
+entry2
+
 root.mainloop()
 
 
