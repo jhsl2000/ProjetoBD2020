@@ -37,6 +37,5 @@ entry2
 
 root.mainloop()
 
-
-puta
+O rodrigo é um manso!
 
