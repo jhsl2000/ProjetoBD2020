@@ -1,9 +1,18 @@
+import getpass
 from tkinter import *
 
 
 def register_user():
-    username_info = username.get()
+    email_info = email.get()
     password_info = password.get()
+
+
+def login_verify():
+
+    email1 = email_verify.get()
+    password1 = password_verify.get()
+    email_entry1.delete(0, END)
+    password_entry1.delete(0, END)
 
 
 def register():
@@ -15,20 +24,20 @@ def register():
     photo = Label(screen, image=photo2, height=300, width=250)
     photo.pack()
 
-    global username
+    global email
     global password
-    global username_entry
+    global email_entry
     global password_entry
-
-    username=StringVar()
+    email=StringVar()
     password=StringVar()
+
     Label(screen1, text="Insere os detalhes em baixo: ").pack()
     Label(screen1, text="").pack()
-    Label(screen1, text="Username: ").pack()
-    username_entry = Entry(screen1, textvariable = username)
-    username_entry.pack()
+    Label(screen1, text="Email: ").pack()
+    email_entry = Entry(screen1, textvariable = email)
+    email_entry.pack()
     Label(screen1, text="Password: ").pack()
-    password_entry = Entry(screen1, textvariable = password, show="*")
+    password_entry = Entry(screen1, textvariable =password, show="*")
     password_entry.pack()
     Label(screen1, text="").pack()
     Button(screen1, text="Registar", command = register_user).pack()
@@ -42,20 +51,24 @@ def login():
     Label(screen2, text= "Insere os detalhes para Login").pack()
     Label(screen2, text="").pack()
 
-    global username_verify
+    global email_verify
     global password_verify
 
-    username_verify = StringVar()
+    email_verify = StringVar()
     password_verify = StringVar()
 
-    Label(screen2, text = "Username * ").pack()
-    username_verify = Entry(screen2, textvariable = username_verify)
+    global email_entry1
+    global password_entry1
 
+    Label(screen2, text = "Email : ").pack()
+    email_entry1 = Entry(screen2, textvariable=email_verify)
+    email_entry1.pack()
     Label(screen2, text = "").pack()
-    Label(screen2, text= "Password * ").pack()
-
+    Label(screen2, text="Password : ").pack()
+    password_entry1 = Entry(screen2, textvariable=password_verify, show='*')
+    password_entry1.pack()
     Label(screen2, text="").pack()
-    Button(screen2, "Login").pack()
+    Button(screen2, text="Login", command= login_verify).pack()
 
 
 def main_screen():
