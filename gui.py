@@ -37,5 +37,5 @@ entry2
 
 root.mainloop()
 
-O RODRIGO É UM MANSO
+
 
