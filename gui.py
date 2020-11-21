@@ -37,5 +37,7 @@ entry2
 
 root.mainloop()
 
-
+ISTO
+E
+UM TESTE
 
