@@ -33,13 +33,11 @@ label = Label(top, text='Copyright Jose Lourenco, Rodrigo Mendes', font={'Arial'
 label1.pack()
 label2.pack()
 entry1.pack()
-entry2
+entry2.pack()
+button.pack()
+
+
 
 root.mainloop()
 
-ISTO
-E
-UM TESTE
-
-PORRA
 
