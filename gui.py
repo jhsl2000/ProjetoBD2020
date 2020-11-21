@@ -25,3 +25,5 @@ button = Button(top, text='Cancel', command= lambda:command2())
 entry2.bind('<Return>', command1)
 
 root.mainloop()
+
+name = "Boas pessoal"
