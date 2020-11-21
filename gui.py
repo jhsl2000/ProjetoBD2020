@@ -30,3 +30,6 @@ entry2.bind('<Return>', command1)
 
 root.mainloop()
 
+
+puta
+
