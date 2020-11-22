@@ -1,4 +1,6 @@
 import getpass
+import funcoes
+
 from tkinter import *
 
 
@@ -13,6 +15,9 @@ def login_verify():
     password1 = password_verify.get()
     email_entry1.delete(0, END)
     password_entry1.delete(0, END)
+
+    if funcoes.check_login(email1, password1) == 'cliente':
+        print("Login bem sucedido!", email1)
 
 
 def register():
