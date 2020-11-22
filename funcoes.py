@@ -3,9 +3,8 @@ import psycopg2.extras
 
 # Conexao a base de dados basica
 
-import ui
 
-def insere_novo_user(user_email, user_password, user_nome):
+def insere_novo_user(user_email, user_password):
     try:
         connection = psycopg2.connect(user="postgres",
                                       password="postgres",
@@ -13,14 +12,19 @@ def insere_novo_user(user_email, user_password, user_nome):
                                       port="5432",
                                       database="ProjetoBD2020")
         cursor = connection.cursor()
+        postgres_insert_query = """ INSERT INTO utilizador (email, password, nome) VALUES (%s,%s,%s)"""
+        record_to_insert = (user_email, user_email, user_password)
 
-    except(Exception, psycopg2.Error):
-        if (connection):
+        cursor.execute(postgres_insert_query, record_to_insert)
+        connection.commit()
+
+    except (Exception, psycopg2.Error):
+        if connection:
             print("Esse email ja tem conta criada! Insira outro email.")
 
     finally:
         # Closing database connection
-        if(connection):
+        if connection:
             cursor.close()
             connection.close()
 

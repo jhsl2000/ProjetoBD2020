@@ -1,12 +1,12 @@
+from tkinter import *
 import getpass
 import funcoes
-
-from tkinter import *
 
 
 def register_user():
     email_info = email.get()
     password_info = password.get()
+    funcoes.insere_novo_user(email_info, password_info)
 
 
 def login_verify():
@@ -39,20 +39,20 @@ def register():
     Label(screen1, text="Insere os detalhes em baixo: ").pack()
     Label(screen1, text="").pack()
     Label(screen1, text="Email: ").pack()
-    email_entry = Entry(screen1, textvariable = email)
+    email_entry = Entry(screen1, textvariable=email)
     email_entry.pack()
     Label(screen1, text="Password: ").pack()
-    password_entry = Entry(screen1, textvariable =password, show="*")
+    password_entry = Entry(screen1, textvariable=password, show="*")
     password_entry.pack()
     Label(screen1, text="").pack()
-    Button(screen1, text="Registar", command = register_user).pack()
+    Button(screen1, text="Registar", command=register_user).pack()
 
 
 def login():
     global screen2
     screen2 = Toplevel(screen)
     screen2.title("Login")
-    screen2.geometry("1280x720")
+    screen2.geometry("500x300")
     Label(screen2, text= "Insere os detalhes para Login").pack()
     Label(screen2, text="").pack()
 
@@ -86,8 +86,18 @@ def main_screen():
     photo.pack()
     Button(text="Login", command=login).pack()
     Label(text="").pack()
-    Button(text="Register", command=register).pack()
-
+    Label(text="").pack()
+    Button(text="Register", padx=4, activebackground='white',activeforeground='black',  command=register).pack()
+    #ignorar as seguintes linhas: apenas para espaço entre botoes e copyright
+    Label(text="").pack()
+    Label(text="").pack()
+    Label(text="").pack()
+    Label(text="").pack()
+    Label(text="").pack()
+    Label(text="").pack()
+    Label(text="").pack()
+    Label(text="").pack()
+    label3 = Label(screen, text='Copyright Jose Lourenco & Rodrigo Mendes', font={'Arial', 9}).pack()
     screen.mainloop()
 
 
