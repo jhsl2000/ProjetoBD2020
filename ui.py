@@ -4,8 +4,8 @@ import funcoes
 
 
 def register_user():
-    email_info = email.get()
-    password_info = password.get()
+    email_info = email_entry.get()
+    password_info = password_entry.get()
     funcoes.insere_novo_user(email_info, password_info)
 
 
