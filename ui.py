@@ -1,12 +1,13 @@
 from tkinter import *
-import getpass
+
 import funcoes
 
 
 def register_user():
-    email_info = email.get()
-    password_info = password.get()
-    funcoes.insere_novo_user(email_info, password_info)
+    email_info = email_entry.get()
+    password_info = password_entry.get()
+    nome_info = nome_entry.get()
+    funcoes.insere_novo_user(email_info, password_info, nome_info)
 
 
 def login_verify():
@@ -31,13 +32,19 @@ def register():
 
     global email
     global password
+    global nome
     global email_entry
     global password_entry
+    global nome_entry
     email=StringVar()
     password=StringVar()
+    nome=StringVar()
 
     Label(screen1, text="Insere os detalhes em baixo: ").pack()
     Label(screen1, text="").pack()
+    Label(screen1, text="Nome: ").pack()
+    nome_entry = Entry(screen1, textvariable=nome)
+    nome_entry.pack()
     Label(screen1, text="Email: ").pack()
     email_entry = Entry(screen1, textvariable=email)
     email_entry.pack()
