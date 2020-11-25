@@ -24,7 +24,7 @@ def register():
     global screen
     screen1 = Toplevel(screen)
     screen1.title("Registar")
-    screen1.geometry("1280x720")
+    screen1.geometry("500x300")
     photo2 = PhotoImage(file='NETFLOX.png')
     photo = Label(screen, image=photo2, height=300, width=250)
     photo.pack()
@@ -97,7 +97,7 @@ def main_screen():
     Label(text="").pack()
     Label(text="").pack()
     Label(text="").pack()
-    label3 = Label(screen, text='Copyright Jose Lourenco & Rodrigo Mendes', font={'Arial', 9}).pack()
+    Label(screen, text='Copyright Jose Lourenco & Rodrigo Mendes', font={'Arial', 9}).pack()
     screen.mainloop()
 
 
