@@ -12,7 +12,7 @@ def insere_novo_user(email_info, password_info):
                                       database="ProjetoBD2020")
         cursor = connection.cursor()
         postgres_insert_query = """ INSERT INTO utilizador (email, password) VALUES (%s,%s)"""
-        record_to_insert = (email_info, password_info)
+        record_to_insert = (email_info , password_info)
 
         cursor.execute(postgres_insert_query, record_to_insert)
         connection.commit()
