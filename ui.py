@@ -4,10 +4,14 @@ import funcoes
 
 
 def register_user():
-    email_info = email_entry.get()
-    password_info = password_entry.get()
-    nome_info = nome_entry.get()
+    email_info = email.get()
+    password_info = password.get()
+    nome_info = nome.get()
     funcoes.insere_novo_user(email_info, password_info, nome_info)
+
+    email_entry.delete(0, END)
+    password_entry.delete(0, END)
+    nome_entry.delete(0, END)
 
 
 def login_verify():
