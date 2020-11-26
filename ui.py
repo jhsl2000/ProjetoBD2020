@@ -7,22 +7,21 @@ import funcoes
 
 
 def teste():
-    try:
-        connection = psycopg2.connect("host=localhost dbname=ProjetoBD2020 user=postgres password=postgres")
+        connection = psycopg2.connect("host=localhost dbname=testes user=postgres password=postgres")
         cursor = connection.cursor()
-        cursor.execute(" INSERT INTO utilizador (email, password, nome) VALUES ('jose', 'joseemail', 'teste')")
-        
-        
+        cursor.execute(" INSERT INTO utilizador (email, password, nome) VALUES ('rodrigo', 'rodrigoemail', 'teste')")
+        cursor.execute("SELECT * FROM utilizador")
+        connection.commit() 
        
         print("Registado com sucesso")
-        print(cursor.fetchall())
+        for linha in cursor.fetchall():
+            email, password, nome = linha
+            print (linha)
         
+        connection.commit()
+        cursor.close()
+        connection.close()
 
-    finally:
-        # Closing database connection
-        if connection:
-            cursor.close()
-            connection.close()
 
 def register_user():
     email_info = email.get()
