@@ -1,7 +1,28 @@
+import psycopg2
+import psycopg2.extras
+
 from tkinter import *
 
 import funcoes
 
+
+def teste():
+    try:
+        connection = psycopg2.connect("host=localhost dbname=ProjetoBD2020 user=postgres password=postgres")
+        cursor = connection.cursor()
+        cursor.execute(" INSERT INTO utilizador (email, password, nome) VALUES ('jose', 'joseemail', 'teste')")
+        
+        
+       
+        print("Registado com sucesso")
+        print(cursor.fetchall())
+        
+
+    finally:
+        # Closing database connection
+        if connection:
+            cursor.close()
+            connection.close()
 
 def register_user():
     email_info = email.get()
@@ -57,6 +78,7 @@ def register():
     password_entry.pack()
     Label(screen1, text="").pack()
     Button(screen1, text="Registar", command=register_user).pack()
+    Button(screen1, text="Teste", command=teste).pack()
 
 
 def login():
