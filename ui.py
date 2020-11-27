@@ -1,10 +1,11 @@
+import psycopg2
+import psycopg2.extras
+
 from tkinter import *
 
 import funcoes
 
 
-<<<<<<< Updated upstream
-=======
 def teste():
         connection = psycopg2.connect("host=localhost dbname=testes user=postgres password=postgres")
         cursor = connection.cursor()
@@ -22,7 +23,6 @@ def teste():
         connection.close()
 
 
->>>>>>> Stashed changes
 def register_user():
     email_info = email.get()
     password_info = password.get()
