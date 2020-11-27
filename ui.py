@@ -3,6 +3,26 @@ from tkinter import *
 import funcoes
 
 
+<<<<<<< Updated upstream
+=======
+def teste():
+        connection = psycopg2.connect("host=localhost dbname=testes user=postgres password=postgres")
+        cursor = connection.cursor()
+        cursor.execute(" INSERT INTO utilizador (nome, idade) VALUES ('rodrigo', 15)")
+        cursor.execute("SELECT * FROM utilizador")
+        connection.commit() 
+       
+        print("Registado com sucesso")
+        for linha in cursor.fetchall():
+            nome, idade = linha
+            print (linha)
+        
+        connection.commit()
+        cursor.close()
+        connection.close()
+
+
+>>>>>>> Stashed changes
 def register_user():
     email_info = email.get()
     password_info = password.get()

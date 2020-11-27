@@ -3,22 +3,29 @@ import psycopg2.extras
 
 # Conexao a base de dados basica
 
+
 def insere_novo_user(email_info, password_info, nome_info):
     try:
         connection = psycopg2.connect(user="postgres",
-                                      password="postgres",
-                                      host="localhost",
-                                      port="5432",
-                                      database="ProjetoBD2020")
+                                  password="postgres",
+                                  host="localhost",
+                                  port="5432",
+                                  database="ProjetoBD2020")
         cursor = connection.cursor()
+<<<<<<< Updated upstream
         postgres_insert_query = """ INSERT * INTO utilizador (email, password, nome) VALUES ('%s','%s','%s')"""
         record_to_insert = (email_info , password_info, nome_info)
 
         cursor.execute(postgres_insert_query, record_to_insert)
         
         connection.commit()
+=======
+        postgres_insert_query = " INSERT INTO utilizador (email, password, nome) VALUES ('" +email_info +"','" +password_info +"',' " +nome_info +"')"
+        cursor.execute(postgres_insert_query)
+>>>>>>> Stashed changes
         print("Registado com sucesso")
-
+        connection.commit()
+    
     except (Exception, psycopg2.Error):
         if connection:
             print("Esse email ja tem conta criada! Insira outro email.")
@@ -28,7 +35,6 @@ def insere_novo_user(email_info, password_info, nome_info):
         if connection:
             cursor.close()
             connection.close()
-
 
 def check_login(email_entry1, password_entry1):
     try:
