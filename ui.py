@@ -6,7 +6,7 @@ from tkinter import *
 import funcoes
 
 
-def teste():
+"""def teste():
         connection = psycopg2.connect("host=localhost dbname=testes user=postgres password=postgres")
         cursor = connection.cursor()
         cursor.execute(" INSERT INTO utilizador (nome, idade) VALUES ('rodrigo', 15)")
@@ -21,7 +21,7 @@ def teste():
         connection.commit()
         cursor.close()
         connection.close()
-
+"""
 
 def register_user():
     email_info = email.get()

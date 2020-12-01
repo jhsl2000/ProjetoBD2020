@@ -7,10 +7,10 @@ import psycopg2.extras
 def insere_novo_user(email_info, password_info, nome_info):
     try:
         connection = psycopg2.connect(user="postgres",
-                                  password="postgres",
+                                  password="rodmen27",
                                   host="localhost",
                                   port="5432",
-                                  database="ProjetoBD2020")
+                                  database="ProjetoBD2020v1")
         cursor = connection.cursor()
         postgres_insert_query = " INSERT INTO utilizador (email, password, nome) VALUES ('" +email_info +"','" +password_info +"',' " +nome_info +"')"
         cursor.execute(postgres_insert_query)
@@ -30,23 +30,20 @@ def insere_novo_user(email_info, password_info, nome_info):
 def check_login(email_entry1, password_entry1):
     try:
         connection = psycopg2.connect(user="postgres",
-                                      password="postgres",
+                                      password="rodmen27",
                                       host="localhost",
                                       port="5432",
-                                      database="ProjetoBD2020")
+                                      database="ProjetoBD2020v1")
         cursor = connection.cursor()
-        cursor.execute("SELECT utilizador.email, utlizador.password,"
-                       "admin.utilizador_email FROM utilizador,"
-                       "admin WHERE utilizador.email =%s AND utilizador.password = %s AND admin.utilizador_email = %s;",
-                       (email_entry1, password_entry1, email_entry1))
+        cursor.execute("SELECT email, password FROM utilizador,"                    
+                       "utilizador WHERE email = " +email_entry1 +" AND password = " +password_entry1 +""),
+                  
 
         if cursor.rowcount == 1:
             return 'cliente' # codigo para cliente_login
         else:
-            cursor.execute("SELECT utilizador.email, utlizador.password,"
-                       "admin.utilizador_email FROM utilizador,"
-                       "admin WHERE utilizador.email =%s AND utilizador.password = %s AND admin.utilizador_email = %s;",
-                       (email_entry1, password_entry1, email_entry1))
+            cursor.execute("SELECT email, password FROM utilizador,"                    
+                       "utilizador WHERE email = " +email_entry1 +" AND password = " +password_entry1 +""),
             if cursor.rowcount == 1:
                 return 'admin' # codigo para admin_login
             else:
