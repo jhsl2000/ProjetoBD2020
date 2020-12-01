@@ -35,15 +35,17 @@ def check_login(email_entry1, password_entry1):
                                       port="5432",
                                       database="ProjetoBD2020v1")
         cursor = connection.cursor()
-        cursor.execute("SELECT email, password FROM utilizador,"                    
-                       "utilizador WHERE email = " +email_entry1 +" AND password = " +password_entry1 +""),
-                  
-
+        cursor.execute("SELECT 'email', 'password'"
+                      " FROM utilizador"
+                      " WHERE 'email' = " +email_entry1 +" AND 'password' = " +password_entry1 +""),                 
+                      
         if cursor.rowcount == 1:
             return 'cliente' # codigo para cliente_login
         else:
-            cursor.execute("SELECT email, password FROM utilizador,"                    
-                       "utilizador WHERE email = " +email_entry1 +" AND password = " +password_entry1 +""),
+            cursor.execute("SELECT 'email', 'password'"
+                      " FROM utilizador"
+                      " WHERE 'email' = " +email_entry1 +" AND 'password' = " +password_entry1 +""), 
+                         
             if cursor.rowcount == 1:
                 return 'admin' # codigo para admin_login
             else:
