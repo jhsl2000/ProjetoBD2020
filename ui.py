@@ -35,7 +35,8 @@ def register_user():
 
 
 def login_verify():
-
+    global screen
+    screen4 = Toplevel(screen)
     email1 = email_verify.get()
     password1 = password_verify.get()
     email_entry1.delete(0, END)
@@ -43,6 +44,15 @@ def login_verify():
 
     if funcoes.check_login(email1, password1) == 'cliente':
         print("Login bem sucedido!", email1)
+        Label(screen4, text = 'Login bem sucedido!').pack()
+
+    elif funcoes.check_login(email1, password1) == 'admin':
+        print("Login bem sucedido!", email1)
+        Label(screen4, text = 'Login bem sucedido admin!').pack()
+
+    elif funcoes.check_login(email1, password1) == 0:
+        print("Login invalido!")
+        Label(screen4, text = 'Respeita-te').pack()
 
 
 def register():
@@ -77,6 +87,13 @@ def register():
     password_entry.pack()
     Label(screen1, text="").pack()
     Button(screen1, text="Registar", command=register_user).pack()
+
+
+def main_menu():
+    global screen3
+    screen3 = Toplevel(screen)
+    screen3.title("Menu principal")
+    screen3.geometry("1280x720")
 
 
 def login():
