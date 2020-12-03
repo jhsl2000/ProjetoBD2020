@@ -24,6 +24,7 @@ def teste():
 
 
 def register_user():
+    screen1 = Toplevel()
     email_info = email.get()
     password_info = password.get()
     nome_info = nome.get()
@@ -32,7 +33,11 @@ def register_user():
     email_entry.delete(0, END)
     password_entry.delete(0, END)
     nome_entry.delete(0, END)
-
+    if funcoes.insere_novo_user(email_info, password_info, nome_info) == 'registado':
+        Label(screen1, text= 'Resgistado com sucesso!').pack()
+        Button(screen1, text='Continuar para login', command=login).pack()
+    else:
+        Label(screen1, text='Erro').pack()
 
 def login_verify():
     global screen2
@@ -44,6 +49,7 @@ def login_verify():
     if funcoes.check_login(email1, password1) == 'cliente':
         print("Login bem sucedido!", email1)
         Label(screen2, text = 'Login bem sucedido!').pack()
+        Button(screen2, text="Continuar", command=main_menu).pack()
 
     elif funcoes.check_login(email1, password1) == 'admin':
         print("Login bem sucedido!", email1)

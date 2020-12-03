@@ -15,6 +15,7 @@ def insere_novo_user(email_info, password_info, nome_info):
         postgres_insert_query = " INSERT INTO utilizador (email, password, nome) VALUES ('" +email_info +"','" +password_info +"',' " +nome_info +"')"
         cursor.execute(postgres_insert_query)
         print("Registado com sucesso")
+        return 'registado'
         connection.commit()
     
     except (Exception, psycopg2.Error):
