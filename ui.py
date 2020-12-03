@@ -33,7 +33,8 @@ def register_user():
     email_entry.delete(0, END)
     password_entry.delete(0, END)
     nome_entry.delete(0, END)
-    if funcoes.insere_novo_user(email_info, password_info, nome_info) == 'registado':
+
+    if funcoes.confirma_novo_user(email_info, password_info) == 'registado':
         Label(screen1, text= 'Resgistado com sucesso!').pack()
         Button(screen1, text='Continuar para login', command=login).pack()
     else:
