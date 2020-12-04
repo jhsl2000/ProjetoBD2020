@@ -26,6 +26,10 @@ def teste():
 def logout():
     screen3.destroy()
 
+
+def voltar():
+    screen4.destroy()
+
 def register_user():
     screen1 = Toplevel()
     email_info = email.get()
@@ -114,11 +118,37 @@ def artigos():
     Label(screen4, text="").pack()
     Label(screen3, text="").pack()
     Label(screen4, text="").pack()
-    Button(screen4, height=2, width=10, text="Filmes", command=artigos).pack()
+    Button(screen4, height=2, width=10, text="Filmes", command=filmes).pack()
     Label(screen4, text="").pack()
     Label(screen3, text="").pack()
     Label(screen4, text="").pack()
-    Button(screen4, height=2, width=10, text="Series", command=artigos).pack()
+    Button(screen4, height=2, width=10, text="Series", command=series).pack()
+    Label(screen4, text="").pack()
+    Label(screen3, text="").pack()
+    Label(screen4, text="").pack()
+    Button(screen4, height=2, width=10, text="Voltar", command=voltar).pack()
+
+
+def filmes():
+    global screen5
+    screen5 = Tk()
+    screen5.title("Filmes")
+    screen5.geometry("1280x720")
+    screen5.resizable(0, 0)
+    screen5.propagate(0)
+
+
+
+
+
+
+def series():
+    global screen6
+    screen6 = Tk()
+    screen6.title("Series")
+    screen6.geometry("1280x720")
+    screen6.resizable(0, 0)
+    screen6.propagate(0)
 
 def main_menu():
     screen2.destroy()
