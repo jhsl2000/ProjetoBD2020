@@ -63,9 +63,9 @@ def saldo():
     screen.propagate(0)
 
     global saldo_email
-    global saldo_quantia =0.0
+    global saldo_quantia 
     saldo_email = StringVar()
-    saldo_quantia = StringVar()
+    saldo_quantia = 0.0
 
     Label(screen, text="").pack()
     Label(screen, text="Insira o email que pretende adicionar saldo:").pack()
@@ -79,8 +79,7 @@ def saldo():
 
 def enviar_saldo():
     saldo_email_info = saldo_email.get()
-    saldo_quantia_info = float(saldo_quantia.get())
-
+    saldo_quantia_info = float(saldo_quantia)
     funcoes.add_saldo(saldo_email_info, saldo_quantia_info)
 
 
