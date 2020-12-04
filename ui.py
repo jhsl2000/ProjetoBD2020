@@ -52,6 +52,34 @@ def login_verify():
         Label(screen2, text = 'Respeita-te').pack()
 
 
+def saldo():
+    global screen
+    screen = Tk()
+    screen.title("Adicionar Saldo")
+    screen.geometry("700x600")
+    screen.resizable(0, 0)
+    screen.propagate(0)
+
+    global saldo_email
+    global saldo_quantia
+    saldo_email = float()
+
+    Label(screen, text="").pack()
+    Label(screen, text="Insira o email que pretende adicionar saldo:").pack()
+    Entry(screen, textvariable=saldo_email).pack()
+    Label(screen, text="").pack()
+    Label(screen, text="Insira a quantia:").pack()
+    Entry(screen, textvariable=saldo_quantia).pack()
+    Label(screen, text="").pack()
+    Button(screen, text="Enviar", command=enviar_saldo).pack()
+
+
+def enviar_saldo():
+
+   saldo_email_info= saldo_email.get()
+   saldo_quantia_info= float(saldo_quantia.get())
+
+   funcoes.add_saldo(saldo_email_info, saldo_quantia_info)
 
 
 def register():
@@ -220,15 +248,19 @@ def admin_main_menu():
     Label(screen3, text="").pack()
     Label(screen3, text="").pack()
     Label(screen3, text="").pack()
-    Button(screen3, height=2, width=10, text="Adicionar Artigos", command=adicionar_artigos).pack()
+    Button(screen3, height=2, width=15, text="Adicionar Artigos", command=adicionar_artigos).pack()
     Label(screen3, text="").pack()
     Label(screen3, text="").pack()
     Label(screen3, text="").pack()
-    Button(screen3, height=2, width=12, text="Alterar preco artigo").pack()
+    Button(screen3, height=2, width=15, text="Alterar preco artigo").pack()
     Label(screen3, text="").pack()
     Label(screen3, text="").pack()
     Label(screen3, text="").pack()
-    Button(screen3, height=2, width=12, text="Mensagens").pack()
+    Button(screen3, height=2, width=15, text="Adicionar saldo", command=saldo).pack()
+    Label(screen3, text="").pack()
+    Label(screen3, text="").pack()
+    Label(screen3, text="").pack()
+    Button(screen3, height=2, width=15, text="Mensagens").pack()
 
 
 def login():

@@ -12,7 +12,7 @@ def insere_novo_user(email_info, password_info, nome_info):
                                   port="5432",
                                   database="ProjetoBD2020v1")
         cursor = connection.cursor()
-        cursor.execute(" INSERT INTO utilizador (email, password, nome) VALUES ('" +email_info +"','" +password_info +"','" +nome_info +"')")
+        cursor.execute(" INSERT INTO utilizador (email, password, nome, saldo) VALUES ('" +email_info +"','" +password_info +"','" +nome_info +"', '20')")
         print("Registado com sucesso")
         connection.commit()
     except (Exception, psycopg2.Error):
@@ -85,8 +85,8 @@ def check_login(email_entry1, password_entry1):
             cursor.close()
             connection.close()
 
-'''
-def saldo(email_entry1, password_entry1):
+
+def add_saldo(saldo_email_info, saldo_quantia_info):
     try:
         connection = psycopg2.connect(user="postgres",
                                       password="postgres",
@@ -94,12 +94,18 @@ def saldo(email_entry1, password_entry1):
                                       port="5432",
                                       database="ProjetoBD2020v1")
         cursor = connection.cursor()
-        cursor.execute("SELECT saldo from utilizador WHERE utilizador.email=utilizador.email ='" +email_entry1 +"' AND password ='" +password_entry1 +"'")
+        cursor.execute(" INSERT INTO utilizador (saldo) VALUES ('" +saldo_quantia_info +"') WHERE utilizador.email='saldo_email_info'")
 
-        if cursor.rowcount == 1:
-            return   # codigo para cliente_login
         connection.commit()
-        '''
+    except (Exception, psycopg2.Error):
+        if connection:
+            print("ERRO")
+
+    finally:
+        # Closing database connection
+        if connection:
+            cursor.close()
+            connection.close()
 
 def insere_novo_filme(email_info, password_info, nome_info):
     try:
