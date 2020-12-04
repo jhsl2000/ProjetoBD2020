@@ -104,9 +104,11 @@ def main_menu():
     screen3 = Tk()
     screen3.title("Menu principal")
     screen3.geometry("1280x720")
+    screen3.resizable(0,0)
     photo3 = PhotoImage(file='NETFLOX.png')
     photo = Label(screen, image=photo3, height=300, width=250)
     photo.pack()
+    screen3.propagate(0)
 
     #Label(screen3, text="saldo=").pack()
     Button(screen3, height=100, width=200 ,text="Artigos").pack()
