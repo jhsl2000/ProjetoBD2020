@@ -100,3 +100,24 @@ def saldo(email_entry1, password_entry1):
             return   # codigo para cliente_login
         connection.commit()
         '''
+
+def insere_novo_filme(email_info, password_info, nome_info):
+    try:
+        connection = psycopg2.connect(user="postgres",
+                                  password="postgres",
+                                  host="localhost",
+                                  port="5432",
+                                  database="ProjetoBD2020v1")
+        cursor = connection.cursor()
+        cursor.execute(" INSERT INTO utilizador (email, password, nome) VALUES ('" +email_info +"','" +password_info +"','" +nome_info +"')")
+        print("Registado com sucesso")
+        connection.commit()
+    except (Exception, psycopg2.Error):
+        if connection:
+            print("Esse email ja tem conta criada! Insira outro email.")
+
+    finally:
+        # Closing database connection
+        if connection:
+            cursor.close()
+            connection.close()

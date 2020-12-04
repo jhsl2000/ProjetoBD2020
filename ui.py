@@ -6,23 +6,6 @@ from tkinter import *
 import funcoes
 
 
-def teste():
-        connection = psycopg2.connect("host=localhost dbname=testes user=postgres password=postgres")
-        cursor = connection.cursor()
-        cursor.execute(" INSERT INTO utilizador (nome, idade) VALUES ('rodrigo', 15)")
-        cursor.execute("SELECT * FROM utilizador")
-        connection.commit() 
-       
-        print("Registado com sucesso")
-        for linha in cursor.fetchall():
-            nome, idade = linha
-            print (linha)
-        
-        connection.commit()
-        cursor.close()
-        connection.close()
-
-
 def logout():
     screen3.destroy()
 
@@ -114,19 +97,33 @@ def artigos():
 
     Label(screen4, text="").pack()
     Label(screen4, text="").pack()
-    Label(screen3, text="").pack()
     Label(screen4, text="").pack()
-    Label(screen3, text="").pack()
+    Label(screen4, text="").pack()
+    Label(screen4, text="").pack()
     Label(screen4, text="").pack()
     Button(screen4, height=2, width=10, text="Filmes", command=filmes).pack()
     Label(screen4, text="").pack()
-    Label(screen3, text="").pack()
+    Label(screen4, text="").pack()
     Label(screen4, text="").pack()
     Button(screen4, height=2, width=10, text="Series", command=series).pack()
     Label(screen4, text="").pack()
-    Label(screen3, text="").pack()
+    Label(screen4, text="").pack()
     Label(screen4, text="").pack()
     Button(screen4, height=2, width=10, text="Voltar", command=voltar).pack()
+
+def adicionar_artigos():
+    global screen
+    screen = Tk()
+    screen.title("Artigos")
+    screen.geometry("700x600")
+    screen.resizable(0,0)
+    screen.propagate(0)
+    global nome_artigo
+
+    nome_artigo = StringVar()
+
+    Label(screen,text="Nome:" ).pack()
+    Entry(screen,textvariable=nome).pack()
 
 
 def filmes():
@@ -209,7 +206,7 @@ def admin_main_menu():
     Label(screen3, text="").pack()
     Label(screen3, text="").pack()
     Label(screen3, text="").pack()
-    Button(screen3, height=2, width=10, text="Adicionar Artigos", command=artigos).pack()
+    Button(screen3, height=2, width=10, text="Adicionar Artigos", command=adicionar_artigos).pack()
     Label(screen3, text="").pack()
     Label(screen3, text="").pack()
     Label(screen3, text="").pack()
