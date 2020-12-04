@@ -13,6 +13,7 @@ def logout():
 def voltar():
     screen4.destroy()
 
+
 def register_user():
     screen1 = Toplevel()
     email_info = email.get()
@@ -25,10 +26,11 @@ def register_user():
     nome_entry.delete(0, END)
 
     if funcoes.confirma_novo_user(email_info, password_info) == 'registado':
-        Label(screen1, text= 'Resgistado com sucesso!').pack()
+        Label(screen1, text='Resgistado com sucesso!').pack()
         Button(screen1, text='Continuar para login', command=login).pack()
     else:
         Label(screen1, text='Erro').pack()
+
 
 def login_verify():
     global screen2
@@ -39,17 +41,17 @@ def login_verify():
 
     if funcoes.check_login(email1, password1) == 'cliente':
         print("Login bem sucedido!", email1)
-        Label(screen2, text = 'Login bem sucedido!').pack()
+        Label(screen2, text='Login bem sucedido!').pack()
         Button(screen2, text="Continuar", command=main_menu).pack()
 
     elif funcoes.check_login(email1, password1) == 'admin':
         print("Login bem sucedido!", email1)
-        Label(screen2, text = 'Login bem sucedido admin!').pack()
+        Label(screen2, text='Login bem sucedido admin!').pack()
         Button(screen2, text="Continuar", command=admin_main_menu).pack()
 
     elif funcoes.check_login(email1, password1) == 0:
         print("Login invalido!")
-        Label(screen2, text = 'Respeita-te').pack()
+        Label(screen2, text='Respeita-te').pack()
 
 
 def saldo():
@@ -61,8 +63,9 @@ def saldo():
     screen.propagate(0)
 
     global saldo_email
-    global saldo_quantia
-    saldo_email = float()
+    global saldo_quantia =0.0
+    saldo_email = StringVar()
+    saldo_quantia = StringVar()
 
     Label(screen, text="").pack()
     Label(screen, text="Insira o email que pretende adicionar saldo:").pack()
@@ -75,11 +78,10 @@ def saldo():
 
 
 def enviar_saldo():
+    saldo_email_info = saldo_email.get()
+    saldo_quantia_info = float(saldo_quantia.get())
 
-   saldo_email_info= saldo_email.get()
-   saldo_quantia_info= float(saldo_quantia.get())
-
-   funcoes.add_saldo(saldo_email_info, saldo_quantia_info)
+    funcoes.add_saldo(saldo_email_info, saldo_quantia_info)
 
 
 def register():
@@ -97,9 +99,9 @@ def register():
     global email_entry
     global password_entry
     global nome_entry
-    email=StringVar()
-    password=StringVar()
-    nome=StringVar()
+    email = StringVar()
+    password = StringVar()
+    nome = StringVar()
 
     Label(screen1, text="Insere os detalhes em baixo: ").pack()
     Label(screen1, text="").pack()
@@ -115,12 +117,13 @@ def register():
     Label(screen1, text="").pack()
     Button(screen1, text="Registar", command=register_user).pack()
 
+
 def artigos():
     global screen4
     screen4 = Tk()
     screen4.title("Artigos")
     screen4.geometry("700x600")
-    screen4.resizable(0,0)
+    screen4.resizable(0, 0)
     screen4.propagate(0)
 
     Label(screen4, text="").pack()
@@ -145,7 +148,7 @@ def adicionar_artigos():
     screen = Tk()
     screen.title("Artigos")
     screen.geometry("1280x720")
-    screen.resizable(0,0)
+    screen.resizable(0, 0)
     screen.propagate(0)
     global nome_artigo
     global tempo
@@ -158,8 +161,8 @@ def adicionar_artigos():
     Label(screen, text="").pack()
     Label(screen, text="").pack()
     Label(screen, text="").pack()
-    Label(screen,text="Nome:" ).pack()
-    Entry(screen,textvariable=nome_artigo).pack()
+    Label(screen, text="Nome:").pack()
+    Entry(screen, textvariable=nome_artigo).pack()
     Label(screen, text="").pack()
     Label(screen, text="Tempo disponivel em dias:").pack()
     Entry(screen, textvariable=tempo).pack()
@@ -177,10 +180,6 @@ def filmes():
     screen5.propagate(0)
 
 
-
-
-
-
 def series():
     global screen6
     screen6 = Tk()
@@ -189,34 +188,35 @@ def series():
     screen6.resizable(0, 0)
     screen6.propagate(0)
 
+
 def main_menu():
     screen2.destroy()
     global screen3
     screen3 = Tk()
     screen3.title("Menu principal")
     screen3.geometry("1280x720")
-    screen3.resizable(0,0)
+    screen3.resizable(0, 0)
     photo3 = PhotoImage(file='NETFLOX.png')
     photo = Label(screen, image=photo3, height=300, width=250)
     photo.pack()
     screen3.propagate(0)
 
-    #Label(screen3, text="saldo=").pack()
-    Label(screen3, text="").pack()
-    Label(screen3,text="").pack()
-    Label(screen3,text="").pack()
+    # Label(screen3, text="saldo=").pack()
     Label(screen3, text="").pack()
     Label(screen3, text="").pack()
     Label(screen3, text="").pack()
-    Button(screen3, height=2, width=10 ,text="Artigos", command= artigos).pack()
-    Label(screen3,text="").pack()
     Label(screen3, text="").pack()
     Label(screen3, text="").pack()
-    Button(screen3, height = 2, width = 12 ,text="Carrinho").pack()
-    Label(screen3,text="").pack()
+    Label(screen3, text="").pack()
+    Button(screen3, height=2, width=10, text="Artigos", command=artigos).pack()
     Label(screen3, text="").pack()
     Label(screen3, text="").pack()
-    Button(screen3, height = 2, width = 12 ,text="Caixa de Entrada").pack()
+    Label(screen3, text="").pack()
+    Button(screen3, height=2, width=12, text="Carrinho").pack()
+    Label(screen3, text="").pack()
+    Label(screen3, text="").pack()
+    Label(screen3, text="").pack()
+    Button(screen3, height=2, width=12, text="Caixa de Entrada").pack()
     Label(screen3, text="").pack()
     Label(screen3, text="").pack()
     Label(screen3, text="").pack()
@@ -268,7 +268,7 @@ def login():
     screen2 = Toplevel(screen)
     screen2.title("Login")
     screen2.geometry("500x300")
-    Label(screen2, text= "Insere os detalhes para Login").pack()
+    Label(screen2, text="Insere os detalhes para Login").pack()
     Label(screen2, text="").pack()
 
     global email_verify
@@ -280,15 +280,15 @@ def login():
     global email_entry1
     global password_entry1
 
-    Label(screen2, text = "Email : ").pack()
+    Label(screen2, text="Email : ").pack()
     email_entry1 = Entry(screen2, textvariable=email_verify)
     email_entry1.pack()
-    Label(screen2, text = "").pack()
+    Label(screen2, text="").pack()
     Label(screen2, text="Password : ").pack()
     password_entry1 = Entry(screen2, textvariable=password_verify, show='*')
     password_entry1.pack()
     Label(screen2, text="").pack()
-    Button(screen2, text="Login", command= login_verify).pack()
+    Button(screen2, text="Login", command=login_verify).pack()
 
 
 def main_screen():
@@ -302,8 +302,8 @@ def main_screen():
     Button(text="Login", command=login).pack()
     Label(text="").pack()
     Label(text="").pack()
-    Button(text="Register", padx=4, activebackground='white',activeforeground='black',  command=register).pack()
-    #ignorar as seguintes linhas: apenas para espaço entre botoes e copyright
+    Button(text="Register", padx=4, activebackground='white', activeforeground='black', command=register).pack()
+    # ignorar as seguintes linhas: apenas para espaço entre botoes e copyright
     Label(text="").pack()
     Label(text="").pack()
     Label(text="").pack()

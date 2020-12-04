@@ -94,7 +94,12 @@ def add_saldo(saldo_email_info, saldo_quantia_info):
                                       port="5432",
                                       database="ProjetoBD2020v1")
         cursor = connection.cursor()
-        cursor.execute(" INSERT INTO utilizador (saldo) VALUES ('" +saldo_quantia_info +"') WHERE utilizador.email='saldo_email_info'")
+        cursor.execute(" SELECT saldo FROM cliente WHERE utilizador.email='"+saldo_email_info+"'")
+        for linha in cursor.fetchall():
+            saldo_antigo = linha[0]
+        novo_saldo = saldo_antigo + saldo_quantia_info
+
+        cursor.execute("UPDATE utilizador SET saldo =%s WHERE  utilizador.email ='"+saldo_email_info+"'", (novo_saldo))
 
         connection.commit()
     except (Exception, psycopg2.Error):
