@@ -23,6 +23,9 @@ def teste():
         connection.close()
 
 
+def logout():
+    screen3.destroy()
+
 def register_user():
     screen1 = Toplevel()
     email_info = email.get()
@@ -55,7 +58,7 @@ def login_verify():
     elif funcoes.check_login(email1, password1) == 'admin':
         print("Login bem sucedido!", email1)
         Label(screen2, text = 'Login bem sucedido admin!').pack()
-        Button(screen2, text="Continuar", command=main_menu).pack()
+        Button(screen2, text="Continuar", command=admin_main_menu).pack()
 
     elif funcoes.check_login(email1, password1) == 0:
         print("Login invalido!")
@@ -97,6 +100,25 @@ def register():
     Label(screen1, text="").pack()
     Button(screen1, text="Registar", command=register_user).pack()
 
+def artigos():
+    global screen4
+    screen4 = Tk()
+    screen4.title("Artigos")
+    screen4.geometry("700x600")
+    screen4.resizable(0,0)
+    screen4.propagate(0)
+
+    Label(screen4, text="").pack()
+    Label(screen4, text="").pack()
+    Label(screen3, text="").pack()
+    Label(screen4, text="").pack()
+    Label(screen3, text="").pack()
+    Label(screen4, text="").pack()
+    Button(screen4, height=2, width=10, text="Filmes", command=artigos).pack()
+    Label(screen4, text="").pack()
+    Label(screen3, text="").pack()
+    Label(screen4, text="").pack()
+    Button(screen4, height=2, width=10, text="Series", command=artigos).pack()
 
 def main_menu():
     screen2.destroy()
@@ -111,9 +133,62 @@ def main_menu():
     screen3.propagate(0)
 
     #Label(screen3, text="saldo=").pack()
-    Button(screen3, height=100, width=200 ,text="Artigos").pack()
-    Button(screen3, height = 100, width = 200 ,text="Carrinho").pack()
-    Button(screen3, height = 100, width = 200 ,text="Caixa de Entrada").pack()
+    Label(screen3, text="").pack()
+    Label(screen3,text="").pack()
+    Label(screen3,text="").pack()
+    Label(screen3, text="").pack()
+    Label(screen3, text="").pack()
+    Label(screen3, text="").pack()
+    Button(screen3, height=2, width=10 ,text="Artigos", command= artigos).pack()
+    Label(screen3,text="").pack()
+    Label(screen3, text="").pack()
+    Label(screen3, text="").pack()
+    Button(screen3, height = 2, width = 12 ,text="Carrinho").pack()
+    Label(screen3,text="").pack()
+    Label(screen3, text="").pack()
+    Label(screen3, text="").pack()
+    Button(screen3, height = 2, width = 12 ,text="Caixa de Entrada").pack()
+    Label(screen3, text="").pack()
+    Label(screen3, text="").pack()
+    Label(screen3, text="").pack()
+    Label(screen3, text="").pack()
+    Label(screen3, text="").pack()
+    Label(screen3, text="").pack()
+    Label(screen3, text="").pack()
+    Label(screen3, text="").pack()
+    Label(screen3, text="").pack()
+    Button(screen3, text="Logout", fg="red", command=logout).pack()
+
+
+def admin_main_menu():
+    screen2.destroy()
+    global screen3
+    screen3 = Tk()
+    screen3.title("Menu principal")
+    screen3.geometry("1280x720")
+    screen3.resizable(0, 0)
+    photo3 = PhotoImage(file='NETFLOX.png')
+    photo = Label(screen, image=photo3, height=300, width=250)
+    photo.pack()
+    screen3.propagate(0)
+
+    # Label(screen3, text="saldo=").pack()
+    Label(screen3, text="").pack()
+    Label(screen3, text="").pack()
+    Label(screen3, text="").pack()
+    Label(screen3, text="").pack()
+    Label(screen3, text="").pack()
+    Label(screen3, text="").pack()
+    Button(screen3, height=2, width=10, text="Adicionar Artigos", command=artigos).pack()
+    Label(screen3, text="").pack()
+    Label(screen3, text="").pack()
+    Label(screen3, text="").pack()
+    Button(screen3, height=2, width=12, text="Alterar preco artigo").pack()
+    Label(screen3, text="").pack()
+    Label(screen3, text="").pack()
+    Label(screen3, text="").pack()
+    Button(screen3, height=2, width=12, text="Mensagens").pack()
+
 
 def login():
     global screen2
