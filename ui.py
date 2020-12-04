@@ -100,12 +100,18 @@ def register():
 
 def main_menu():
     screen2.destroy()
-    screen.destroy()
     global screen3
     screen3 = Tk()
     screen3.title("Menu principal")
     screen3.geometry("1280x720")
+    photo3 = PhotoImage(file='NETFLOX.png')
+    photo = Label(screen, image=photo3, height=300, width=250)
+    photo.pack()
 
+    #Label(screen3, text="saldo=").pack()
+    Button(screen3, height=100, width=200 ,text="Artigos").pack()
+    Button(screen3, height = 100, width = 200 ,text="Carrinho").pack()
+    Button(screen3, height = 100, width = 200 ,text="Caixa de Entrada").pack()
 
 def login():
     global screen2
