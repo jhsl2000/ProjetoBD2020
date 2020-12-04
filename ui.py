@@ -111,19 +111,33 @@ def artigos():
     Label(screen4, text="").pack()
     Button(screen4, height=2, width=10, text="Voltar", command=voltar).pack()
 
+
 def adicionar_artigos():
     global screen
     screen = Tk()
     screen.title("Artigos")
-    screen.geometry("700x600")
+    screen.geometry("1280x720")
     screen.resizable(0,0)
     screen.propagate(0)
     global nome_artigo
+    global tempo
+    global tipo_artigo
 
     nome_artigo = StringVar()
+    tempo = StringVar()
+    tipo_artigo = StringVar()
 
+    Label(screen, text="").pack()
+    Label(screen, text="").pack()
+    Label(screen, text="").pack()
     Label(screen,text="Nome:" ).pack()
-    Entry(screen,textvariable=nome).pack()
+    Entry(screen,textvariable=nome_artigo).pack()
+    Label(screen, text="").pack()
+    Label(screen, text="Tempo disponivel em dias:").pack()
+    Entry(screen, textvariable=tempo).pack()
+    Label(screen, text="").pack()
+    Label(screen, text="Tipo do artigo:").pack()
+    Entry(screen, textvariable=tipo_artigo).pack()
 
 
 def filmes():
