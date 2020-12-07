@@ -56,30 +56,31 @@ def login_verify():
 
 def saldo():
     global screen
-    screen = Tk()
-    screen.title("Adicionar Saldo")
-    screen.geometry("700x600")
-    screen.resizable(0, 0)
-    screen.propagate(0)
+    screen7 = Toplevel(screen)
+    screen7.title("Adicionar Saldo")
+    screen7.geometry("700x600")
+    screen7.resizable(0, 0)
+    screen7.propagate(0)
 
     global saldo_email
     global saldo_quantia 
     saldo_email = StringVar()
-    saldo_quantia = 0.0
+    saldo_quantia = StringVar()
 
-    Label(screen, text="").pack()
-    Label(screen, text="Insira o email que pretende adicionar saldo:").pack()
-    Entry(screen, textvariable=saldo_email).pack()
-    Label(screen, text="").pack()
-    Label(screen, text="Insira a quantia:").pack()
-    Entry(screen, textvariable=saldo_quantia).pack()
-    Label(screen, text="").pack()
-    Button(screen, text="Enviar", command=enviar_saldo).pack()
+    Label(screen7, text="").pack()
+    Label(screen7, text="Insira o email que pretende adicionar saldo:").pack()
+    Entry(screen7, textvariable=saldo_email).pack()
+    Label(screen7, text="").pack()
+    Label(screen7, text="Insira a quantia:").pack()
+    Entry(screen7, textvariable=saldo_quantia).pack()
+    Label(screen7, text="").pack()
+    Button(screen7, text="Enviar", command=enviar_saldo).pack()
 
 
 def enviar_saldo():
+    global screen
     saldo_email_info = saldo_email.get()
-    saldo_quantia_info = float(saldo_quantia)
+    saldo_quantia_info = saldo_quantia.get()
     funcoes.add_saldo(saldo_email_info, saldo_quantia_info)
 
 

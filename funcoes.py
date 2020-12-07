@@ -7,7 +7,7 @@ import psycopg2.extras
 def insere_novo_user(email_info, password_info, nome_info):
     try:
         connection = psycopg2.connect(user="postgres",
-                                  password="rodmen27",
+                                  password="postgres",
                                   host="localhost",
                                   port="5432",
                                   database="ProjetoBD2020v1")
@@ -29,7 +29,7 @@ def insere_novo_user(email_info, password_info, nome_info):
 def confirma_novo_user(email_info, password_info):
     try:
         connection = psycopg2.connect(user="postgres",
-                                      password="rodmen27",
+                                      password="postgres",
                                       host="localhost",
                                       port="5432",
                                       database="ProjetoBD2020v1")
@@ -56,7 +56,7 @@ def confirma_novo_user(email_info, password_info):
 def check_login(email_entry1, password_entry1):
     try:
         connection = psycopg2.connect(user="postgres",
-                                      password="rodmen27",
+                                      password="postgres",
                                       host="localhost",
                                       port="5432",
                                       database="ProjetoBD2020v1")
@@ -89,16 +89,16 @@ def check_login(email_entry1, password_entry1):
 def add_saldo(saldo_email_info, saldo_quantia_info):
     try:
         connection = psycopg2.connect(user="postgres",
-                                      password="rodmen27",
+                                      password="postgres",
                                       host="localhost",
                                       port="5432",
                                       database="ProjetoBD2020v1")
         cursor = connection.cursor()
-        
+
         cursor.execute("SELECT saldo FROM utilizador WHERE utilizador.email= '"+saldo_email_info +"'")
-           
+
         if cursor.rowcount == 1:
-            cursor.execute(" SELECT SUM(saldo + "+saldo_quantia_info +") FROM utilizador WHERE utilizador.email = '" +saldo_email_info +"'")
+            cursor.execute(" SELECT SUM(saldo + 'float(+saldo_quantia_info)') FROM utilizador WHERE utilizador.email = '"+ saldo_email_info +"' ")
             print('Saldo atualizado')
 
         else:
@@ -118,7 +118,7 @@ def add_saldo(saldo_email_info, saldo_quantia_info):
 def insere_novo_filme(email_info, password_info, nome_info):
     try:
         connection = psycopg2.connect(user="postgres",
-                                  password="rodmen27",
+                                  password="postgres",
                                   host="localhost",
                                   port="5432",
                                   database="ProjetoBD2020v1")
