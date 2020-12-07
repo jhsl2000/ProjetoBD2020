@@ -76,7 +76,6 @@ def check_login(email_entry1, password_entry1):
             else:
                 return 0
 
-
     except (Exception, psycopg2.Error) as error:
         print("Error", error)
     finally:
@@ -95,25 +94,28 @@ def add_saldo(saldo_email_info, saldo_quantia_info):
                                       database="ProjetoBD2020v1")
         cursor = connection.cursor()
 
-        cursor.execute("SELECT saldo FROM utilizador WHERE utilizador.email= '"+saldo_email_info +"'")
+        cursor.execute("SELECT saldo FROM utilizador WHERE email= '"+saldo_email_info +"'")
 
         if cursor.rowcount == 1:
-            cursor.execute(" SELECT SUM(saldo + 'float(+saldo_quantia_info)') FROM utilizador WHERE utilizador.email = '"+ saldo_email_info +"' ")
-            print('Saldo atualizado')
-
+            cursor.execute("UPDATE utilizador SET saldo (saldo + saldo_quantia_info) WHERE email = '"+ saldo_email_info +"'")
+            return 'confirma'
+        connection.commit()
         else:
-            print('ERRO')      
+            return 0
+            print('ERRO')
 
-    except (Exception, psycopg2.Error):
-    
+    except (Exception, psycopg2.Error) as error:
         if connection:
             print("erro")
+            print(saldo_email_info)
+            print(saldo_quantia_info)''
 
     finally:
         # Closing database connection
         if connection:
             cursor.close()
             connection.close()
+
 
 def insere_novo_filme(email_info, password_info, nome_info):
     try:

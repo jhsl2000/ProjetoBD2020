@@ -45,34 +45,39 @@ def login_verify():
         Button(screen2, text="Continuar", command=main_menu).pack()
 
     elif funcoes.check_login(email1, password1) == 'admin':
+
         print("Login bem sucedido!", email1)
         Label(screen2, text='Login bem sucedido admin!').pack()
         Button(screen2, text="Continuar", command=admin_main_menu).pack()
 
     elif funcoes.check_login(email1, password1) == 0:
         print("Login invalido!")
-        Label(screen2, text='Respeita-te').pack()
+        Label1 = Label(screen2, text='Login Inválido!')
+        Label1.pack()
 
 
 def saldo():
-    global screen
+    global screen7
     screen7 = Toplevel(screen)
     screen7.title("Adicionar Saldo")
     screen7.geometry("700x600")
     screen7.resizable(0, 0)
     screen7.propagate(0)
-
+    global Entry1
+    global Entry2
     global saldo_email
     global saldo_quantia 
     saldo_email = StringVar()
-    saldo_quantia = StringVar()
+    saldo_quantia = DoubleVar()
 
     Label(screen7, text="").pack()
     Label(screen7, text="Insira o email que pretende adicionar saldo:").pack()
-    Entry(screen7, textvariable=saldo_email).pack()
+    Entry1 = Entry(screen7, textvariable=saldo_email)
+    Entry1.pack()
     Label(screen7, text="").pack()
     Label(screen7, text="Insira a quantia:").pack()
-    Entry(screen7, textvariable=saldo_quantia).pack()
+    Entry2= Entry(screen7, textvariable=saldo_quantia)
+    Entry2.pack()
     Label(screen7, text="").pack()
     Button(screen7, text="Enviar", command=enviar_saldo).pack()
 
@@ -83,6 +88,14 @@ def enviar_saldo():
     saldo_quantia_info = saldo_quantia.get()
     funcoes.add_saldo(saldo_email_info, saldo_quantia_info)
 
+
+    Entry1.delete(0, END)
+    Entry2.delete(0, END)
+
+    if funcoes.add_saldo(saldo_email_info, saldo_quantia_info) == 'confirma':
+        Label(screen, text='Saldo atualizado!').pack()
+    else:
+        Label(screen, text='Erro').pack()
 
 def register():
     global screen
