@@ -94,22 +94,24 @@ def add_saldo(saldo_email_info, saldo_quantia_info):
                                       database="ProjetoBD2020v1")
         cursor = connection.cursor()
 
-        cursor.execute("SELECT saldo FROM utilizador WHERE email= '"+saldo_email_info +"'")
+        cursor.execute("SELECT email FROM utilizador WHERE utilizador.email= '"+saldo_email_info +"'")
 
         if cursor.rowcount == 1:
-            cursor.execute("UPDATE utilizador SET saldo (saldo + saldo_quantia_info) WHERE email = '"+ saldo_email_info +"'")
-            return 'confirma'
-        connection.commit()
+            cursor.execute("UPDATE utilizador SET saldo = (utilizador.saldo + saldo_quantia_info) WHERE email = '"+ saldo_email_info +"'")
+            print("Saldo atualizado")
+
         else:
+            print("Email não existe")
             return 0
-            print('ERRO')
 
     except (Exception, psycopg2.Error) as error:
+        print("Error", error)
+        '''
         if connection:
             print("erro")
             print(saldo_email_info)
-            print(saldo_quantia_info)''
-
+            print(saldo_quantia_info)
+        '''
     finally:
         # Closing database connection
         if connection:
