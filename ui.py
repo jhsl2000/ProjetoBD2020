@@ -34,6 +34,7 @@ def register_user():
 
 def login_verify():
     global screen2
+    global email1
     email1 = email_verify.get()
     password1 = password_verify.get()
     email_entry1.delete(0, END)
@@ -83,19 +84,17 @@ def saldo():
 
 
 def enviar_saldo():
-    global screen
+    global screen7
     saldo_email_info = saldo_email.get()
     saldo_quantia_info = saldo_quantia.get()
-    funcoes.add_saldo(saldo_email_info, saldo_quantia_info)
-
+    Label(screen, text="chili").pack()
+    if funcoes.add_saldo(saldo_email_info, saldo_quantia_info) == 'confirma':
+        Label(screen7, text='Saldo atualizado!').pack()
+    else:
+        Label(screen7, text='Erro').pack()
 
     Entry1.delete(0, END)
     Entry2.delete(0, END)
-
-    if funcoes.add_saldo(saldo_email_info, saldo_quantia_info) == 'confirma':
-        Label(screen, text='Saldo atualizado!').pack()
-    else:
-        Label(screen, text='Erro').pack()
 
 def register():
     global screen
@@ -214,7 +213,8 @@ def main_menu():
     photo.pack()
     screen3.propagate(0)
 
-    # Label(screen3, text="saldo=").pack()
+    Label(screen3, text="Saldo:").pack()
+    Label(screen3, text=funcoes.consulta_saldo(email1), font= {'Arial', 25 }).pack()
     Label(screen3, text="").pack()
     Label(screen3, text="").pack()
     Label(screen3, text="").pack()

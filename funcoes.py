@@ -43,7 +43,6 @@ def confirma_novo_user(email_info, password_info):
         else:
             return 0
 
-
     except (Exception, psycopg2.Error) as error:
         print("Error", error)
     finally:
@@ -93,16 +92,17 @@ def add_saldo(saldo_email_info, saldo_quantia_info):
                                       port="5432",
                                       database="ProjetoBD2020v1")
         cursor = connection.cursor()
-
-        cursor.execute("SELECT email FROM utilizador WHERE utilizador.email= '"+saldo_email_info +"'")
+        cursor.execute("Select email from utilizador where utilizador.email= '"+saldo_email_info +"'")
 
         if cursor.rowcount == 1:
-            cursor.execute("UPDATE utilizador SET saldo = (utilizador.saldo + saldo_quantia_info) WHERE email = '"+ saldo_email_info +"'")
+            cursor.execute("update utilizador set saldo = (saldo + %s) where email = '"+ saldo_email_info +"'", [saldo_quantia_info])
             print("Saldo atualizado")
-
+            print(saldo_quantia_info)
+            connection.commit()
+            return 'confirma'
         else:
             print("Email não existe")
-            return 0
+
 
     except (Exception, psycopg2.Error) as error:
         print("Error", error)
@@ -112,6 +112,7 @@ def add_saldo(saldo_email_info, saldo_quantia_info):
             print(saldo_email_info)
             print(saldo_quantia_info)
         '''
+
     finally:
         # Closing database connection
         if connection:
@@ -119,20 +120,22 @@ def add_saldo(saldo_email_info, saldo_quantia_info):
             connection.close()
 
 
-def insere_novo_filme(email_info, password_info, nome_info):
+def consulta_saldo(email1):
     try:
         connection = psycopg2.connect(user="postgres",
-                                  password="postgres",
-                                  host="localhost",
-                                  port="5432",
-                                  database="ProjetoBD2020v1")
+                                      password="postgres",
+                                      host="localhost",
+                                      port="5432",
+                                      database="ProjetoBD2020v1")
         cursor = connection.cursor()
-        cursor.execute(" INSERT INTO utilizador (email, password, nome) VALUES ('" +email_info +"','" +password_info +"','" +nome_info +"')")
-        print("Registado com sucesso")
-        connection.commit()
-    except (Exception, psycopg2.Error):
-        if connection:
-            print("Esse email ja tem conta criada! Insira outro email.")
+        cursor.execute("Select saldo  from utilizador where utilizador.email= '"+email1 +"'")
+
+        saldo = cursor.fetchall()
+
+        return saldo
+
+    except (Exception, psycopg2.Error) as error:
+        print("Error", error)
 
     finally:
         # Closing database connection
