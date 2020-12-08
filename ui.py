@@ -283,6 +283,9 @@ def adicionar_artigos():
     screen8.geometry("700x600")
     screen8.resizable(0, 0)
     screen8.propagate(0)
+    Label(screen8, text="").pack()
+    Label(screen8, text="").pack()
+    Label(screen8, text="").pack()
     Label(screen8, text="Que tipo de artigo pretende adicionar?").pack()
     Label(screen8, text="").pack()
     Label(screen8, text="").pack()
@@ -306,44 +309,62 @@ def add_filme():
     global screen
     global tipo_artigo
     global Entry1
-    global nome_filme
+    global nome_artigo
     global Entry2
     global horas_disp
     global Entry3
     global preco_artigo
-    nome_filme = StringVar()
+    nome_artigo = StringVar()
     horas_disp = IntVar()
     preco_artigo = DoubleVar()
     tipo_artigo = StringVar()
     screen8.destroy()
-    screen7 = Toplevel(screen)
-    screen7.title("Adicionar Filme")
-    screen7.geometry("700x600")
-    screen7.resizable(0, 0)
-    screen7.propagate(0)
+    screen = Toplevel(screen)
+    screen.title("Adicionar Filme")
+    screen.geometry("700x600")
+    screen.resizable(0, 0)
+    screen.propagate(0)
     
+    Label(screen, text="").pack()
+    Label(screen, text="").pack()
+    Label(screen, text="").pack()
     tipo_artigo = 'Filme'
     Label(screen, text="Insira o nome do filme que pretende adicionar:").pack()
-    Entry1 = Entry(screen, textvariable=nome_filme)
+    Entry1 = Entry(screen, textvariable=nome_artigo)
     Entry1.pack()
+    Label(screen, text="").pack()
+    Label(screen, text="").pack()
+    Label(screen, text="").pack()
     Label(screen, text="Insira o número de horas que pretende que o filme esteja disponível:").pack()
     Entry2 = Entry(screen, textvariable=horas_disp)
     Entry2.pack()
+    Label(screen, text="").pack()
+    Label(screen, text="").pack()
+    Label(screen, text="").pack()
     Label(screen, text="Insira o preço do filme:").pack()
-    Entry3 = Entry(screen, textvariable=horas_disp)
+    Entry3 = Entry(screen, textvariable=preco_artigo)
     Entry3.pack()
+    Label(screen, text="").pack()
+    Label(screen, text="").pack()
+    Button(screen, text="Enviar", command=enviar_artigo).pack()
+
+
+    
+
+
+
 
     
 def add_serie():
     global screen
     global tipo_artigo
     global Entry1
-    global nome_filme
+    global nome_artigo
     global Entry2
     global horas_disp
     global Entry3
     global preco_artigo
-    nome_filme = StringVar()
+    nome_artigo = StringVar()
     horas_disp = IntVar()
     preco_artigo = DoubleVar()
     tipo_artigo = StringVar()
@@ -356,13 +377,13 @@ def add_serie():
     
     tipo_artigo = 'Série'
     Label(screen, text="Insira o nome da série que pretende adicionar:").pack()
-    Entry1 = Entry(screen, textvariable=nome_filme)
+    Entry1 = Entry(screen, textvariable=nome_artigo)
     Entry1.pack()
     Label(screen, text="Insira o número de horas que pretende que a série esteja disponível:").pack()
     Entry2 = Entry(screen, textvariable=horas_disp)
     Entry2.pack()
     Label(screen, text="Insira o preço da série:").pack()
-    Entry3 = Entry(screen, textvariable=horas_disp)
+    Entry3 = Entry(screen, textvariable=preco_artigo)
     Entry3.pack()
 
 
@@ -372,12 +393,12 @@ def add_documentario():
     global screen
     global tipo_artigo
     global Entry1
-    global nome_filme
+    global nome_artigo
     global Entry2
     global horas_disp
     global Entry3
     global preco_artigo
-    nome_filme = StringVar()
+    nome_artigo = StringVar()
     horas_disp = IntVar()
     preco_artigo = DoubleVar()
     tipo_artigo = StringVar()
@@ -390,19 +411,35 @@ def add_documentario():
     
     tipo_artigo = 'Documentário'
     Label(screen, text="Insira o nome do documentário que pretende adicionar:").pack()
-    Entry1 = Entry(screen, textvariable=nome_filme)
+    Entry1 = Entry(screen, textvariable=nome_artigo)
     Entry1.pack()
     Label(screen, text="Insira o número de horas que pretende que o documentário esteja disponível:").pack()
     Entry2 = Entry(screen, textvariable=horas_disp)
     Entry2.pack()
     Label(screen, text="Insira o preço do documentário:").pack()
-    Entry3 = Entry(screen, textvariable=horas_disp)
+    Entry3 = Entry(screen, textvariable=preco_artigo)
     Entry3.pack()
 
 
 
+def enviar_artigo():
+    global screen
+    tipo_info = tipo_artigo
+    nome_info = nome_artigo
+    horas_info = horas_disp.get()
+    preco_info = preco_artigo.get()
+
+    funcoes.addartigo(tipo_info, nome_info, horas_info, preco_info)
 
 
+    Entry1.delete(0, END)
+    Entry2.delete(0, END)
+    Entry3.delete(0, END)
+
+    if funcoes.addartigo(tipo_artigo, nome_artigo, horas_disp, preco_artigo) == 'confirma':
+        Label(screen, text='Artigo adicionado!').pack()
+    else:
+        Label(screen, text='Erro').pack()
 
 
 

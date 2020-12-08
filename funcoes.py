@@ -119,20 +119,21 @@ def add_saldo(saldo_email_info, saldo_quantia_info):
             connection.close()
 
 
-def insere_novo_filme(email_info, password_info, nome_info):
+def addartigo(tipo_artigo, nome_artigo, horas_disp, preco_artigo):
     try:
         connection = psycopg2.connect(user="postgres",
-                                  password="rodmen27",
-                                  host="localhost",
-                                  port="5432",
-                                  database="ProjetoBD2020v1")
+                                      password="rodmen27",
+                                      host="localhost",
+                                      port="5432",
+                                      database="ProjetoBD2020v1")
         cursor = connection.cursor()
-        cursor.execute(" INSERT INTO utilizador (email, password, nome) VALUES ('" +email_info +"','" +password_info +"','" +nome_info +"')")
-        print("Registado com sucesso")
+
+        cursor.execute(" INSERT INTO artigo (tipo, nome, tempo_disponivel, preco, id, hist_preco, realizador_id) VALUES ('" +tipo_artigo +"','" +nome_artigo +"','horas_disp', 'preco_artigo', '0', '0', '0')")
+        print("Adicionado com sucesso")
         connection.commit()
     except (Exception, psycopg2.Error):
         if connection:
-            print("Esse email ja tem conta criada! Insira outro email.")
+            print("Esse artigo já existe.")
 
     finally:
         # Closing database connection
