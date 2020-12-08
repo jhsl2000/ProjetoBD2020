@@ -1,8 +1,6 @@
 import psycopg2
 import psycopg2.extras
 
-# Conexao a base de dados basica
-
 
 def insere_novo_user(email_info, password_info, nome_info):
     try:
@@ -10,11 +8,12 @@ def insere_novo_user(email_info, password_info, nome_info):
                                   password="postgres",
                                   host="localhost",
                                   port="5432",
-                                  database="ProjetoBD2020v1")
+                                  database="ProjetoBD2020v2")
         cursor = connection.cursor()
         cursor.execute(" INSERT INTO utilizador (email, password, nome, saldo) VALUES ('" +email_info +"','" +password_info +"','" +nome_info +"', '20')")
         print("Registado com sucesso")
         connection.commit()
+
     except (Exception, psycopg2.Error):
         if connection:
             print("Esse email ja tem conta criada! Insira outro email.")
@@ -32,7 +31,7 @@ def confirma_novo_user(email_info, password_info):
                                       password="postgres",
                                       host="localhost",
                                       port="5432",
-                                      database="ProjetoBD2020v1")
+                                      database="ProjetoBD2020v2")
         cursor = connection.cursor()
 
         cursor.execute(" SELECT email, password FROM utilizador WHERE utilizador.email ='" +email_info +"' AND password ='" +password_info +"'")
@@ -58,7 +57,7 @@ def check_login(email_entry1, password_entry1):
                                       password="postgres",
                                       host="localhost",
                                       port="5432",
-                                      database="ProjetoBD2020v1")
+                                      database="ProjetoBD2020v2")
         cursor = connection.cursor()
 
         cursor.execute("SELECT email, password FROM utilizador WHERE utilizador.email ='" +email_entry1 +"' AND password ='" +password_entry1 +"'")
@@ -90,7 +89,7 @@ def add_saldo(saldo_email_info, saldo_quantia_info):
                                       password="postgres",
                                       host="localhost",
                                       port="5432",
-                                      database="ProjetoBD2020v1")
+                                      database="ProjetoBD2020v2")
         cursor = connection.cursor()
         cursor.execute("Select email from utilizador where utilizador.email= '"+saldo_email_info +"'")
 
@@ -126,7 +125,7 @@ def consulta_saldo(email1):
                                       password="postgres",
                                       host="localhost",
                                       port="5432",
-                                      database="ProjetoBD2020v1")
+                                      database="ProjetoBD2020v2")
         cursor = connection.cursor()
         cursor.execute("Select saldo  from utilizador where utilizador.email= '"+email1 +"'")
 
@@ -134,6 +133,24 @@ def consulta_saldo(email1):
 
         return saldo
 
+    except (Exception, psycopg2.Error) as error:
+        print("Error", error)
+
+    finally:
+        # Closing database connection
+        if connection:
+            cursor.close()
+            connection.close()
+
+
+def envia_mensagem():
+    try:
+        connection = psycopg2.connect(user="postgres",
+                                      password="postgres",
+                                      host="localhost",
+                                      port="5432",
+                                      database="ProjetoBD2020v2")
+        cursor = connection.cursor()
     except (Exception, psycopg2.Error) as error:
         print("Error", error)
 

@@ -96,6 +96,7 @@ def enviar_saldo():
     Entry1.delete(0, END)
     Entry2.delete(0, END)
 
+
 def register():
     global screen
     screen1 = Toplevel(screen)
@@ -201,6 +202,40 @@ def series():
     screen6.propagate(0)
 
 
+def mensagens():
+    large_font = ('Verdana', 15)
+
+    global screen9
+    screen8 = Tk()
+    screen8.title("Mensagens")
+    screen8.geometry("1280x720")
+    screen8.resizable(0, 0)
+    screen8.propagate(0)
+    global destinatario
+    destinatario = StringVar()
+    global assunto
+    assunto = StringVar()
+    global mensagem
+    mensagem = StringVar()
+
+    Label(screen8, text="").pack()
+    Label(screen8, text="").pack()
+    Label(screen8, text="Destinatario:").pack()
+    Label(screen8, text="").pack()
+    Entry1 = Entry(screen8, textvariable = destinatario)
+    Entry1.pack()
+    Label(screen8, text="").pack()
+    Label(screen8, text="Insira o assunto:").pack()
+    Label(screen8, text="").pack()
+    Entry2 = Entry(screen8, textvariable=assunto)
+    Entry2.pack()
+    Label(screen8, text="").pack()
+    Label(screen8, text="Insira a mensagem").pack()
+    Entry3 =Entry(screen8, textvariable=mensagem)
+    Entry3.pack(padx=10, pady = 5, ipadx = 20, ipady= 40)
+
+
+
 def main_menu():
     screen2.destroy()
     global screen3
@@ -273,7 +308,7 @@ def admin_main_menu():
     Label(screen3, text="").pack()
     Label(screen3, text="").pack()
     Label(screen3, text="").pack()
-    Button(screen3, height=2, width=15, text="Mensagens").pack()
+    Button(screen3, height=2, width=15, text="Mensagens", command=mensagens).pack()
 
 
 def login():
