@@ -87,7 +87,6 @@ def enviar_saldo():
     global screen7
     saldo_email_info = saldo_email.get()
     saldo_quantia_info = saldo_quantia.get()
-    Label(screen, text="chili").pack()
     if funcoes.add_saldo(saldo_email_info, saldo_quantia_info) == 'confirma':
         Label(screen7, text='Saldo atualizado!').pack()
     else:
@@ -203,9 +202,8 @@ def series():
 
 
 def mensagens():
-    large_font = ('Verdana', 15)
 
-    global screen9
+    global screen8
     screen8 = Tk()
     screen8.title("Mensagens")
     screen8.geometry("1280x720")
@@ -222,7 +220,7 @@ def mensagens():
     Label(screen8, text="").pack()
     Label(screen8, text="Destinatario:").pack()
     Label(screen8, text="").pack()
-    Entry1 = Entry(screen8, textvariable = destinatario)
+    Entry1 = Entry(screen8, textvariable=destinatario)
     Entry1.pack()
     Label(screen8, text="").pack()
     Label(screen8, text="Insira o assunto:").pack()
@@ -232,7 +230,21 @@ def mensagens():
     Label(screen8, text="").pack()
     Label(screen8, text="Insira a mensagem").pack()
     Entry3 =Entry(screen8, textvariable=mensagem)
-    Entry3.pack(padx=10, pady = 5, ipadx = 20, ipady= 40)
+    Entry3.pack(padx=50, pady = 25, ipadx = 50, ipady= 50)
+    Button(screen8, text="Enviar", command = enviar_mensagem).pack()
+
+
+def enviar_mensagem():
+    global screen8
+    destinatario_info = destinatario.get()
+    assunto_info = assunto.get()
+    mensagem_info = mensagem.get()
+
+    if funcoes.envia_mensagem(destinatario_info, assunto_info, mensagem_info) == 'mensagem_aceite':
+        Label(screen8, text="Mensagem enviada").pack()
+    else:
+        Label(screen8, text="Erro no envio da mensagem").pack()
+
 
 
 
