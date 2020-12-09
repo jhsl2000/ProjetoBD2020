@@ -128,12 +128,18 @@ def addartigo(tipo_info, nome_info, horas_info, preco_info, realizador_info, ato
                                       database="ProjetoBD2020v2")
         cursor = connection.cursor()
 
-        cursor.execute(" INSERT INTO artigo (tipo, nome, realizador, ator, tempo_disponivel, preco, id) VALUES ('" +tipo_info+ "','" +nome_info +"','" +realizador_info +"','"+ator_info +"', '"+horas_info+"', '"+preco_info+"', 'DEFAULT')")
+        cursor.execute(" INSERT INTO Artigo (tipo, nome, realizador, ator, tempo_disponivel, preco, id) VALUES ('" +tipo_info+ "','" +nome_info +"','" +realizador_info +"','"+ator_info +"', %f, %f, '7')", (horas_info, preco_info))
         print("Adicionado com sucesso")
         connection.commit()
-    except (Exception, psycopg2.Error):
-        if connection:
-            print("Esse artigo já existe.")
+
+    except (Exception, psycopg2.Error) as error:
+        print(tipo_info)
+        print(nome_info)
+        print(horas_info)
+        print(preco_info)
+        print(realizador_info)
+        print(ator_info)
+        print("Esse artigo já existe.")
 
     finally:
         # Closing database connection
@@ -160,8 +166,7 @@ def confirma_novo_artigo(nome_info, realizador_info):
 
         else:
             return 0
-
-
+            
     except (Exception, psycopg2.Error) as error:
         print("Error", error)
     finally:
