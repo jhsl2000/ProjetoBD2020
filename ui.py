@@ -321,7 +321,6 @@ def add_filme():
     nome_artigo = StringVar()
     horas_disp = IntVar()
     preco_artigo = DoubleVar()
-    tipo_artigo = 'Filme'
     tipo_artigo = StringVar()
     realizador = StringVar()
     ator = StringVar()
@@ -332,7 +331,7 @@ def add_filme():
     screen.resizable(0, 0)
     screen.propagate(0)
     
-
+    tipo_artigo.set('Filme')
     Label(screen, text="").pack()
     Label(screen, text="Insira o nome do filme que pretende adicionar:").pack()
     nome_entrada = Entry(screen, textvariable=nome_artigo)
