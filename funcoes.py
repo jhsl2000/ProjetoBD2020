@@ -128,7 +128,7 @@ def addartigo(tipo_info, nome_info, horas_info, preco_info, realizador_info, ato
                                       database="ProjetoBD2020v2")
         cursor = connection.cursor()
 
-        cursor.execute(" INSERT INTO Artigo (tipo, nome, realizador, ator, tempo_disponivel, preco, id) VALUES ('" +tipo_info+ "','" +nome_info +"','" +realizador_info +"','"+ator_info +"', 'horas_info', 'preco_info', 'DEFAULT')")
+        cursor.execute(" INSERT INTO artigo (tipo, nome, realizador, ator, tempo_disponivel, preco, id) VALUES ('" +tipo_info+ "','" +nome_info +"','" +realizador_info +"','"+ator_info +"', 'horas_info', 'preco_info', DEFAULT)")
         print("Adicionado com sucesso")
         connection.commit()
     except (Exception, psycopg2.Error):
