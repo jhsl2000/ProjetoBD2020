@@ -190,6 +190,7 @@ def admin_ver_mensagens_utilizador(nome_utilizador_info):
 
     except (Exception, psycopg2.Error) as error:
         print("Error", error)
+
 def addartigo(tipo_info, nome_info, horas_info, preco_info, realizador_info, ator_info):
     try:
         connection = psycopg2.connect(user="postgres",
