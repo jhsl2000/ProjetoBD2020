@@ -122,15 +122,17 @@ def add_saldo(saldo_email_info, saldo_quantia_info):
 def addartigo(tipo_info, nome_info, horas_info, preco_info, realizador_info, ator_info):
     try:
         connection = psycopg2.connect(user="postgres",
-                                      password="rodmen27",
-                                      host="localhost",
-                                      port="5432",
-                                      database="ProjetoBD2020v2")
+                                  password="rodmen27",
+                                  host="localhost",
+                                  port="5432",
+                                  database="ProjetoBD2020v2")
         cursor = connection.cursor()
-
-        cursor.execute(" INSERT INTO Artigo (tipo, nome, realizador, ator, tempo_disponivel, preco, id) VALUES ('" +tipo_info+ "','" +nome_info +"','" +realizador_info +"','"+ator_info +"', %f, %f, '7')", (horas_info, preco_info))
+        #cursor.execute(" INSERT INTO Artigo (tipo, nome, realizador, ator, tempo_disponivel, preco, id) VALUES ('" +tipo_info+ "','" +nome_info +"','" +realizador_info +"','"+ator_info +"', horas_info, preco_info, '7')")
+        cursor.execute("INSERT INTO artigo (id, nome, tipo, realizador, ator, tempo_disponivel, preco) VALUES ('152', %s, %s, %s, %s, '9', '9')", (nome_info, tipo_info, realizador_info, ator_info))    
         print("Adicionado com sucesso")
         connection.commit()
+
+
 
     except (Exception, psycopg2.Error) as error:
         print(tipo_info)
@@ -140,6 +142,7 @@ def addartigo(tipo_info, nome_info, horas_info, preco_info, realizador_info, ato
         print(realizador_info)
         print(ator_info)
         print("Esse artigo já existe.")
+    
 
     finally:
         # Closing database connection
