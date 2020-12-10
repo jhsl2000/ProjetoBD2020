@@ -307,6 +307,15 @@ def admin_ver_todas_mensagens():
     screen13.resizable(0, 0)
     screen13.propagate(0)
 
+    for linha in funcoes.admin_ver_todas_mensagens():
+        Label(screen13, text="Destinatario:").pack()
+        Label(screen13, text=linha[0]).pack()
+        Label(screen13, text="Assunto:").pack()
+        Label(screen13, text=linha[1]).pack()
+        Label(screen13, text="Texto:").pack()
+        Label(screen13, text=linha[2]).pack()
+        Label(screen13, text="").pack()
+        Label(screen13, text="").pack()
 
 def main_menu():
     screen2.destroy()
@@ -384,7 +393,7 @@ def admin_main_menu():
     Label(screen3, text="").pack()
     Label(screen3, text="").pack()
     Label(screen3, text="").pack()
-    Button(screen3, height=2, width=20, text="Caixa de entrada de Mensagens", command=admin_caixa_entrada_mensagens).pack()
+    Button(screen3, height=2, width=25, text="Caixa de entrada de Mensagens", command=admin_caixa_entrada_mensagens).pack()
 
 def adicionar_artigos():
     global screen8
