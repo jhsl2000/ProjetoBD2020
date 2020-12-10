@@ -31,7 +31,7 @@ def confirma_novo_user(email_info, password_info):
                                       password="rodmen27",
                                       host="localhost",
                                       port="5432",
-                                      database="ProjetoBD2020v4")
+                                      database="ProjetoBD2020v2")
         cursor = connection.cursor()
 
         cursor.execute(" SELECT email, password FROM utilizador WHERE utilizador.email ='" +email_info +"' AND password ='" +password_info +"'")
@@ -57,7 +57,7 @@ def check_login(email_entry1, password_entry1):
                                       password="rodmen27",
                                       host="localhost",
                                       port="5432",
-                                      database="ProjetoBD2020v4")
+                                      database="ProjetoBD2020v2")
         cursor = connection.cursor()
 
         cursor.execute("SELECT email, password FROM utilizador WHERE utilizador.email ='" +email_entry1 +"' AND password ='" +password_entry1 +"'")
@@ -89,7 +89,7 @@ def add_saldo(saldo_email_info, saldo_quantia_info):
                                       password="rodmen27",
                                       host="localhost",
                                       port="5432",
-                                      database="ProjetoBD2020v4")
+                                      database="ProjetoBD2020v2")
         cursor = connection.cursor()
         cursor.execute("Select email from utilizador where utilizador.email= '"+saldo_email_info +"'")
 
@@ -122,10 +122,10 @@ def add_saldo(saldo_email_info, saldo_quantia_info):
 def consulta_saldo(email1):
     try:
         connection = psycopg2.connect(user="postgres",
-                                      password="postgres",
+                                      password="rodmen27",
                                       host="localhost",
                                       port="5432",
-                                      database="ProjetoBD2020v4")
+                                      database="ProjetoBD2020v2")
         cursor = connection.cursor()
         cursor.execute("Select saldo  from utilizador where utilizador.email= '"+email1 +"'")
 
@@ -146,10 +146,10 @@ def consulta_saldo(email1):
 def envia_mensagem(destinatario_info, assunto_info, mensagem_info):
     try:
         connection = psycopg2.connect(user="postgres",
-                                      password="postgres",
+                                      password="rodmen27",
                                       host="localhost",
                                       port="5432",
-                                      database="ProjetoBD2020v4")
+                                      database="ProjetoBD2020v2")
         cursor = connection.cursor()
         cursor.execute("SELECT email FROM utilizador WHERE utilizador.email ='" +destinatario_info +"'")
 
@@ -174,10 +174,10 @@ def envia_mensagem(destinatario_info, assunto_info, mensagem_info):
 def admin_ver_mensagens_utilizador(nome_utilizador_info):
     try:
         connection = psycopg2.connect(user="postgres",
-                                      password="postgres",
+                                      password="rodmen27",
                                       host="localhost",
                                       port="5432",
-                                      database="ProjetoBD2020v4")
+                                      database="ProjetoBD2020v2")
         cursor = connection.cursor()
         cursor.execute("SELECT email FROM utilizador WHERE email = '"+nome_utilizador_info +"' ")
 
@@ -190,6 +190,8 @@ def admin_ver_mensagens_utilizador(nome_utilizador_info):
 
     except (Exception, psycopg2.Error) as error:
         print("Error", error)
+
+
 def addartigo(tipo_info, nome_info, horas_info, preco_info, realizador_info, ator_info):
     try:
         connection = psycopg2.connect(user="postgres",
@@ -199,7 +201,7 @@ def addartigo(tipo_info, nome_info, horas_info, preco_info, realizador_info, ato
                                   database="ProjetoBD2020v2")
         cursor = connection.cursor()
         #cursor.execute(" INSERT INTO Artigo (tipo, nome, realizador, ator, tempo_disponivel, preco, id) VALUES ('" +tipo_info+ "','" +nome_info +"','" +realizador_info +"','"+ator_info +"', horas_info, preco_info, '7')")
-        cursor.execute("INSERT INTO artigo (id, nome, tipo, realizador, ator, tempo_disponivel, preco) VALUES ('152', %s, %s, %s, %s, '9', '9')", (nome_info, tipo_info, realizador_info, ator_info))    
+        cursor.execute("INSERT INTO artigo (id, nome, tipo, realizador, ator, tempo_disponivel, preco) VALUES ( %s, %s, %s, %s, %s, %s)", (nome_info, tipo_info, realizador_info, ator_info, horas_info, preco_info))    
         print("Adicionado com sucesso")
         connection.commit()
 

@@ -604,7 +604,7 @@ def enviar_artigo():
     horas_info = horas_disp.get()
     preco_info = preco_artigo.get()
 
-    funcoes.addartigo(tipo_info, nome_info, realizador_info, ator_info, horas_info, preco_info)
+    funcoes.addartigo(tipo_info, nome_info, horas_info, preco_info, realizador_info, ator_info)
 
 
     nome_entrada.delete(0, END)
