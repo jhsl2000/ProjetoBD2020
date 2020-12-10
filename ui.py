@@ -204,24 +204,24 @@ def series():
 def mensagens():
 
     global screen8
-    screen8 = Tk()
+    screen8 = Toplevel(screen)
     screen8.title("Mensagens")
     screen8.geometry("1280x720")
     screen8.resizable(0, 0)
     screen8.propagate(0)
     global destinatario
-    destinatario = StringVar()
-    global assunto
-    assunto = StringVar()
     global mensagem
+    global assunto
+    destinatario = StringVar()
+    assunto = StringVar()
     mensagem = StringVar()
-
+   
     Label(screen8, text="").pack()
     Label(screen8, text="").pack()
     Label(screen8, text="Destinatario:").pack()
     Label(screen8, text="").pack()
     Entry1 = Entry(screen8, textvariable=destinatario)
-    Entry1.pack()
+    Entry1.pack()   
     Label(screen8, text="").pack()
     Label(screen8, text="Insira o assunto:").pack()
     Label(screen8, text="").pack()
@@ -246,6 +246,66 @@ def enviar_mensagem():
         Label(screen8, text="Erro no envio da mensagem").pack()
 
 
+def admin_caixa_entrada_mensagens():
+    global screen9
+    screen9 = Toplevel(screen)
+    screen9.title("Mensagens")
+    screen9.geometry("600x500")
+    screen9.resizable(0, 0)
+    screen9.propagate(0)
+
+    Label(screen9, text="").pack()
+    Label(screen9, text="").pack()
+    Button(screen9, text="Pesquisar por utilizador", command = admin_mensagens_utilizador).pack()
+    Label(screen9, text="").pack()
+    Label(screen9, text="").pack()
+    Button(screen9, text="Ver todas as mensagens enviadas", command = admin_ver_todas_mensagens).pack()
+
+    
+def admin_mensagens_utilizador():
+    global screen11
+    screen11 = Toplevel(screen)
+    screen11.title("Mensagens")
+    screen11.geometry("400x300")
+    screen11.resizable(0, 0)
+    screen11.propagate(0)
+
+    global nome_utilizador
+    nome_utilizador = StringVar()
+
+    Label(screen11, text="").pack()
+    Label(screen11, text="").pack()
+    Label(screen11, text="Insira o nome do utilizador:").pack()
+    Label(screen11, text="").pack()
+    Entry(screen11, textvariable = nome_utilizador).pack()
+    Button(screen11, text="Pesquisar", command=admin_ver_mensagens_utilizador).pack()
+
+def admin_ver_mensagens_utilizador():
+    global screen12
+    screen12 = Toplevel(screen)
+    screen12.title("Mensagens")
+    screen12.geometry("1280x720")
+    screen12.resizable(0, 0)
+    screen12.propagate(0)
+
+    nome_utilizador_info = nome_utilizador.get()
+
+    for linha in funcoes.admin_ver_mensagens_utilizador(nome_utilizador_info):
+        Label(screen12, text=linha[0]).pack()
+        Label(screen12, text=linha[1]).pack()
+        Label(screen12, text="").pack()
+        Label(screen12, text="").pack()
+
+  
+
+
+def admin_ver_todas_mensagens():
+    global screen13
+    screen13 = Toplevel(screen)
+    screen13.title("Mensagens")
+    screen13.geometry("1280x720")
+    screen13.resizable(0, 0)
+    screen13.propagate(0)
 
 
 def main_menu():
@@ -320,8 +380,11 @@ def admin_main_menu():
     Label(screen3, text="").pack()
     Label(screen3, text="").pack()
     Label(screen3, text="").pack()
-    Button(screen3, height=2, width=15, text="Mensagens", command=mensagens).pack()
-
+    Button(screen3, height=2, width=15, text="Enviar mensagens", command=mensagens).pack()
+    Label(screen3, text="").pack()
+    Label(screen3, text="").pack()
+    Label(screen3, text="").pack()
+    Button(screen3, height=2, width=20, text="Caixa de entrada de Mensagens", command=admin_caixa_entrada_mensagens).pack()
 
 def login():
     global screen2

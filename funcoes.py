@@ -151,12 +151,42 @@ def envia_mensagem(destinatario_info, assunto_info, mensagem_info):
                                       port="5432",
                                       database="ProjetoBD2020v4")
         cursor = connection.cursor()
-        cursor.execute("SELECT email FROM UTILIZADOR WHERE email ='"+destinatario_info+"'")
+        cursor.execute("SELECT email FROM utilizador WHERE utilizador.email ='" +destinatario_info +"'")
 
         if cursor.rowcount == 1:
-            cursor.execute("INSERT INTO mensagem (texto, assunto) VALUES ('"+mensagem_info+"', '"+assunto_info+"')")
+            cursor.execute("INSERT INTO mensagem (texto, assunto, utilizador_email) VALUES ('" +mensagem_info + "', '" +assunto_info + "', '" +destinatario_info + "')")
             connection.commit()
-            return "mensagem_aceite"
+            print("Mensagem enviada")
+            return 'mensagem_aceite'
+        else:
+            return 'erro'
+    
+    except (Exception, psycopg2.Error) as error:
+        print("Error", error)
+ 
+    finally:
+        # Closing database connection
+        if connection:
+            cursor.close()
+            connection.close()
+
+
+def admin_ver_mensagens_utilizador(nome_utilizador_info):
+    try:
+        connection = psycopg2.connect(user="postgres",
+                                      password="postgres",
+                                      host="localhost",
+                                      port="5432",
+                                      database="ProjetoBD2020v4")
+        cursor = connection.cursor()
+        cursor.execute("SELECT email FROM utilizador WHERE email = '"+nome_utilizador_info +"' ")
+
+        if cursor.rowcount == 1:
+            cursor.execute("SELECT texto, assunto FROM mensagem where mensagem.utilizador_email = '"+nome_utilizador_info +"'")
+            mensagem = cursor.fetchall()
+            return mensagem
+        else:
+            return 0
 
     except (Exception, psycopg2.Error) as error:
         print("Error", error)
