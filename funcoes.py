@@ -5,10 +5,10 @@ import psycopg2.extras
 def insere_novo_user(email_info, password_info, nome_info):
     try:
         connection = psycopg2.connect(user="postgres",
-                                  password="postgres",
+                                  password="rodmen27",
                                   host="localhost",
                                   port="5432",
-                                  database="ProjetoBD2020v4")
+                                  database="ProjetoBD2020v2")
         cursor = connection.cursor()
         cursor.execute(" INSERT INTO utilizador (email, password, nome, saldo) VALUES ('" +email_info +"','" +password_info +"','" +nome_info +"', '20')")
         print("Registado com sucesso")
@@ -28,7 +28,7 @@ def insere_novo_user(email_info, password_info, nome_info):
 def confirma_novo_user(email_info, password_info):
     try:
         connection = psycopg2.connect(user="postgres",
-                                      password="postgres",
+                                      password="rodmen27",
                                       host="localhost",
                                       port="5432",
                                       database="ProjetoBD2020v4")
@@ -54,7 +54,7 @@ def confirma_novo_user(email_info, password_info):
 def check_login(email_entry1, password_entry1):
     try:
         connection = psycopg2.connect(user="postgres",
-                                      password="postgres",
+                                      password="rodmen27",
                                       host="localhost",
                                       port="5432",
                                       database="ProjetoBD2020v4")
@@ -86,7 +86,7 @@ def check_login(email_entry1, password_entry1):
 def add_saldo(saldo_email_info, saldo_quantia_info):
     try:
         connection = psycopg2.connect(user="postgres",
-                                      password="postgres",
+                                      password="rodmen27",
                                       host="localhost",
                                       port="5432",
                                       database="ProjetoBD2020v4")
@@ -190,9 +190,61 @@ def admin_ver_mensagens_utilizador(nome_utilizador_info):
 
     except (Exception, psycopg2.Error) as error:
         print("Error", error)
+def addartigo(tipo_info, nome_info, horas_info, preco_info, realizador_info, ator_info):
+    try:
+        connection = psycopg2.connect(user="postgres",
+                                  password="rodmen27",
+                                  host="localhost",
+                                  port="5432",
+                                  database="ProjetoBD2020v2")
+        cursor = connection.cursor()
+        #cursor.execute(" INSERT INTO Artigo (tipo, nome, realizador, ator, tempo_disponivel, preco, id) VALUES ('" +tipo_info+ "','" +nome_info +"','" +realizador_info +"','"+ator_info +"', horas_info, preco_info, '7')")
+        cursor.execute("INSERT INTO artigo (id, nome, tipo, realizador, ator, tempo_disponivel, preco) VALUES ('152', %s, %s, %s, %s, '9', '9')", (nome_info, tipo_info, realizador_info, ator_info))    
+        print("Adicionado com sucesso")
+        connection.commit()
+
+
+
+    except (Exception, psycopg2.Error) as error:
+        print(tipo_info)
+        print(nome_info)
+        print(horas_info)
+        print(preco_info)
+        print(realizador_info)
+        print(ator_info)
+        print("Esse artigo já existe.")
+    
 
     finally:
         # Closing database connection
         if connection:
+            cursor.close()
+            connection.close()
+
+
+
+
+def confirma_novo_artigo(nome_info, realizador_info):
+    try:
+        connection = psycopg2.connect(user="postgres",
+                                      password="rodmen27",
+                                      host="localhost",
+                                      port="5432",
+                                      database="ProjetoBD2020v2")
+        cursor = connection.cursor()
+
+        cursor.execute(" SELECT nome, realizador FROM artigo WHERE artigo.nome ='" +nome_info +"' AND artigo.realizador ='" +realizador_info +"'")
+
+        if cursor.rowcount == 1:
+            return 'confirma' # codigo para cliente_login
+
+        else:
+            return 0
+            
+    except (Exception, psycopg2.Error) as error:
+        print("Error", error)
+    finally:
+        # closing database connection
+        if(connection):
             cursor.close()
             connection.close()
