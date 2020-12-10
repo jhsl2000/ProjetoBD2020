@@ -315,7 +315,7 @@ def admin_ver_todas_mensagens():
         Label(screen13, text="Texto:").pack()
         Label(screen13, text=linha[2]).pack()
         Label(screen13, text="").pack()
-        Label(screen13, text="").pack()
+        Label(screen13, text="---------------").pack()
 
 def main_menu():
     screen2.destroy()
