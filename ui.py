@@ -165,6 +165,7 @@ def artigos():
 def filmes():
     Fonte = {'Verdana', 20}
     global screen5
+    global id_filme
     id_filme = IntVar()
     screen5 = Toplevel(screen)
     screen5.title("Filmes")
@@ -176,12 +177,13 @@ def filmes():
 
     for linha in funcoes.ver_filmes():
         Label(screen5, text="").pack()
-        Label(screen5, text=linha[0], font=Fonte).pack()
-        Label(screen5, text="ID: " + linha[1]).pack()
+        Label(screen5, text="Nome: " + linha[0], font=Fonte).pack()
+        Label(screen5, text="ID: ").pack()
+        Label(screen5, text=linha[1]).pack()
         Label(screen5, text="").pack()
         Label(screen5, text="---------------").pack()
-        Label(screen5, text="").pack()
-    
+        
+    Label(screen5, text="Qual o ID do filme que pretende visualizar os detalhes?").pack()
     Entry_filme = Entry(screen5, textvariable=id_filme)
     Entry_filme.pack()
     Button(screen5, height=2, width=10, text='Ver descrições', command=ver_descricao_filmes).pack()
@@ -190,6 +192,7 @@ def filmes():
 def series():
     Fonte = {'Verdana', 20}
     global screen6
+    global id_serie
     id_serie = IntVar()
     screen6 = Tk()
     screen6.title("Series")
@@ -199,11 +202,14 @@ def series():
 
     for linha in funcoes.ver_series():
         Label(screen6, text="").pack()
-        Label(screen6, text=linha[0], font=Fonte).pack()
-        Label(screen6, text="ID: " + linha[1]).pack()
+        Label(screen6, text="Nome: " + linha[0], font=Fonte).pack()
+        Label(screen6, text="ID: ").pack()
+        Label(screen6, text=linha[1]).pack()
         Label(screen6, text="").pack()
         Label(screen6, text="---------------").pack()
         Label(screen6, text="").pack()
+
+    Label(screen6, text="Qual o ID da série que pretende visualizar os detalhes?").pack()
     Entry_serie = Entry(screen6, textvariable=id_serie)
     Entry_serie.pack()
     Button(screen6, height=2, width=10, text='Ver descrições', command=ver_descricao_series).pack()
@@ -212,6 +218,7 @@ def series():
 def documentarios():
     Fonte = {'Verdana', 20}
     global screen15
+    global id_documentario
     id_documentario = IntVar()
     screen15 = Tk()
     screen15.title("Documentários")
@@ -221,26 +228,31 @@ def documentarios():
 
     for linha in funcoes.ver_documentarios():       
         Label(screen15, text="").pack()
-        Label(screen15, text=linha[0], font=Fonte).pack()
-        Label(screen15, text="ID: " + linha[1]).pack()
+        Label(screen15, text="Nome: " + linha[0], font=Fonte).pack()
+        Label(screen15, text="ID: ").pack()
+        Label(screen15, text=linha[1]).pack()
         Label(screen15, text="").pack()
         Label(screen15, text="---------------").pack()
         Label(screen15, text="").pack()
+
+    Label(screen15, text="Qual o ID do documentário que pretende visualizar os detalhes?").pack()
     Entry_documentario = Entry(screen15, textvariable=id_documentario)
     Entry_documentario.pack()
-    Button(screen15, height=2, width=10, text='Ver descrições', command= ver_descricao_documentarios(id_documentario)).pack()
+    Button(screen15, height=2, width=10, text='Ver descrições', command= ver_descricao_documentarios).pack()
 
 
-def ver_descricao_filmes(id_filme):
+def ver_descricao_filmes():
     global screen71
     screen71 = Toplevel(screen)
     screen71.title("Descrição Filmes")
     screen71.geometry("1280x720")
     screen71.resizable(0, 0)
     screen71.propagate(0)
+
+    id_filme_info = id_filme.get()
     
 
-    for linha in funcoes.ver_descricao_filmes(id_filme):
+    for linha in funcoes.ver_descricao_filmes(id_filme_info):
         Label(screen71, text="").pack()
         Label(screen71, text=linha[0]).pack()
         Label(screen71, text="").pack()
@@ -254,16 +266,18 @@ def ver_descricao_filmes(id_filme):
 
 
 
-def ver_descricao_series(id_serie):
+def ver_descricao_series():
     global screen20
     screen20 = Toplevel(screen)
     screen20.title("Descrição Séries")
     screen20.geometry("1280x720")
     screen20.resizable(0, 0)
     screen20.propagate(0)
+
+    id_serie_info = id_serie.get()
     
 
-    for linha in funcoes.ver_descricao_series(id_serie):
+    for linha in funcoes.ver_descricao_series(id_serie_info):
         Label(screen20, text="").pack()
         Label(screen20, text=linha[0]).pack()
         Label(screen20, text="").pack()
@@ -279,16 +293,18 @@ def ver_descricao_series(id_serie):
 
 
 
-def ver_descricao_documentarios(id_documentario):
+def ver_descricao_documentarios():
     global screen72
     screen72 = Toplevel(screen)
     screen72.title("Descrição Documentários")
     screen72.geometry("1280x720")
     screen72.resizable(0, 0)
     screen72.propagate(0)
+
+    id_documentario_info = id_documentario.get()
     
 
-    for linha in funcoes.ver_descricao_documentarios(id_documentario):
+    for linha in funcoes.ver_descricao_documentarios(id_documentario_info):
         Label(screen72, text="").pack()
         Label(screen72, text=linha[0]).pack()
         Label(screen72, text="").pack()

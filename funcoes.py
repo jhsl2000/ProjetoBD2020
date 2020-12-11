@@ -327,7 +327,7 @@ def ver_documentarios():
 
 
 
-def ver_descricao_filmes(id_filme):
+def ver_descricao_filmes(id_filme_info):
     try:
         connection = psycopg2.connect(user="postgres",
                                       password="postgres",
@@ -336,7 +336,7 @@ def ver_descricao_filmes(id_filme):
                                       database="ProjetoBD2020v1")
         cursor = connection.cursor()
 
-        cursor.execute("SELECT nome, tipo, realizador, ator, tempo_disponivel, preco FROM artigo WHERE tipo = 'Filme' AND id = '"+ id_filme +"'")
+        cursor.execute("SELECT nome, tipo, realizador, ator, tempo_disponivel, preco FROM artigo WHERE tipo = 'Filme' AND id = 'id_filme_info'")
         nomee = cursor.fetchall()
         return nomee
        
@@ -349,7 +349,7 @@ def ver_descricao_filmes(id_filme):
 
 
 
-def ver_descricao_series(id_serie):
+def ver_descricao_series(id_serie_info):
     try:
         connection = psycopg2.connect(user="postgres",
                                       password="postgres",
@@ -358,7 +358,7 @@ def ver_descricao_series(id_serie):
                                       database="ProjetoBD2020v1")
         cursor = connection.cursor()
 
-        cursor.execute("SELECT nome, tipo, realizador, ator, tempo_disponivel, preco FROM artigo WHERE tipo = 'Série' AND id = %s", (id_serie))
+        cursor.execute("SELECT nome, tipo, realizador, ator, tempo_disponivel, preco FROM artigo WHERE tipo = 'Série' AND id = %s", (id_serie_info))
         seriee = cursor.fetchall()
         return seriee
        
@@ -367,7 +367,7 @@ def ver_descricao_series(id_serie):
         print("Error", error)
 
 
-def ver_descricao_documentarios(id_documentario):
+def ver_descricao_documentarios(id_documentario_info):
     try:
         connection = psycopg2.connect(user="postgres",
                                       password="postgres",
@@ -376,7 +376,7 @@ def ver_descricao_documentarios(id_documentario):
                                       database="ProjetoBD2020v1")
         cursor = connection.cursor()
 
-        cursor.execute("SELECT nome, tipo, realizador, ator, tempo_disponivel, preco FROM artigo WHERE tipo = 'Documentário' AND id = %s", (id_documentario))
+        cursor.execute("SELECT nome, tipo, realizador, ator, tempo_disponivel, preco FROM artigo WHERE tipo = 'Documentário' AND id = %s", (id_documentario_info))
         documentarioo = cursor.fetchall()
         return documentarioo
        
