@@ -336,7 +336,7 @@ def ver_descricao_filmes(id_filme_info):
                                       database="ProjetoBD2020v1")
         cursor = connection.cursor()
 
-        cursor.execute("SELECT nome, tipo, realizador, ator, tempo_disponivel, preco FROM artigo WHERE tipo = 'Filme' AND id = 'id_filme_info'")
+        cursor.execute("SELECT nome, tipo, realizador, ator, tempo_disponivel, preco FROM artigo WHERE artigo.tipo = 'Filme' AND artigo.id = %s", [id_filme_info])
         nomee = cursor.fetchall()
         return nomee
        
@@ -358,7 +358,7 @@ def ver_descricao_series(id_serie_info):
                                       database="ProjetoBD2020v1")
         cursor = connection.cursor()
 
-        cursor.execute("SELECT nome, tipo, realizador, ator, tempo_disponivel, preco FROM artigo WHERE tipo = 'Série' AND id = %s", (id_serie_info))
+        cursor.execute("SELECT nome, tipo, realizador, ator, tempo_disponivel, preco FROM artigo WHERE tipo = 'Série' AND id = %s", [id_serie_info])
         seriee = cursor.fetchall()
         return seriee
        
@@ -376,7 +376,7 @@ def ver_descricao_documentarios(id_documentario_info):
                                       database="ProjetoBD2020v1")
         cursor = connection.cursor()
 
-        cursor.execute("SELECT nome, tipo, realizador, ator, tempo_disponivel, preco FROM artigo WHERE tipo = 'Documentário' AND id = %s", (id_documentario_info))
+        cursor.execute("SELECT nome, tipo, realizador, ator, tempo_disponivel, preco FROM artigo WHERE tipo = 'Documentário' AND id = %s", [id_documentario_info])
         documentarioo = cursor.fetchall()
         return documentarioo
        

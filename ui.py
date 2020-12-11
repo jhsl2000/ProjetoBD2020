@@ -166,12 +166,12 @@ def filmes():
     Fonte = {'Verdana', 20}
     global screen5
     global id_filme
-    id_filme = IntVar()
     screen5 = Toplevel(screen)
     screen5.title("Filmes")
     screen5.geometry("1280x720")
     screen5.resizable(0, 0)
     screen5.propagate(0)
+    id_filme = DoubleVar()
     
     
 
@@ -193,7 +193,7 @@ def series():
     Fonte = {'Verdana', 20}
     global screen6
     global id_serie
-    id_serie = IntVar()
+    id_serie = DoubleVar()
     screen6 = Tk()
     screen6.title("Series")
     screen6.geometry("1280x720")
@@ -212,6 +212,7 @@ def series():
     Label(screen6, text="Qual o ID da série que pretende visualizar os detalhes?").pack()
     Entry_serie = Entry(screen6, textvariable=id_serie)
     Entry_serie.pack()
+    print(id_filme)
     Button(screen6, height=2, width=10, text='Ver descrições', command=ver_descricao_series).pack()
 
 
@@ -219,7 +220,7 @@ def documentarios():
     Fonte = {'Verdana', 20}
     global screen15
     global id_documentario
-    id_documentario = IntVar()
+    id_documentario = DoubleVar()
     screen15 = Tk()
     screen15.title("Documentários")
     screen15.geometry("1280x720")
@@ -242,6 +243,7 @@ def documentarios():
 
 
 def ver_descricao_filmes():
+    Fonte = {'Verdana', 20}
     global screen71
     screen71 = Toplevel(screen)
     screen71.title("Descrição Filmes")
@@ -250,23 +252,36 @@ def ver_descricao_filmes():
     screen71.propagate(0)
 
     id_filme_info = id_filme.get()
-    
 
     for linha in funcoes.ver_descricao_filmes(id_filme_info):
         Label(screen71, text="").pack()
-        Label(screen71, text=linha[0]).pack()
+        Label(screen71, text="").pack()
+        Label(screen71, text="").pack()
+        Label(screen71, text="").pack()
+        Label(screen71, text="---------------").pack()
+        Label(screen71, text="").pack()
+        Label(screen71, text="").pack()
+        Label(screen71, text=linha[0], font=Fonte).pack()
         Label(screen71, text="").pack()
         Label(screen71, text="Tipo: " + linha[1]).pack()
+        Label(screen71, text="").pack()
         Label(screen71, text="Realizador: " + linha[2]).pack()
+        Label(screen71, text="").pack()
         Label(screen71, text="Ator: " + linha[3]).pack()
-        Label(screen71, text="Tempo disponível: " + linha[4]).pack()
-        Label(screen71, text="Preço: " + linha[5]).pack()
+        Label(screen71, text="").pack()
+        Label(screen71, text="Tempo disponível: ").pack()
+        Label(screen71, text=linha[4]).pack()
+        Label(screen71, text="").pack()
+        Label(screen71, text="Preço: ").pack()
+        Label(screen71, text=linha[5]).pack()
+        Label(screen71, text="").pack()
         Label(screen71, text="").pack()
         Label(screen71, text="---------------").pack()
 
 
 
 def ver_descricao_series():
+    Fonte = {'Verdana', 20}
     global screen20
     screen20 = Toplevel(screen)
     screen20.title("Descrição Séries")
@@ -279,13 +294,26 @@ def ver_descricao_series():
 
     for linha in funcoes.ver_descricao_series(id_serie_info):
         Label(screen20, text="").pack()
-        Label(screen20, text=linha[0]).pack()
+        Label(screen20, text="").pack()
+        Label(screen20, text="").pack()
+        Label(screen20, text="").pack()
+        Label(screen20, text="---------------").pack()
+        Label(screen20, text="").pack()
+        Label(screen20, text="").pack()
+        Label(screen20, text=linha[0], font=Fonte).pack()
         Label(screen20, text="").pack()
         Label(screen20, text="Tipo: " + linha[1]).pack()
+        Label(screen20, text="").pack()
         Label(screen20, text="Realizador: " + linha[2]).pack()
+        Label(screen20, text="").pack()
         Label(screen20, text="Ator: " + linha[3]).pack()
-        Label(screen20, text="Tempo disponível: " + linha[4]).pack()
-        Label(screen20, text="Preço: " + linha[5]).pack()
+        Label(screen20, text="").pack()
+        Label(screen20, text="Tempo disponível: ").pack()
+        Label(screen20, text=linha[4]).pack()
+        Label(screen20, text="").pack()
+        Label(screen20, text="Preço: ").pack()
+        Label(screen20, text=linha[5]).pack()
+        Label(screen20, text="").pack()
         Label(screen20, text="").pack()
         Label(screen20, text="---------------").pack()
 
@@ -294,6 +322,7 @@ def ver_descricao_series():
 
 
 def ver_descricao_documentarios():
+    Fonte = {'Verdana', 20}
     global screen72
     screen72 = Toplevel(screen)
     screen72.title("Descrição Documentários")
@@ -306,13 +335,26 @@ def ver_descricao_documentarios():
 
     for linha in funcoes.ver_descricao_documentarios(id_documentario_info):
         Label(screen72, text="").pack()
-        Label(screen72, text=linha[0]).pack()
+        Label(screen72, text="").pack()
+        Label(screen72, text="").pack()
+        Label(screen72, text="").pack()
+        Label(screen72, text="---------------").pack()
+        Label(screen72, text="").pack()
+        Label(screen72, text="").pack()
+        Label(screen72, text=linha[0], font=Fonte).pack()
         Label(screen72, text="").pack()
         Label(screen72, text="Tipo: " + linha[1]).pack()
+        Label(screen72, text="").pack()
         Label(screen72, text="Realizador: " + linha[2]).pack()
+        Label(screen72, text="").pack()
         Label(screen72, text="Ator: " + linha[3]).pack()
-        Label(screen72, text="Tempo disponível: " + linha[4]).pack()
-        Label(screen72, text="Preço: " + linha[5]).pack()
+        Label(screen72, text="").pack()
+        Label(screen72, text="Tempo disponível: ").pack()
+        Label(screen72, text=linha[4]).pack()
+        Label(screen72, text="").pack()
+        Label(screen72, text="Preço: ").pack()
+        Label(screen72, text=linha[5]).pack()
+        Label(screen72, text="").pack()
         Label(screen72, text="").pack()
         Label(screen72, text="---------------").pack()
 
