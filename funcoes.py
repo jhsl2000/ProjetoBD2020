@@ -190,7 +190,8 @@ def envia_mensagem_todos(mensagem_todos_info, assunto_todos_info):
             cursor.close()
             connection.close()
 '''
-def seleciona_clientes(mensagem_todos_info, assunto_todos_info):
+
+def envia_mensagem_todos(mensagem_todos_info, assunto_todos_info):
     try:
         connection = psycopg2.connect(user="postgres",
                                       password="postgres",
@@ -206,7 +207,7 @@ def seleciona_clientes(mensagem_todos_info, assunto_todos_info):
             print(sql)
             cursor.execute(sql)
             connection.commit()
-        return 'mensagem aceite'
+        return 'mensagem_aceite'
 
     except (Exception, psycopg2.Error) as error:
         print("Error", error)
@@ -253,6 +254,23 @@ def admin_ver_todas_mensagens():
         cursor.execute("SELECT utilizador_email, assunto, texto FROM mensagem")
         mensagem = cursor.fetchall()
         return mensagem
+
+    except (Exception, psycopg2.Error) as error:
+        print("Error", error)
+
+
+def utilizador_ver_todas_mensagens(email1):
+    try:
+        connection = psycopg2.connect(user="postgres",
+                                      password="postgres",
+                                      host="localhost",
+                                      port="5432",
+                                      database="ProjetoBD2020")
+        cursor = connection.cursor()
+
+        cursor.execute("SELECT assunto, texto FROM mensagem WHERE utilizador_email = '"+email1+"'")
+        user_mensagens = cursor.fetchall()
+        return user_mensagens
 
     except (Exception, psycopg2.Error) as error:
         print("Error", error)
@@ -312,5 +330,28 @@ def confirma_novo_artigo(nome_info, realizador_info):
     finally:
         # closing database connection
         if(connection):
+            cursor.close()
+            connection.close()
+
+
+def return_clientes():
+    try:
+        connection = psycopg2.connect(user="postgres",
+                                      password="postgres",
+                                      host="localhost",
+                                      port="5432",
+                                      database="ProjetoBD2020")
+        cursor = connection.cursor()
+
+        cursor.execute("SELECT (nome, email) FROM utilizador")
+
+        utilizadores = cursor.fetchall()
+        return utilizadores
+
+    except (Exception, psycopg2.Error) as error:
+        print("Error", error)
+    finally:
+        # closing database connection
+        if (connection):
             cursor.close()
             connection.close()

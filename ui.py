@@ -154,34 +154,6 @@ def artigos():
     Label(screen4, text="").pack()
     Button(screen4, height=2, width=10, text="Voltar", command=voltar).pack()
 
-'''
-def adicionar_artigos():
-    global screen
-    screen = Tk()
-    screen.title("Artigos")
-    screen.geometry("1280x720")
-    screen.resizable(0, 0)
-    screen.propagate(0)
-    global nome_artigo
-    global tempo
-    global tipo_artigo
-
-    nome_artigo = StringVar()
-    tempo = StringVar()
-    tipo_artigo = StringVar()
-
-    Label(screen, text="").pack()
-    Label(screen, text="").pack()
-    Label(screen, text="").pack()
-    Label(screen, text="Nome:").pack()
-    Entry(screen, textvariable=nome_artigo).pack()
-    Label(screen, text="").pack()
-    Label(screen, text="Tempo disponivel em dias:").pack()
-    Entry(screen, textvariable=tempo).pack()
-    Label(screen, text="").pack()
-    Label(screen, text="Tipo do artigo:").pack()
-    Entry(screen, textvariable=tipo_artigo).pack()
-'''
 
 def filmes():
     global screen5
@@ -216,6 +188,72 @@ def mensagens():
     Label(screen15, text="").pack()
     Label(screen15, text="").pack()
     Button(screen15, text="Todos os utilizadores", command=mensagens_para_todos).pack()
+
+def mensagens_utilizador():
+    global screen20
+    screen20=Toplevel(screen)
+    screen20.title("Caixa de entrada de mensagens")
+    screen20.geometry("400x300")
+    screen20.resizable(0, 0)
+    screen20.propagate(0)
+
+    Label(screen20, text="").pack()
+    Label(screen20, text="").pack()
+    Label(screen20, text="Pretende...").pack()
+    Label(screen20, text="").pack()
+    Button(screen20,height=2, width=18, text="Ver mensagens recebidas", command=utilizador_ver_mensagens).pack()
+    Label(screen20, text="").pack()
+    Button(screen20,height=2, width=18, text="Escrever mensagem", command=utilizador_escrever_mensagem).pack()
+
+def utilizador_escrever_mensagem():
+    global screen18
+    screen18 = Toplevel(screen)
+    screen18.title("Mensagens")
+    screen18.geometry("1280x720")
+    screen18.resizable(0, 0)
+    screen18.propagate(0)
+
+    global mensagem_utilizador
+    global assunto_utilizador
+    assunto_utilizador = StringVar()
+    mensagem_utilizador = StringVar()
+
+    Label(screen18, text="").pack()
+    Label(screen18, text="").pack()
+    Label(screen18, text="Irá enviar uma mensagem para os administradores", fg="red").pack()
+    Label(screen18, text="Insira o assunto:").pack()
+    Label(screen18, text="").pack()
+    Entry2 = Entry(screen18, textvariable=assunto_utilizador)
+    Entry2.pack()
+    Label(screen18, text="").pack()
+    Label(screen18, text="Insira a mensagem").pack()
+    Entry3 = Entry(screen18, textvariable=mensagem_utilizador)
+    Entry3.pack(padx=50, pady=25, ipadx=50, ipady=50)
+    Button(screen18, text="Enviar", command=utilizador_enviar_mensagem).pack()
+
+def utilizador_enviar_mensagem():
+    global screen18
+
+    assunto_utilizador_info = assunto_utilizador.get()
+    mensagem_utilizador_info = mensagem_utilizador.get()
+
+def utilizador_ver_mensagens():
+    global screen22
+    screen22 = Toplevel(screen)
+    screen22.title("Mensagens")
+    screen22.geometry("1280x720")
+    screen22.resizable(0, 0)
+    screen22.propagate(0)
+
+    for linha in funcoes.utilizador_ver_todas_mensagens(email1):
+        Label(screen13, text="Destinatario:").pack()
+        Label(screen13, text=linha[0]).pack()
+        Label(screen13, text="Assunto:").pack()
+        Label(screen13, text=linha[1]).pack()
+        Label(screen13, text="Texto:").pack()
+        Label(screen13, text=linha[2]).pack()
+        Label(screen13, text="").pack()
+        Label(screen13, text="---------------").pack()
 
 
 def mensagens_para_um_utilizador():
@@ -283,7 +321,7 @@ def enviar_mensagem_todos():
     mensagem_todos_info = mensagem_todos.get()
     assunto_todos_info = assunto_todos.get()
     
-    if funcoes.seleciona_clientes(mensagem_todos_info, assunto_todos_info) == 'mensagem_aceite':
+    if funcoes.envia_mensagem_todos(mensagem_todos_info, assunto_todos_info) == 'mensagem_aceite':
         Label(screen16, text="Mensagem enviada").pack()
     else:
         Label(screen16, text="Erro no envio da mensagem").pack()
@@ -363,32 +401,10 @@ def admin_ver_todas_mensagens():
     screen13.propagate(0)
 
     for linha in funcoes.admin_ver_todas_mensagens():
-        Label(screen13, text="Destinatario:").pack()
-        Label(screen13, text=linha[0]).pack()
-        Label(screen13, text="Assunto:").pack()
-        Label(screen13, text=linha[1]).pack()
-        Label(screen13, text="Texto:").pack()
-        Label(screen13, text=linha[2]).pack()
-        Label(screen13, text="").pack()
-        Label(screen13, text="---------------").pack()
+        Label(screen13, text="-------------------------------------").pack()
+        Label(screen13, text="Destinatario:  " + linha[0] + " Assunto:  " + linha[1] + " Texto:  " + linha[2]).pack()
 
 
-def mensagens_utilizador():
-    global screen14
-    screen14 = Toplevel(screen)
-    screen14.title("Mensagens")
-    screen14.geometry("400x300")
-    screen14.resizable(0, 0)
-    screen14.propagate(0)
-
-    
-    
-    Label(screen14, text="").pack()
-    Label(screen14, text="").pack()
-    Button(screen14, text="Enviar mensagem", command=utilizador_enviar_mensagem).pack()
-    Label(screen14, text="").pack()
-    Label(screen14, text="").pack()
-    Button(screen14, text="Mensagens recebidas", command= utilizador_mensagens_recebidas).pack()
 
 
 #def utilizador_enviar_mensagem():
@@ -422,7 +438,7 @@ def main_menu():
     Label(screen3, text="").pack()
     Label(screen3, text="").pack()
     Label(screen3, text="").pack()
-    Button(screen3, height=2, width=12, text="Caixa de Entrada", command=mensagens_utilizador).pack()
+    Button(screen3, height=2, width=15, text="Caixa de mensagens", command=mensagens_utilizador).pack()
     Label(screen3, text="").pack()
     Label(screen3, text="").pack()
     Label(screen3, text="").pack()
@@ -450,27 +466,46 @@ def admin_main_menu():
     # Label(screen3, text="saldo=").pack()
     Label(screen3, text="").pack()
     Label(screen3, text="").pack()
-    Label(screen3, text="").pack()
-    Label(screen3, text="").pack()
-    Label(screen3, text="").pack()
-    Label(screen3, text="").pack()
     Button(screen3, height=2, width=15, text="Adicionar Artigos", command=adicionar_artigos).pack()
-    Label(screen3, text="").pack()
     Label(screen3, text="").pack()
     Label(screen3, text="").pack()
     Button(screen3, height=2, width=15, text="Alterar preco artigo").pack()
     Label(screen3, text="").pack()
     Label(screen3, text="").pack()
-    Label(screen3, text="").pack()
     Button(screen3, height=2, width=15, text="Adicionar saldo", command=saldo).pack()
-    Label(screen3, text="").pack()
     Label(screen3, text="").pack()
     Label(screen3, text="").pack()
     Button(screen3, height=2, width=15, text="Enviar mensagens", command=mensagens).pack()
     Label(screen3, text="").pack()
     Label(screen3, text="").pack()
-    Label(screen3, text="").pack()
     Button(screen3, height=2, width=25, text="Caixa de entrada de Mensagens", command=admin_caixa_entrada_mensagens).pack()
+    Label(screen3, text="").pack()
+    Label(screen3, text="").pack()
+    Button(screen3, height=2, width=25, text="Ver estatisticas", command=ver_estatisticas).pack()
+
+def ver_estatisticas():
+    global screen23
+    screen23 = Toplevel(screen)
+    screen23.title("Mensagens")
+    screen23.geometry("400x200")
+    screen23.resizable(0, 0)
+    screen23.propagate(0)
+
+    Label(screen23, text="Qual a estatistica que pretende ver:", fg="blue").pack()
+    Button(screen23,height=2, width=15, text="Total de clientes", command=total_clientes).pack()
+    Label(screen23, text="").pack()
+    Button(screen23,height=2, width=15, text="Total de artigos").pack()
+
+def total_clientes():
+    global screen24
+    screen24 = Toplevel(screen)
+    screen24.title("Total de clientes")
+    screen24.geometry("400x700")
+    screen24.resizable(0, 0)
+    screen24.propagate(0)
+
+    for linha in funcoes.return_clientes():
+        Label(screen24, text="Nome:  " + linha[0] + " Email:  " + linha[1]).pack()
 
 def adicionar_artigos():
     global screen8
