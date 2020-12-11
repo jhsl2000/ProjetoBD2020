@@ -494,7 +494,7 @@ def ver_estatisticas():
     Label(screen23, text="Qual a estatistica que pretende ver:", fg="blue").pack()
     Button(screen23,height=2, width=15, text="Total de clientes", command=total_clientes).pack()
     Label(screen23, text="").pack()
-    Button(screen23,height=2, width=15, text="Total de artigos").pack()
+    Button(screen23,height=2, width=15, text="Total de artigos", command=estatisticas_artigos).pack()
 
 def total_clientes():
     global screen24
@@ -504,8 +504,25 @@ def total_clientes():
     screen24.resizable(0, 0)
     screen24.propagate(0)
 
+    Label(screen24, text="Total de clientes").pack()
+    Label(screen24, text=funcoes.total_utilizadores(), fg= 'green').pack()
+    Label(screen24, text="").pack()
     for linha in funcoes.return_clientes():
-        Label(screen24, text="Nome:  " + linha[0] + " Email:  " + linha[1]).pack()
+        Label(screen24, text="-------------------------------------").pack()
+        Label(screen24, text="Nome,Email:  " + linha[0] ).pack()
+
+def estatisticas_artigos():
+    global screen25
+    screen25 = Toplevel(screen)
+    screen25.title("Total de clientes")
+    screen25.geometry("1280x720")
+    screen25.resizable(0, 0)
+    screen25.propagate(0)
+
+    Label(screen25, text="Total de artigos").pack()
+    Label(screen25, text=funcoes.total_artigos(), fg= 'green').pack()
+    Label(screen25, text="").pack()
+
 
 def adicionar_artigos():
     global screen8
@@ -533,7 +550,12 @@ def adicionar_artigos():
     Label(screen8, text="").pack()
     Label(screen8, text="").pack()
     Button(screen8, height=2, width=15, text="Documentário", command=add_documentario).pack()
-
+    global screen25
+    screen25 = Toplevel(screen)
+    screen25.title("Estatistica de Artigos ")
+    screen25.geometry("400x700")
+    screen25.resizable(0, 0)
+    screen25.propagate(0)
 
 
 def add_filme():

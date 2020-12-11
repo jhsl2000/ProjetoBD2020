@@ -342,14 +342,62 @@ def return_clientes():
                                       port="5432",
                                       database="ProjetoBD2020")
         cursor = connection.cursor()
-
-        cursor.execute("SELECT (nome, email) FROM utilizador")
+        sql ="SELECT (nome, email) FROM utilizador"
+        print(sql)
+        cursor.execute(sql)
 
         utilizadores = cursor.fetchall()
         return utilizadores
 
     except (Exception, psycopg2.Error) as error:
         print("Error", error)
+    finally:
+        # closing database connection
+        if (connection):
+            cursor.close()
+            connection.close()
+
+
+def total_utilizadores():
+    try:
+        connection = psycopg2.connect(user="postgres",
+                                      password="postgres",
+                                      host="localhost",
+                                      port="5432",
+                                      database="ProjetoBD2020")
+        cursor = connection.cursor()
+        sql ="SELECT COUNT(*) FROM utilizador"
+        print(sql)
+        cursor.execute(sql)
+        total_users = cursor.fetchall()
+        return total_users
+
+    except (Exception, psycopg2.Error) as error:
+        print("Error", error)
+
+    finally:
+        # closing database connection
+        if (connection):
+            cursor.close()
+            connection.close()
+
+def total_artigos():
+    try:
+        connection = psycopg2.connect(user="postgres",
+                                      password="postgres",
+                                      host="localhost",
+                                      port="5432",
+                                      database="ProjetoBD2020")
+        cursor = connection.cursor()
+        sql ="SELECT COUNT(*) FROM artigo"
+        print(sql)
+        cursor.execute(sql)
+        total_artigo= cursor.fetchall()
+        return total_artigo
+
+    except (Exception, psycopg2.Error) as error:
+        print("Error", error)
+
     finally:
         # closing database connection
         if (connection):
