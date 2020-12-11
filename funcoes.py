@@ -460,3 +460,20 @@ def alterar_preco_admin(id_alterar_info, novo_preco_info):
 
     except (Exception, psycopg2.Error) as error:
         print("Erro.")
+
+
+
+def remover_artigo_admin(id_remover_info):
+    try:
+        connection = psycopg2.connect(user="postgres",
+                                  password="postgres",
+                                  host="localhost",
+                                  port="5432",
+                                  database="ProjetoBD2020v1")
+        cursor = connection.cursor()
+        cursor.execute("DELETE FROM artigo WHERE id = %s", [id_remover_info])
+        print("Removido com sucesso")
+        connection.commit()
+
+    except (Exception, psycopg2.Error) as error:
+        print("Erro.")

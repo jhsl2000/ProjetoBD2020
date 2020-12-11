@@ -861,7 +861,7 @@ def filmes_admin():
     Label(screen50, text="Digite o ID do produto que pretende remover:").pack()
     Entry33 = Entry(screen50, textvariable=id_remover)
     Entry33.pack()
-    Button(screen50, height=2, width=15, text="Remover artigo", command=voltar).pack()
+    Button(screen50, height=2, width=15, text="Remover artigo", command=remover_artigo).pack()
 
 
 def series_admin():
@@ -903,7 +903,7 @@ def series_admin():
     Label(screen60, text="Digite o ID do produto que pretende remover:").pack()
     Entry33 = Entry(screen60, textvariable=id_remover)
     Entry33.pack()
-    Button(screen60, height=2, width=15, text="Remover artigo", command=voltar).pack()
+    Button(screen60, height=2, width=15, text="Remover artigo", command=remover_artigo).pack()
 
 
 def documentarios_admin():
@@ -945,7 +945,7 @@ def documentarios_admin():
     Label(screen105, text="Digite o ID do produto que pretende remover:").pack()
     Entry33 = Entry(screen105, textvariable=id_remover)
     Entry33.pack()
-    Button(screen105, height=2, width=15, text="Remover artigo", command=voltar).pack()
+    Button(screen105, height=2, width=15, text="Remover artigo", command=remover_artigo).pack()
 
 
 
@@ -958,6 +958,14 @@ def alterar_preco():
 
     Entry11.delete(0, END)
     Entry22.delete(0, END)
+
+def remover_artigo():
+    global screen
+    id_remover_info = id_remover.get()
+
+    funcoes.remover_artigo_admin(id_remover_info)
+
+    Entry33.delete(0, END)
         
 
 
