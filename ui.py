@@ -824,62 +824,141 @@ def visualizar_artigos():
 
 def filmes_admin():
     global screen50
+    global novo_preco
+    global id_alterar
+    global id_remover
+    global Entry11
+    global Entry22
+    global Entry33 
     screen50 = Toplevel(screen)
     screen50.title("Filmes")
     screen50.geometry("1280x720")
     screen50.resizable(0, 0)
     screen50.propagate(0)
+    novo_preco = DoubleVar()
+    id_alterar = DoubleVar()
+    id_remover = DoubleVar()
     
     
 
     for linha in funcoes.ver_filmes_admin():
         Label(screen50, text=linha[0]).pack()
         Label(screen50, text="").pack()
-        Label(screen50, text="Preço: ").pack()
+        Label(screen50, text="ID: ").pack()
         Label(screen50, text=linha[1]).pack()
-        Label(screen50, text="Tempo disponível: ").pack()
+        Label(screen50, text="Preço: ").pack()
         Label(screen50, text=linha[2]).pack()
+        Label(screen50, text="Tempo disponível: ").pack()
+        Label(screen50, text=linha[3]).pack()
         Label(screen50, text="---------------").pack()
+    Label(screen50, text="Digite o ID do produto que pretende alterar de preço:").pack()
+    Entry11 = Entry(screen50, textvariable=id_alterar)
+    Entry11.pack()
+    Label(screen50, text="Digite o novo preço que deseja atribuir ao produto:").pack()
+    Entry22 = Entry(screen50, textvariable=novo_preco)
+    Entry22.pack()
+    Button(screen50, height=2, width=15, text="Alterar preço", command=alterar_preco).pack()
+    Label(screen50, text="Digite o ID do produto que pretende remover:").pack()
+    Entry33 = Entry(screen50, textvariable=id_remover)
+    Entry33.pack()
+    Button(screen50, height=2, width=15, text="Remover artigo", command=voltar).pack()
 
 
 def series_admin():
     global screen60
-    screen60 = Tk()
-    screen60.title("Series")
+    global novo_preco
+    global id_alterar
+    global id_remover
+    global Entry11
+    global Entry22
+    global Entry33 
+    screen60 = Toplevel(screen)
+    screen60.title("Filmes")
     screen60.geometry("1280x720")
     screen60.resizable(0, 0)
     screen60.propagate(0)
+    novo_preco = DoubleVar()
+    id_alterar = DoubleVar()
+    id_remover = DoubleVar()
+    
+    
 
     for linha in funcoes.ver_series_admin():
         Label(screen60, text=linha[0]).pack()
         Label(screen60, text="").pack()
-        Label(screen60, text="Preço: ").pack()
+        Label(screen60, text="ID: ").pack()
         Label(screen60, text=linha[1]).pack()
-        Label(screen60, text="Tempo disponível: ").pack()
+        Label(screen60, text="Preço: ").pack()
         Label(screen60, text=linha[2]).pack()
+        Label(screen60, text="Tempo disponível: ").pack()
+        Label(screen60, text=linha[3]).pack()
         Label(screen60, text="---------------").pack()
+    Label(screen60, text="Digite o ID do produto que pretende alterar de preço:").pack()
+    Entry11 = Entry(screen60, textvariable=id_alterar)
+    Entry11.pack()
+    Label(screen60, text="Digite o novo preço que deseja atribuir ao produto:").pack()
+    Entry22 = Entry(screen60, textvariable=novo_preco)
+    Entry22.pack()
+    Button(screen60, height=2, width=15, text="Alterar preço", command=alterar_preco).pack()
+    Label(screen60, text="Digite o ID do produto que pretende remover:").pack()
+    Entry33 = Entry(screen60, textvariable=id_remover)
+    Entry33.pack()
+    Button(screen60, height=2, width=15, text="Remover artigo", command=voltar).pack()
 
 
 def documentarios_admin():
     global screen105
-    screen105 = Tk()
-    screen105.title("Documentários")
+    global novo_preco
+    global id_alterar
+    global id_remover
+    global Entry11
+    global Entry22
+    global Entry33 
+    screen105 = Toplevel(screen)
+    screen105.title("Filmes")
     screen105.geometry("1280x720")
     screen105.resizable(0, 0)
     screen105.propagate(0)
+    novo_preco = DoubleVar()
+    id_alterar = DoubleVar()
+    id_remover = DoubleVar()
+    
+    
 
-    for linha in funcoes.ver_documentarios_admin():       
+    for linha in funcoes.ver_series_admin():
         Label(screen105, text=linha[0]).pack()
         Label(screen105, text="").pack()
-        Label(screen72, text="Preço: ").pack()
+        Label(screen105, text="ID: ").pack()
         Label(screen105, text=linha[1]).pack()
-        Label(screen72, text="Tempo disponível: ").pack()
+        Label(screen105, text="Preço: ").pack()
         Label(screen105, text=linha[2]).pack()
+        Label(screen105, text="Tempo disponível: ").pack()
+        Label(screen105, text=linha[3]).pack()
         Label(screen105, text="---------------").pack()
+    Label(screen105, text="Digite o ID do produto que pretende alterar de preço:").pack()
+    Entry11 = Entry(screen105, textvariable=id_alterar)
+    Entry11.pack()
+    Label(screen105, text="Digite o novo preço que deseja atribuir ao produto:").pack()
+    Entry22 = Entry(screen105, textvariable=novo_preco)
+    Entry22.pack()
+    Button(screen105, height=2, width=15, text="Alterar preço", command=alterar_preco).pack()
+    Label(screen105, text="Digite o ID do produto que pretende remover:").pack()
+    Entry33 = Entry(screen105, textvariable=id_remover)
+    Entry33.pack()
+    Button(screen105, height=2, width=15, text="Remover artigo", command=voltar).pack()
 
 
 
+def alterar_preco():
+    global screen
+    id_alterar_info = id_alterar.get()
+    novo_preco_info = novo_preco.get()
 
+    funcoes.alterar_preco_admin(id_alterar_info, novo_preco_info)
+
+    Entry11.delete(0, END)
+    Entry22.delete(0, END)
+        
 
 
 def login():

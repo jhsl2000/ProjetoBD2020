@@ -399,7 +399,7 @@ def ver_filmes_admin():
                                       database="ProjetoBD2020v1")
         cursor = connection.cursor()
             
-        cursor.execute("SELECT nome, preco, tempo_disponivel FROM artigo WHERE tipo = 'Filme'")
+        cursor.execute("SELECT nome, id, preco, tempo_disponivel FROM artigo WHERE tipo = 'Filme'")
         filmes = cursor.fetchall()
         return filmes
        
@@ -417,7 +417,7 @@ def ver_series_admin():
                                       database="ProjetoBD2020v1")
         cursor = connection.cursor()
             
-        cursor.execute("SELECT nome, preco, tempo_disponivel FROM artigo WHERE tipo = 'Série'")
+        cursor.execute("SELECT nome, id, preco, tempo_disponivel FROM artigo WHERE tipo = 'Série'")
         series = cursor.fetchall()
         return series
        
@@ -435,7 +435,7 @@ def ver_documentarios_admin():
                                       database="ProjetoBD2020v1")
         cursor = connection.cursor()
             
-        cursor.execute("SELECT nome, preco, tempo_disponivel FROM artigo WHERE tipo = 'Documentário'")
+        cursor.execute("SELECT nome, id, preco, tempo_disponivel FROM artigo WHERE tipo = 'Documentário'")
         documentarios = cursor.fetchall()
         return documentarios
        
@@ -443,3 +443,20 @@ def ver_documentarios_admin():
     except (Exception, psycopg2.Error) as error:
         print("Error", error)
 
+
+
+
+def alterar_preco_admin(id_alterar_info, novo_preco_info):
+    try:
+        connection = psycopg2.connect(user="postgres",
+                                  password="postgres",
+                                  host="localhost",
+                                  port="5432",
+                                  database="ProjetoBD2020v1")
+        cursor = connection.cursor()
+        cursor.execute("UPDATE artigo SET preco = %s WHERE id = %s", [novo_preco_info, id_alterar_info])
+        print("Alterado com sucesso")
+        connection.commit()
+
+    except (Exception, psycopg2.Error) as error:
+        print("Erro.")
