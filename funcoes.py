@@ -278,7 +278,7 @@ def ver_filmes():
                                       database="ProjetoBD2020v1")
         cursor = connection.cursor()
             
-        cursor.execute("SELECT nome FROM artigo WHERE tipo = 'Filme'")
+        cursor.execute("SELECT nome, id FROM artigo WHERE tipo = 'Filme'")
         filme = cursor.fetchall()
         return filme
        
@@ -297,7 +297,7 @@ def ver_series():
                                       database="ProjetoBD2020v1")
         cursor = connection.cursor()
             
-        cursor.execute("SELECT nome FROM artigo WHERE tipo = 'Série'")
+        cursor.execute("SELECT nome, id FROM artigo WHERE tipo = 'Série'")
         serie = cursor.fetchall()
         return serie
        
@@ -317,7 +317,7 @@ def ver_documentarios():
                                       database="ProjetoBD2020v1")
         cursor = connection.cursor()
             
-        cursor.execute("SELECT nome FROM artigo WHERE tipo = 'Documentário'")
+        cursor.execute("SELECT nome, id FROM artigo WHERE tipo = 'Documentário'")
         documentario = cursor.fetchall()
         return documentario
        
@@ -327,7 +327,7 @@ def ver_documentarios():
 
 
 
-def ver_descricao():
+def ver_descricao_filmes(id_filme):
     try:
         connection = psycopg2.connect(user="postgres",
                                       password="postgres",
@@ -336,9 +336,49 @@ def ver_descricao():
                                       database="ProjetoBD2020v1")
         cursor = connection.cursor()
 
-        cursor.execute("SELECT nome, tipo, realizador, ator, tempo_disponivel, preco FROM artigo WHERE nome = 'oo'")
+        cursor.execute("SELECT nome, tipo, realizador, ator, tempo_disponivel, preco FROM artigo WHERE tipo = 'Filme' AND id = '"+ id_filme +"'")
         nomee = cursor.fetchall()
         return nomee
+       
+
+    except (Exception, psycopg2.Error) as error:
+        print("Error", error)
+
+
+
+
+
+
+def ver_descricao_series(id_serie):
+    try:
+        connection = psycopg2.connect(user="postgres",
+                                      password="postgres",
+                                      host="localhost",
+                                      port="5432",
+                                      database="ProjetoBD2020v1")
+        cursor = connection.cursor()
+
+        cursor.execute("SELECT nome, tipo, realizador, ator, tempo_disponivel, preco FROM artigo WHERE tipo = 'Série' AND id = %s", (id_serie))
+        seriee = cursor.fetchall()
+        return seriee
+       
+
+    except (Exception, psycopg2.Error) as error:
+        print("Error", error)
+
+
+def ver_descricao_documentarios(id_documentario):
+    try:
+        connection = psycopg2.connect(user="postgres",
+                                      password="postgres",
+                                      host="localhost",
+                                      port="5432",
+                                      database="ProjetoBD2020v1")
+        cursor = connection.cursor()
+
+        cursor.execute("SELECT nome, tipo, realizador, ator, tempo_disponivel, preco FROM artigo WHERE tipo = 'Documentário' AND id = %s", (id_documentario))
+        documentarioo = cursor.fetchall()
+        return documentarioo
        
 
     except (Exception, psycopg2.Error) as error:
