@@ -283,7 +283,7 @@ def enviar_mensagem_todos():
     mensagem_todos_info = mensagem_todos.get()
     assunto_todos_info = assunto_todos.get()
     
-    if funcoes.envia_mensagem_todos(mensagem_todos_info, assunto_todos_info) == 'mensagem_aceite':
+    if funcoes.seleciona_clientes(mensagem_todos_info, assunto_todos_info) == 'mensagem_aceite':
         Label(screen16, text="Mensagem enviada").pack()
     else:
         Label(screen16, text="Erro no envio da mensagem").pack()
@@ -295,7 +295,7 @@ def enviar_mensagem():
     assunto_info = assunto.get()
     mensagem_info = mensagem.get()
 
-    if funcoes.envia_mensagem(destinatario_info, assunto_info, mensagem_info) == 'mensagem_aceite':
+    if funcoes.seleciona_clientes(destinatario_info, assunto_info, mensagem_info) == 'mensagem_aceite':
         Label(screen8, text="Mensagem enviada").pack()
     else:
         Label(screen8, text="Erro no envio da mensagem").pack()
