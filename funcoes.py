@@ -170,6 +170,29 @@ def envia_mensagem(destinatario_info, assunto_info, mensagem_info):
             cursor.close()
             connection.close()
 
+def envia_mensagem_todos(mensagem_todos_info, assunto_todos_info):
+    try:
+        connection = psycopg2.connect(user="postgres",
+                                      password="postgres",
+                                      host="localhost",
+                                      port="5432",
+                                      database="ProjetoBD2020")
+        cursor = connection.cursor()
+        cursor.execute("INSERT INTO mensagens VALUES ('" +assunto_todos_info +"', '"+mensagem_todos_info +"')")
+        return 'mensagem_aceite'
+    except (Exception, psycopg2.Error) as error:
+        print("Error", error)
+ 
+    finally:
+        # Closing database connection
+        if connection:
+            cursor.close()
+            connection.close()
+
+
+
+
+
 
 def admin_ver_mensagens_utilizador(nome_utilizador_info):
     try:

@@ -202,6 +202,23 @@ def series():
 
 
 def mensagens():
+    global screen15
+    screen15 = Toplevel(screen)
+    screen15.title("Mensagens")
+    screen15.geometry("400x300")
+    screen15.resizable(0, 0)
+    screen15.propagate(0)
+
+    Label(screen15, text="").pack()
+    Label(screen15, text="Pretende enviar para:").pack()
+    Label(screen15, text="").pack()
+    Button(screen15, text="Utilizador especifico", command=mensagens_para_um_utilizador).pack()
+    Label(screen15, text="").pack()
+    Label(screen15, text="").pack()
+    Button(screen15, text="Todos os utilizadores", command=mensagens_para_todos).pack()
+
+
+def mensagens_para_um_utilizador():
 
     global screen8
     screen8 = Toplevel(screen)
@@ -232,6 +249,44 @@ def mensagens():
     Entry3 =Entry(screen8, textvariable=mensagem)
     Entry3.pack(padx=50, pady = 25, ipadx = 50, ipady= 50)
     Button(screen8, text="Enviar", command = enviar_mensagem).pack()
+
+
+def mensagens_para_todos():
+    global screen16
+    screen16 = Toplevel(screen)
+    screen16.title("Mensagens")
+    screen16.geometry("1280x720")
+    screen16.resizable(0, 0)
+    screen16.propagate(0)
+
+    global mensagem_todos
+    global assunto_todos
+    mensagem_todos = StringVar()
+    assunto_todos = StringVar()
+
+    Label(screen16, text="").pack()
+    Label(screen16, text="").pack()
+    Label(screen16, text="Insira o assunto:").pack()
+    Label(screen16, text="").pack()
+    Entry2 = Entry(screen16, textvariable=assunto_todos)
+    Entry2.pack()
+    Label(screen16, text="").pack()
+    Label(screen16, text="Insira a mensagem").pack()
+    Entry3 =Entry(screen16, textvariable=mensagem_todos)
+    Entry3.pack(padx=50, pady = 25, ipadx = 50, ipady= 50)
+    Button(screen16, text="Enviar", command = enviar_mensagem_todos).pack()
+
+
+def enviar_mensagem_todos():
+    global screen16
+
+    mensagem_todos_info = mensagem_todos.get()
+    assunto_todos_info = assunto_todos.get()
+    
+    if funcoes.envia_mensagem_todos(mensagem_todos_info, assunto_todos_info) == 'mensagem_aceite':
+        Label(screen16, text="Mensagem enviada").pack()
+    else:
+        Label(screen16, text="Erro no envio da mensagem").pack()
 
 
 def enviar_mensagem():
@@ -317,6 +372,28 @@ def admin_ver_todas_mensagens():
         Label(screen13, text="").pack()
         Label(screen13, text="---------------").pack()
 
+
+def mensagens_utilizador():
+    global screen14
+    screen14 = Toplevel(screen)
+    screen14.title("Mensagens")
+    screen14.geometry("400x300")
+    screen14.resizable(0, 0)
+    screen14.propagate(0)
+
+    
+    
+    Label(screen14, text="").pack()
+    Label(screen14, text="").pack()
+    Button(screen14, text="Enviar mensagem", command=utilizador_enviar_mensagem).pack()
+    Label(screen14, text="").pack()
+    Label(screen14, text="").pack()
+    Button(screen14, text="Mensagens recebidas", command= utilizador_mensagens_recebidas).pack()
+
+
+#def utilizador_enviar_mensagem():
+
+
 def main_menu():
     screen2.destroy()
     global screen3
@@ -341,11 +418,11 @@ def main_menu():
     Label(screen3, text="").pack()
     Label(screen3, text="").pack()
     Label(screen3, text="").pack()
-    Button(screen3, height=2, width=12, text="Carrinho").pack()
+    Button(screen3, height=2, width=12, text="Biblioteca").pack()
     Label(screen3, text="").pack()
     Label(screen3, text="").pack()
     Label(screen3, text="").pack()
-    Button(screen3, height=2, width=12, text="Caixa de Entrada").pack()
+    Button(screen3, height=2, width=12, text="Caixa de Entrada", command=mensagens_utilizador).pack()
     Label(screen3, text="").pack()
     Label(screen3, text="").pack()
     Label(screen3, text="").pack()
