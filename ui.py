@@ -835,7 +835,9 @@ def filmes_admin():
     for linha in funcoes.ver_filmes_admin():
         Label(screen50, text=linha[0]).pack()
         Label(screen50, text="").pack()
+        Label(screen50, text="Preço: ").pack()
         Label(screen50, text=linha[1]).pack()
+        Label(screen50, text="Tempo disponível: ").pack()
         Label(screen50, text=linha[2]).pack()
         Label(screen50, text="---------------").pack()
 
@@ -851,7 +853,9 @@ def series_admin():
     for linha in funcoes.ver_series_admin():
         Label(screen60, text=linha[0]).pack()
         Label(screen60, text="").pack()
+        Label(screen60, text="Preço: ").pack()
         Label(screen60, text=linha[1]).pack()
+        Label(screen60, text="Tempo disponível: ").pack()
         Label(screen60, text=linha[2]).pack()
         Label(screen60, text="---------------").pack()
 
@@ -867,7 +871,9 @@ def documentarios_admin():
     for linha in funcoes.ver_documentarios_admin():       
         Label(screen105, text=linha[0]).pack()
         Label(screen105, text="").pack()
+        Label(screen72, text="Preço: ").pack()
         Label(screen105, text=linha[1]).pack()
+        Label(screen72, text="Tempo disponível: ").pack()
         Label(screen105, text=linha[2]).pack()
         Label(screen105, text="---------------").pack()
 
