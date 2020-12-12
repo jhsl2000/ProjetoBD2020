@@ -193,26 +193,22 @@ def series():
     Fonte = {'Verdana', 20}
     global screen6
     global id_serie
-    id_serie = DoubleVar()
     screen6 = Tk()
     screen6.title("Series")
     screen6.geometry("1280x720")
     screen6.resizable(0, 0)
     screen6.propagate(0)
-
+    id_serie = DoubleVar()
     for linha in funcoes.ver_series():
-        Label(screen6, text="").pack()
         Label(screen6, text="Nome: " + linha[0], font=Fonte).pack()
         Label(screen6, text="ID: ").pack()
         Label(screen6, text=linha[1]).pack()
         Label(screen6, text="").pack()
         Label(screen6, text="---------------").pack()
-        Label(screen6, text="").pack()
 
     Label(screen6, text="Qual o ID da série que pretende visualizar os detalhes?").pack()
     Entry_serie = Entry(screen6, textvariable=id_serie)
     Entry_serie.pack()
-    print(id_filme)
     Button(screen6, height=2, width=10, text='Ver descrições', command=ver_descricao_series).pack()
 
 
@@ -247,7 +243,7 @@ def ver_descricao_filmes():
     global screen71
     screen71 = Toplevel(screen)
     screen71.title("Descrição Filmes")
-    screen71.geometry("1280x720")
+    screen71.geometry("500x600")
     screen71.resizable(0, 0)
     screen71.propagate(0)
 
@@ -279,46 +275,41 @@ def ver_descricao_filmes():
         Label(screen71, text="---------------").pack()
 
 
-
 def ver_descricao_series():
     Fonte = {'Verdana', 20}
-    global screen20
-    screen20 = Toplevel(screen)
-    screen20.title("Descrição Séries")
-    screen20.geometry("1280x720")
-    screen20.resizable(0, 0)
-    screen20.propagate(0)
+    global screen37
+    screen37 = Toplevel(screen)
+    screen37.title("Descrição Séries")
+    screen37.geometry("500x600")
+    screen37.resizable(0, 0)
+    screen37.propagate(0)
 
     id_serie_info = id_serie.get()
-    
 
     for linha in funcoes.ver_descricao_series(id_serie_info):
-        Label(screen20, text="").pack()
-        Label(screen20, text="").pack()
-        Label(screen20, text="").pack()
-        Label(screen20, text="").pack()
-        Label(screen20, text="---------------").pack()
-        Label(screen20, text="").pack()
-        Label(screen20, text="").pack()
-        Label(screen20, text=linha[0], font=Fonte).pack()
-        Label(screen20, text="").pack()
-        Label(screen20, text="Tipo: " + linha[1]).pack()
-        Label(screen20, text="").pack()
-        Label(screen20, text="Realizador: " + linha[2]).pack()
-        Label(screen20, text="").pack()
-        Label(screen20, text="Ator: " + linha[3]).pack()
-        Label(screen20, text="").pack()
-        Label(screen20, text="Tempo disponível: ").pack()
-        Label(screen20, text=linha[4]).pack()
-        Label(screen20, text="").pack()
-        Label(screen20, text="Preço: ").pack()
-        Label(screen20, text=linha[5]).pack()
-        Label(screen20, text="").pack()
-        Label(screen20, text="").pack()
-        Label(screen20, text="---------------").pack()
-
-
-
+        Label(screen37, text="").pack()
+        Label(screen37, text="").pack()
+        Label(screen37, text="").pack()
+        Label(screen37, text="").pack()
+        Label(screen37, text="---------------").pack()
+        Label(screen37, text="").pack()
+        Label(screen37, text="").pack()
+        Label(screen37, text=linha[0], font=Fonte).pack()
+        Label(screen37, text="").pack()
+        Label(screen37, text="Tipo: " + linha[1]).pack()
+        Label(screen37, text="").pack()
+        Label(screen37, text="Realizador: " + linha[2]).pack()
+        Label(screen37, text="").pack()
+        Label(screen37, text="Ator: " + linha[3]).pack()
+        Label(screen37, text="").pack()
+        Label(screen37, text="Tempo disponível: ").pack()
+        Label(screen37, text=linha[4]).pack()
+        Label(screen37, text="").pack()
+        Label(screen37, text="Preço: ").pack()
+        Label(screen37, text=linha[5]).pack()
+        Label(screen37, text="").pack()
+        Label(screen37, text="").pack()
+        Label(screen37, text="---------------").pack()
 
 
 def ver_descricao_documentarios():
@@ -331,7 +322,6 @@ def ver_descricao_documentarios():
     screen72.propagate(0)
 
     id_documentario_info = id_documentario.get()
-    
 
     for linha in funcoes.ver_descricao_documentarios(id_documentario_info):
         Label(screen72, text="").pack()
@@ -1004,7 +994,6 @@ def filmes_admin():
     novo_preco = DoubleVar()
     id_alterar = DoubleVar()
     id_remover = DoubleVar()
-    
     
 
     for linha in funcoes.ver_filmes_admin():

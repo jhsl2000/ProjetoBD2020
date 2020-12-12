@@ -393,10 +393,6 @@ def ver_descricao_filmes(id_filme_info):
         print("Error", error)
 
 
-
-
-
-
 def ver_descricao_series(id_serie_info):
     try:
         connection = psycopg2.connect(user="postgres",
@@ -406,10 +402,9 @@ def ver_descricao_series(id_serie_info):
                                       database="ProjetoBD2020")
         cursor = connection.cursor()
 
-        cursor.execute("SELECT nome, tipo, realizador, ator, tempo_disponivel, preco FROM artigo WHERE tipo = 'Série' AND id = %s", [id_serie_info])
+        cursor.execute("SELECT nome, tipo, realizador, ator, tempo_disponivel, preco FROM artigo WHERE artigo.tipo = 'Série' AND artigo.id = %s", [id_serie_info])
         seriee = cursor.fetchall()
         return seriee
-       
 
     except (Exception, psycopg2.Error) as error:
         print("Error", error)
@@ -424,17 +419,13 @@ def ver_descricao_documentarios(id_documentario_info):
                                       database="ProjetoBD2020")
         cursor = connection.cursor()
 
-        cursor.execute("SELECT nome, tipo, realizador, ator, tempo_disponivel, preco FROM artigo WHERE tipo = 'Documentário' AND id = %s", [id_documentario_info])
+        cursor.execute("SELECT nome, tipo, realizador, ator, tempo_disponivel, preco FROM artigo WHERE artigo.tipo = 'Documentário' AND artigo.id = %s", [id_documentario_info])
         documentarioo = cursor.fetchall()
         return documentarioo
        
 
     except (Exception, psycopg2.Error) as error:
         print("Error", error)
-
-
-
-
 
 
 
