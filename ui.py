@@ -690,7 +690,7 @@ def admin_main_menu():
     Button(screen3, height=2, width=15, text="Adicionar Artigos", command=adicionar_artigos).pack()
     Label(screen3, text="").pack()
     Label(screen3, text="").pack()
-    Button(screen3, height=2, width=15, text="Ver histórico de preços", command=ver_historico).pack()
+    Button(screen3, height=2, width=18, text="Ver histórico de preços", command=ver_historico).pack()
     Label(screen3, text="").pack()
     Label(screen3, text="").pack()
     Button(screen3, height=2, width=15, text="Adicionar saldo", command=saldo).pack()
@@ -709,7 +709,7 @@ def ver_historico():
     global screen81
     screen81 = Toplevel(screen)
     screen81.title("Histórico de preços")
-    screen81.geometry("1280x720")
+    screen81.geometry("500x600")
     screen81.resizable(0, 0)
     screen81.propagate(0)
     
