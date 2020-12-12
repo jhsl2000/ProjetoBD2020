@@ -715,11 +715,11 @@ def pesquisa():
     Label(screen36, text="").pack()
     Button(screen36, height=2, width=15, text="Pesquisa por título", command=pesquisa_por_titulo).pack()
     Label(screen36, text="").pack()
-    Button(screen36, height=2, width=15, text="Pesquisa por tipo", command=pesquisa_por_tipo).pack()
+    Button(screen36, height=2, width=15, text="Pesquisa por ator", command=pesquisa_por_ator).pack()
     Label(screen36, text="").pack()
-    Button(screen36, height=2, width=15, text="Pesquisa por tipo", command=pesquisa_por_tipo).pack()
+    Button(screen36, height=2, width=15, text="Pesquisa por realizador", command=pesquisa_por_realizador).pack()
     Label(screen36, text="").pack()
-    Button(screen36, height=2, width=15, text="Pesquisa por tipo", command=pesquisa_por_tipo).pack()
+    Button(screen36, height=2, width=20, text="Pesquisa por preço MAX", command=pesquisa_por_preco).pack()
     Label(screen36, text="").pack()
 
 
@@ -733,20 +733,18 @@ def pesquisa_por_titulo():
     screen200.propagate(0)
     global Entry18
     global titulo_pesquisa
-    screen200.title("Pesquisar")
-    screen200.geometry("700x600")
-    screen200.resizable(0, 0)
-    screen200.propagate(0)
-    screen36.destroy()
+
     titulo_pesquisa = StringVar()
 
     Label(screen200, text="").pack()
     Label(screen200, text="Qual o título do produto que pretende observar?").pack()
     Entry18 = Entry(screen200, textvariable=titulo_pesquisa)
-    Button(screen200, height=2, width=15, text="Filmes", command=pesquisa_titulo).pack()
+    Entry18.pack()
+    Button(screen200, height=2, width=15, text="Pesquisar", command=pesquisa_titulo).pack()
 
 
 def pesquisa_titulo():
+
     global screen201
     screen201 = Toplevel()
     screen201.title("Pesquisar por Título")
@@ -755,14 +753,12 @@ def pesquisa_titulo():
     screen201.propagate(0)
 
     titulo_pesquisa_info = titulo_pesquisa.get()
-    
-    funcoes.pesquisar_titulo(titulo_pesquisa_info)
 
-    for linha in funcoes.pesquisar_titulo(titulo_pesquisa_info)
+    for linha in funcoes.pesquisar_titulo(titulo_pesquisa_info):
         Label(screen201, text="---------------").pack()
         Label(screen201, text="").pack()
         Label(screen201, text="").pack()
-        Label(screen201, text=linha[0], font=Fonte).pack()
+        Label(screen201, text=linha[0]).pack()
         Label(screen201, text="").pack()
         Label(screen201, text="Tipo: " + linha[1]).pack()
         Label(screen201, text="").pack()
@@ -780,13 +776,107 @@ def pesquisa_titulo():
         Label(screen201, text="---------------").pack()
     
 
+def pesquisa_por_ator():
+    global screen201
+    screen201 = Toplevel()
+    screen201.title("Pesquisar")
+    screen201.geometry("700x600")
+    screen201.resizable(0, 0)
+    screen201.propagate(0)
+    global Entry22
+    global ator_pesquisa
+
+    ator_pesquisa = StringVar()
 
 
+    Label(screen201, text="").pack()
+    Label(screen201, text="Qual o ator que pretende observar?").pack()
+    Entry22 = Entry(screen201, textvariable=ator_pesquisa)
+    Entry22.pack()
+    Button(screen201, height=2, width=15, text="Pesquisar", command=pesquisa_ator).pack()
 
 
+def pesquisa_ator():
+    global screen203
+    screen203 = Toplevel()
+    screen203.title("Pesquisar por Título")
+    screen203.geometry("700x600")
+    screen203.resizable(0, 0)
+    screen203.propagate(0)
+
+    ator_pesquisa_info = ator_pesquisa.get()
+    Label(screen203, text="Este ator aparece em: ", fg="red")
+    for linha in funcoes.pesquisar_ator(ator_pesquisa_info):
+        Label(screen203, text="---------------").pack()
+        Label(screen203, text=linha[0]).pack()
 
 
+def pesquisa_por_realizador():
+    global screen205
+    screen205 = Toplevel()
+    screen205.title("Pesquisar")
+    screen205.geometry("700x600")
+    screen205.resizable(0, 0)
+    screen205.propagate(0)
+    global Entry24
+    global realizador_pesquisa
 
+    realizador_pesquisa = StringVar()
+
+    Label(screen205, text="").pack()
+    Label(screen205, text="Qual o realizador que pretende observar?").pack()
+    Entry25 = Entry(screen205, textvariable=realizador_pesquisa)
+    Entry25.pack()
+    Button(screen205, height=2, width=15, text="Pesquisar", command=pesquisa_realizador).pack()
+
+
+def pesquisa_realizador():
+    global screen206
+    screen206 = Toplevel()
+    screen206.title("Pesquisar por Título")
+    screen206.geometry("700x600")
+    screen206.resizable(0, 0)
+    screen206.propagate(0)
+
+    realizador_pesquisa_info = realizador_pesquisa.get()
+    Label(screen206, text="Este realizador aparece em: ", fg="red")
+    for linha in funcoes.pesquisar_realizador(realizador_pesquisa_info):
+        Label(screen206, text="---------------").pack()
+        Label(screen206, text=linha[0]).pack()
+
+
+def pesquisa_por_preco():
+    global screen207
+    screen207 = Toplevel()
+    screen207.title("Pesquisar")
+    screen207.geometry("700x600")
+    screen207.resizable(0, 0)
+    screen207.propagate(0)
+    global Entry32
+    global preco_pesquisa
+
+    preco_pesquisa = DoubleVar()
+
+    Label(screen207, text="").pack()
+    Label(screen207, text="Qual o preço máximo que pretende observar?").pack()
+    Entry32 = Entry(screen207, textvariable=preco_pesquisa)
+    Entry32.pack()
+    Button(screen207, height=2, width=15, text="Pesquisar", command=pesquisa_preco).pack()
+
+def pesquisa_preco():
+    global screen208
+    screen208 = Toplevel()
+    screen208.title("Pesquisar por Título")
+    screen208.geometry("700x600")
+    screen208.resizable(0, 0)
+    screen208.propagate(0)
+
+    preco_pesquisa_info = preco_pesquisa.get()
+    Label(screen208, text="Filmes com preço máximo introduzido: ", fg="red")
+    for linha in funcoes.pesquisar_preco(preco_pesquisa_info):
+        Label(screen208, text="---------------").pack()
+        Label(screen208, text=linha[0]).pack()
+        Label(screen208, text= linha[1]).pack()
 
 def biblioteca():
     global screen30

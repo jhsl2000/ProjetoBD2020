@@ -806,12 +806,9 @@ def ver_documentarios_comprados(email1):
         cursor.execute("SELECT nome_b, tipo_b, data_alug, tempo_disp FROM biblioteca WHERE tipo_b = 'Documentário' AND email_ut = '"+ email1 +"'")
         documentarios_comprados = cursor.fetchall()
         return documentarios_comprados
-       
 
     except (Exception, psycopg2.Error) as error:
         print("Error", error)
-
-
 
 
 def pesquisar_titulo(titulo_pesquisa_info):
@@ -822,14 +819,67 @@ def pesquisar_titulo(titulo_pesquisa_info):
                                       port="5432",
                                       database="ProjetoBD2020")
         cursor = connection.cursor()
-            
-        cursor.execute("SELECT nome, tipo, realizador, ator, tempo_disponivel, preco FROM artigo WHERE artigo.nome = '"+ titulo_pesquisa_info +"'")
+
+        sql = "SELECT nome, tipo, realizador, ator, tempo_disponivel, preco FROM artigo WHERE artigo.nome = '"+ titulo_pesquisa_info +"'"
+        print(sql)
+        cursor.execute(sql)
         titulos = cursor.fetchall()
         return titulos
-       
 
     except (Exception, psycopg2.Error) as error:
         print("Error", error)
 
 
+def pesquisar_ator(ator_pesquisa_info):
+    try:
+        connection = psycopg2.connect(user="postgres",
+                                      password="postgres",
+                                      host="localhost",
+                                      port="5432",
+                                      database="ProjetoBD2020")
+        cursor = connection.cursor()
 
+        sql = "SELECT nome FROM artigo WHERE artigo.ator = '"+ ator_pesquisa_info +"'"
+        print(sql)
+        cursor.execute(sql)
+        ator1 = cursor.fetchall()
+        return ator1
+
+    except (Exception, psycopg2.Error) as error:
+        print("Error", error)
+
+
+def pesquisar_realizador(realizador_pesquisa_info):
+    try:
+        connection = psycopg2.connect(user="postgres",
+                                      password="postgres",
+                                      host="localhost",
+                                      port="5432",
+                                      database="ProjetoBD2020")
+        cursor = connection.cursor()
+
+        sql = "SELECT nome FROM artigo WHERE artigo.realizador = '"+ realizador_pesquisa_info +"'"
+        print(sql)
+        cursor.execute(sql)
+        realizador1 = cursor.fetchall()
+        return realizador1
+
+    except (Exception, psycopg2.Error) as error:
+        print("Error", error)
+
+
+def pesquisar_preco(preco_pesquisa_info):
+    try:
+        connection = psycopg2.connect(user="postgres",
+                                      password="postgres",
+                                      host="localhost",
+                                      port="5432",
+                                      database="ProjetoBD2020")
+        cursor = connection.cursor()
+
+        cursor.execute("SELECT nome, preco FROM artigo WHERE artigo.preco <= %s ", [preco_pesquisa_info])
+        preco1 = cursor.fetchall()
+        return preco1
+
+    except (Exception, psycopg2.Error) as error:
+        print("Error", error)
