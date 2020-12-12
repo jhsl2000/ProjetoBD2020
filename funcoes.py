@@ -736,17 +736,14 @@ def alugar(id_alugar_info, email1):
         cursor.execute("SELECT preco FROM artigo WHERE id = %s", [id_alugar_info])       
         preco_now = cursor.fetchall()
         for linha in preco_now:
-            cursor.execute("UPDATE utilizador SET saldo = (saldo - %s) WHERE utilizador.email = '"+ email1 +"'", [linha[0]])
-            
+            cursor.execute("UPDATE utilizador SET saldo = (saldo - %s) WHERE utilizador.email = '"+ email1 +"'", [linha[0]])       
             cursor.execute("SELECT saldo FROM utilizador WHERE email = '"+ email1 +"'")       
             saldo_now = cursor.fetchone()
             if(saldo_now[0] >= 0):
                 cursor.execute("SELECT id, nome, tipo, tempo_disponivel, preco FROM artigo WHERE id = %s", [id_alugar_info])     
                 alug = cursor.fetchall()
                 for linha in alug:
-                    preco_total=linha[4]
-                    cursor.execute("INSERT INTO biblioteca (id_b, nome_b, tipo_b, data_alug, total_artigos, tempo_disp, email_ut, utilizador_email) VALUES (%s, %s, %s, CURRENT_TIMESTAMP, nextval('add_artigo'), %s,  '"+ email1 +"', '"+ email1 +"')", [linha[0], linha[1], linha[2], linha[3]])          
-                    return(preco_total)
+                    cursor.execute("INSERT INTO biblioteca (id_b, preco_b, nome_b, tipo_b, data_alug, tempo_disp, email_ut, utilizador_email) VALUES (%s, %s, %s, %s, CURRENT_TIMESTAMP, %s,  '"+ email1 +"', '"+ email1 +"')", [linha[0], linha[4], linha[1], linha[2], linha[3]])          
                 print('Alugado com sucesso!')
             else:
                 print('Não tem saldo suficiente.')
@@ -883,6 +880,25 @@ def pesquisar_preco(preco_pesquisa_info):
         cursor.execute("SELECT nome, preco FROM artigo WHERE artigo.preco <= %s ", [preco_pesquisa_info])
         preco1 = cursor.fetchall()
         return preco1
+
+    except (Exception, psycopg2.Error) as error:
+        print("Error", error)
+
+
+
+
+def contar_preco():
+    try:
+        connection = psycopg2.connect(user="postgres",
+                                      password="postgres",
+                                      host="localhost",
+                                      port="5432",
+                                      database="ProjetoBD2020")
+        cursor = connection.cursor()
+
+        cursor.execute("SELECT SUM(preco_b) FROM biblioteca")
+        preco_total_b = cursor.fetchall()
+        return preco_total_b
 
     except (Exception, psycopg2.Error) as error:
         print("Error", error)
