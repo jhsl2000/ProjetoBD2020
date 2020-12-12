@@ -1,9 +1,9 @@
 import psycopg2
 import psycopg2.extras
+from passlib.hash import sha256_crypt
 
 
-
-def insere_novo_user(email_info, password_info, nome_info):
+def insere_novo_user(email_info, password_encriptada, nome_info):
     try:
         connection = psycopg2.connect(user="postgres",
                                   password="postgres",
@@ -11,7 +11,7 @@ def insere_novo_user(email_info, password_info, nome_info):
                                   port="5432",
                                   database="ProjetoBD2020")
         cursor = connection.cursor()
-        cursor.execute(" INSERT INTO utilizador (email, password, nome, saldo) VALUES ('" +email_info +"','" +password_info +"','" +nome_info +"', '20')")
+        cursor.execute(" INSERT INTO utilizador (email, password, nome, saldo) VALUES ('" +email_info +"', crypt('password', gen_salt('bf')),'" +nome_info +"', '20')")
         print("Registado com sucesso")
         connection.commit()
 
@@ -26,7 +26,7 @@ def insere_novo_user(email_info, password_info, nome_info):
             connection.close()
 
 
-def confirma_novo_user(email_info, password_info):
+def confirma_novo_user(email_info, password_encriptado):
     try:
         connection = psycopg2.connect(user="postgres",
                                       password="postgres",
@@ -34,8 +34,9 @@ def confirma_novo_user(email_info, password_info):
                                       port="5432",
                                       database="ProjetoBD2020")
         cursor = connection.cursor()
-
-        cursor.execute(" SELECT email, password FROM utilizador WHERE utilizador.email ='" +email_info +"' AND password ='" +password_info +"'")
+        sql = " SELECT email, password FROM utilizador WHERE utilizador.email ='" +email_info +"' AND password = crypt('password', password)"
+        print(sql)
+        cursor.execute(sql)
 
         if cursor.rowcount == 1:
             return 'registado' # codigo para cliente_login
@@ -61,7 +62,7 @@ def check_login(email_entry1, password_entry1):
                                       database="ProjetoBD2020")
         cursor = connection.cursor()
 
-        cursor.execute("SELECT email, password FROM utilizador WHERE utilizador.email ='" +email_entry1 +"' AND password ='" +password_entry1 +"'")
+        cursor.execute("SELECT email, password FROM utilizador WHERE utilizador.email ='" +email_entry1 +"' AND password = crypt('password', password)")
 
         if cursor.rowcount == 1:
             return 'cliente' # codigo para cliente_login

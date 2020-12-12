@@ -1,5 +1,6 @@
 import psycopg2
 import psycopg2.extras
+from passlib.hash import sha256_crypt
 
 from tkinter import *
 
@@ -19,14 +20,16 @@ def register_user():
     screen1 = Toplevel()
     email_info = email.get()
     password_info = password.get()
+    password_encriptada = sha256_crypt.hash(password_info)
+    print(password_encriptada)
     nome_info = nome.get()
-    funcoes.insere_novo_user(email_info, password_info, nome_info)
+    funcoes.insere_novo_user(email_info, password_encriptada, nome_info)
 
     email_entry.delete(0, END)
     password_entry.delete(0, END)
     nome_entry.delete(0, END)
 
-    if funcoes.confirma_novo_user(email_info, password_info) == 'registado':
+    if funcoes.confirma_novo_user(email_info, password_encriptada) == 'registado':
         Label(screen1, text='Resgistado com sucesso!').pack()
         Button(screen1, text='Continuar para login', command=login).pack()
     else:
