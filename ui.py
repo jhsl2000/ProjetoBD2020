@@ -193,12 +193,14 @@ def series():
     Fonte = {'Verdana', 20}
     global screen6
     global id_serie
-    id_serie = DoubleVar()
-    screen6 = Tk()
-    screen6.title("Series")
+    screen6 = Toplevel(screen)
+    screen6.title("Séries")
     screen6.geometry("1280x720")
     screen6.resizable(0, 0)
     screen6.propagate(0)
+    id_serie = DoubleVar()
+    
+    
 
     for linha in funcoes.ver_series():
         Label(screen6, text="").pack()
@@ -207,39 +209,38 @@ def series():
         Label(screen6, text=linha[1]).pack()
         Label(screen6, text="").pack()
         Label(screen6, text="---------------").pack()
-        Label(screen6, text="").pack()
-
+        
     Label(screen6, text="Qual o ID da série que pretende visualizar os detalhes?").pack()
     Entry_serie = Entry(screen6, textvariable=id_serie)
     Entry_serie.pack()
-    print(id_filme)
     Button(screen6, height=2, width=10, text='Ver descrições', command=ver_descricao_series).pack()
 
 
 def documentarios():
     Fonte = {'Verdana', 20}
     global screen15
-    global id_documentario
-    id_documentario = DoubleVar()
-    screen15 = Tk()
+    global id_documentarios
+    screen15 = Toplevel(screen)
     screen15.title("Documentários")
     screen15.geometry("1280x720")
     screen15.resizable(0, 0)
     screen15.propagate(0)
+    id_documentario = DoubleVar()
+    
+    
 
-    for linha in funcoes.ver_documentarios():       
+    for linha in funcoes.ver_documentarios():
         Label(screen15, text="").pack()
         Label(screen15, text="Nome: " + linha[0], font=Fonte).pack()
         Label(screen15, text="ID: ").pack()
         Label(screen15, text=linha[1]).pack()
         Label(screen15, text="").pack()
         Label(screen15, text="---------------").pack()
-        Label(screen15, text="").pack()
-
+        
     Label(screen15, text="Qual o ID do documentário que pretende visualizar os detalhes?").pack()
-    Entry_documentario = Entry(screen15, textvariable=id_documentario)
-    Entry_documentario.pack()
-    Button(screen15, height=2, width=10, text='Ver descrições', command= ver_descricao_documentarios).pack()
+    Entry_serie = Entry(screen15, textvariable=id_serie)
+    Entry_serie.pack()
+    Button(screen15, height=2, width=10, text='Ver descrições', command=ver_descricao_documentarios).pack()
 
 
 def ver_descricao_filmes():
