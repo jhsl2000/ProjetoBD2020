@@ -524,7 +524,7 @@ def enviar_mensagem():
     assunto_info = assunto.get()
     mensagem_info = mensagem.get()
 
-    if funcoes.seleciona_clientes(destinatario_info, assunto_info, mensagem_info) == 'mensagem_aceite':
+    if funcoes.seleciona_clientes(mensagem_info, assunto_info, destinatario_info) == 'mensagem_aceite':
         Label(screen8, text="Mensagem enviada").pack()
     else:
         Label(screen8, text="Erro no envio da mensagem").pack()

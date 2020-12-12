@@ -170,26 +170,7 @@ def envia_mensagem(destinatario_info, assunto_info, mensagem_info):
             cursor.close()
             connection.close()
 
-'''
-def envia_mensagem_todos(mensagem_todos_info, assunto_todos_info):
-    try:
-        connection = psycopg2.connect(user="postgres",
-                                      password="postgres",
-                                      host="localhost",
-                                      port="5432",
-                                      database="ProjetoBD2020")
-        cursor = connection.cursor()
-        cursor.execute("INSERT INTO mensagens (texto, assunto) VALUES ('" +mensagem_todos_info +"', '"+assunto_todos_info +"')")
-        return 'mensagem_aceite'
-    except (Exception, psycopg2.Error) as error:
-        print("Error", error)
- 
-    finally:
-        # Closing database connection
-        if connection:
-            cursor.close()
-            connection.close()
-'''
+
 
 def envia_mensagem_todos(mensagem_todos_info, assunto_todos_info):
     try:
@@ -528,7 +509,28 @@ def alterar_preco_admin(id_alterar_info, novo_preco_info):
     except (Exception, psycopg2.Error) as error:
         print("Erro.")
 
+def seleciona_clientes(mensagem_todos_info, assunto_todos_info, destinatario_info):
+    try:
+        connection = psycopg2.connect(user="postgres",
+                                      password="postgres",
+                                      host="localhost",
+                                      port="5432",
+                                      database="ProjetoBD2020")
+        cursor = connection.cursor()
+        sql ="INSERT INTO mensagem (texto, assunto, utilizador_email) VALUES('"+mensagem_todos_info +"','"+assunto_todos_info +"','"+destinatario_info+"')"
+        print(sql)
+        cursor.execute(sql)
+        connection.commit()
+        return 'mensagem_aceite'
 
+    except (Exception, psycopg2.Error) as error:
+        print("Error", error)
+
+    finally:
+        # Closing database connection
+        if connection:
+            cursor.close()
+            connection.close()
 
 def remover_artigo_admin(id_remover_info):
     try:
