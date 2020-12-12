@@ -143,7 +143,7 @@ def consulta_saldo(email1):
             connection.close()
 
 
-def envia_mensagem(destinatario_info, assunto_info, mensagem_info):
+def envia_mensagem(destinatario_info, assunto_info, mensagem_info, email1):
     try:
         connection = psycopg2.connect(user="postgres",
                                       password="postgres",
@@ -154,7 +154,7 @@ def envia_mensagem(destinatario_info, assunto_info, mensagem_info):
         cursor.execute("SELECT email FROM utilizador WHERE utilizador.email ='" +destinatario_info +"'")
 
         if cursor.rowcount == 1:
-            cursor.execute("INSERT INTO mensagem (texto, assunto, utilizador_email) VALUES ('" +mensagem_info + "', '" +assunto_info + "', '" +destinatario_info + "')")
+            cursor.execute("INSERT INTO mensagem (texto, assunto, utilizador_email, administrador_email) VALUES ('" +mensagem_info + "', '" +assunto_info + "', '" +destinatario_info + "', '"+email1+"')")
             connection.commit()
             print("Mensagem enviada")
             return 'mensagem_aceite'
@@ -172,7 +172,7 @@ def envia_mensagem(destinatario_info, assunto_info, mensagem_info):
 
 
 
-def envia_mensagem_todos(mensagem_todos_info, assunto_todos_info):
+def envia_mensagem_todos(mensagem_todos_info, assunto_todos_info,email1):
     try:
         connection = psycopg2.connect(user="postgres",
                                       password="postgres",
@@ -184,7 +184,7 @@ def envia_mensagem_todos(mensagem_todos_info, assunto_todos_info):
         utilizadores=cursor.fetchall()
 
         for linha in utilizadores:
-            sql ="INSERT INTO mensagem (texto, assunto, utilizador_email) VALUES('"+mensagem_todos_info +"','"+assunto_todos_info +"','"+linha[0]+"')"
+            sql ="INSERT INTO mensagem (texto, assunto, utilizador_email,administrador_email) VALUES('"+mensagem_todos_info +"','"+assunto_todos_info +"','"+linha[0]+"', '"+email1+"')"
             print(sql)
             cursor.execute(sql)
             connection.commit()
@@ -240,6 +240,23 @@ def admin_ver_todas_mensagens():
         print("Error", error)
 
 
+def admin_ver_mensagens_recebidas(email1):
+    try:
+        connection = psycopg2.connect(user="postgres",
+                                      password="postgres",
+                                      host="localhost",
+                                      port="5432",
+                                      database="ProjetoBD2020")
+        cursor = connection.cursor()
+
+        cursor.execute("SELECT utilizador_email, assunto, texto FROM caixa_de_entrada_admin WHERE administrador_admin_email ='"+email1 +"'")
+        mensagem = cursor.fetchall()
+        return mensagem
+
+    except (Exception, psycopg2.Error) as error:
+        print("Error", error)
+
+
 def utilizador_ver_todas_mensagens(email1):
     try:
         connection = psycopg2.connect(user="postgres",
@@ -266,7 +283,7 @@ def addartigo(tipo_info, nome_info, horas_info, preco_info, realizador_info, ato
                                   database="ProjetoBD2020")
         cursor = connection.cursor()
         #cursor.execute(" INSERT INTO Artigo (tipo, nome, realizador, ator, tempo_disponivel, preco, id) VALUES ('" +tipo_info+ "','" +nome_info +"','" +realizador_info +"','"+ator_info +"', horas_info, preco_info, '7')")
-        cursor.execute("INSERT INTO artigo (id, nome, tipo, realizador, ator, tempo_disponivel, preco) VALUES (nextval('put_id'), %s, %s, %s, %s, %s, %s)", (nome_info, tipo_info, realizador_info, ator_info, horas_info, preco_info))    
+        cursor.execute("INSERT INTO artigo (id, nome, tipo, realizador, ator, tempo_disponivel, preco,administrador_admin_email,administrador_admin_email1) VALUES (nextval('put_id'), %s, %s, %s, %s, %s, %s, '1', '1')", (nome_info, tipo_info, realizador_info, ator_info, horas_info, preco_info))
         print("Adicionado com sucesso")
         connection.commit()
 
@@ -393,7 +410,32 @@ def ver_descricao_filmes(id_filme_info):
         print("Error", error)
 
 
+def utilizador_enviar_mensagem(mensagem_utilizador_info, assunto_utilizador_info, email1):
+    try:
+        connection = psycopg2.connect(user="postgres",
+                                      password="postgres",
+                                      host="localhost",
+                                      port="5432",
+                                      database="ProjetoBD2020")
+        cursor = connection.cursor()
+        cursor.execute("SELECT admin_email FROM administrador")
+        admins=cursor.fetchall()
 
+        for linha in admins:
+            sql ="INSERT INTO caixa_de_entrada_admin (texto, assunto, administrador_admin_email, utilizador_email) VALUES('"+mensagem_utilizador_info +"','"+assunto_utilizador_info +"','"+linha[0]+"', '"+email1 +"')"
+            print(sql)
+            cursor.execute(sql)
+            connection.commit()
+        return 'mensagem_aceite'
+
+    except (Exception, psycopg2.Error) as error:
+        print("Error", error)
+
+    finally:
+        # Closing database connection
+        if connection:
+            cursor.close()
+            connection.close()
 
 
 
@@ -431,11 +473,6 @@ def ver_descricao_documentarios(id_documentario_info):
 
     except (Exception, psycopg2.Error) as error:
         print("Error", error)
-
-
-
-
-
 
 
 def ver_filmes_admin():
@@ -492,8 +529,6 @@ def ver_documentarios_admin():
         print("Error", error)
 
 
-
-
 def alterar_preco_admin(id_alterar_info, novo_preco_info):
     try:
         connection = psycopg2.connect(user="postgres",
@@ -509,7 +544,8 @@ def alterar_preco_admin(id_alterar_info, novo_preco_info):
     except (Exception, psycopg2.Error) as error:
         print("Erro.")
 
-def seleciona_clientes(mensagem_todos_info, assunto_todos_info, destinatario_info):
+
+def seleciona_clientes(mensagem_todos_info, assunto_todos_info, destinatario_info,email1):
     try:
         connection = psycopg2.connect(user="postgres",
                                       password="postgres",
@@ -517,7 +553,7 @@ def seleciona_clientes(mensagem_todos_info, assunto_todos_info, destinatario_inf
                                       port="5432",
                                       database="ProjetoBD2020")
         cursor = connection.cursor()
-        sql ="INSERT INTO mensagem (texto, assunto, utilizador_email) VALUES('"+mensagem_todos_info +"','"+assunto_todos_info +"','"+destinatario_info+"')"
+        sql ="INSERT INTO mensagem (texto, assunto, utilizador_email, administrador_admin_email) VALUES('"+mensagem_todos_info +"','"+assunto_todos_info +"','"+destinatario_info+"', '"+email1 +"')"
         print(sql)
         cursor.execute(sql)
         connection.commit()
@@ -531,6 +567,7 @@ def seleciona_clientes(mensagem_todos_info, assunto_todos_info, destinatario_inf
         if connection:
             cursor.close()
             connection.close()
+
 
 def remover_artigo_admin(id_remover_info):
     try:
@@ -546,6 +583,7 @@ def remover_artigo_admin(id_remover_info):
 
     except (Exception, psycopg2.Error) as error:
         print("Erro.")
+
 
 def total_utilizadores():
     try:
@@ -570,6 +608,7 @@ def total_utilizadores():
             cursor.close()
             connection.close()
 
+
 def total_artigos():
     try:
         connection = psycopg2.connect(user="postgres",
@@ -592,6 +631,7 @@ def total_artigos():
         if (connection):
             cursor.close()
             connection.close()
+
 
 def return_clientes():
     try:
@@ -618,6 +658,28 @@ def return_clientes():
             connection.close()
 
 
+def return_artigos_total_preco():
+    try:
+        connection = psycopg2.connect(user="postgres",
+                                      password="postgres",
+                                      host="localhost",
+                                      port="5432",
+                                      database="ProjetoBD2020")
+        cursor = connection.cursor()
+        sql ="SELECT SUM(preco) FROM artigo"
+        print(sql)
+        cursor.execute(sql)
+        total_artigo = cursor.fetchall()
+        return total_artigo
+
+    except (Exception, psycopg2.Error) as error:
+        print("Error", error)
+
+    finally:
+        # closing database connection
+        if (connection):
+            cursor.close()
+            connection.close()
 
 def preco_antigo(id_alterar_info):
     try:
