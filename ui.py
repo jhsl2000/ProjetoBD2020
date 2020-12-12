@@ -794,6 +794,7 @@ def enviar_artigo():
 
 
 def visualizar_artigos():
+    
     global screen40
     screen40 = Toplevel()
     screen40.title("Artigos")
