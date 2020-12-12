@@ -172,7 +172,7 @@ def envia_mensagem(destinatario_info, assunto_info, mensagem_info, email1):
 
 
 
-def envia_mensagem_todos(mensagem_todos_info, assunto_todos_info,email1):
+def envia_mensagem_todos(mensagem_todos_info, assunto_todos_info, email1):
     try:
         connection = psycopg2.connect(user="postgres",
                                       password="postgres",
@@ -730,19 +730,84 @@ def alugar(id_alugar_info, email1):
                                       database="ProjetoBD2020")
         cursor = connection.cursor()
         
-        cursor.execute("SELECT id, nome, tipo, tempo_disponivel FROM artigo WHERE id = %s", [id_alugar_info])     
-        alug = cursor.fetchall()
-        for linha in alug:
-            cursor.execute("INSERT INTO biblioteca (id_b, nome_b, tipo_b, data_alug, total_artigos, tempo_disp, email_ut, utilizador_email) VALUES (%s, %s, %s, CURRENT_TIMESTAMP, nextval('add_artigo'), %s,  '"+ email1 +"', '"+ email1 +"')", [linha[0], linha[1], linha[2], linha[3]])    
         
         cursor.execute("SELECT preco FROM artigo WHERE id = %s", [id_alugar_info])       
         preco_now = cursor.fetchall()
         for linha in preco_now:
             cursor.execute("UPDATE utilizador SET saldo = (saldo - %s) WHERE utilizador.email = '"+ email1 +"'", [linha[0]])
-        
-        print('Alugado com sucesso!')
+            
+            cursor.execute("SELECT saldo FROM utilizador WHERE email = '"+ email1 +"'")       
+            saldo_now = cursor.fetchone()
+            if(saldo_now[0] >= 0):
+                cursor.execute("SELECT id, nome, tipo, tempo_disponivel FROM artigo WHERE id = %s", [id_alugar_info])     
+                alug = cursor.fetchall()
+                for linha in alug:
+                    cursor.execute("INSERT INTO biblioteca (id_b, nome_b, tipo_b, data_alug, total_artigos, tempo_disp, email_ut, utilizador_email) VALUES (%s, %s, %s, CURRENT_TIMESTAMP, nextval('add_artigo'), %s,  '"+ email1 +"', '"+ email1 +"')", [linha[0], linha[1], linha[2], linha[3]])          
+                print('Alugado com sucesso!')
+            else:
+                print('Não tem saldo suficiente.')
+                cursor.execute("SELECT preco FROM artigo WHERE id = %s", [id_alugar_info])       
+                preco_agora = cursor.fetchall()
+                for linha in preco_agora:
+                    cursor.execute("UPDATE utilizador SET saldo = (saldo + %s) WHERE utilizador.email = '"+ email1 +"'", [linha[0]])
+            
         connection.commit()
 
 
     except (Exception, psycopg2.Error) as error:
         print("Error", error)
+
+def ver_filmes_comprados(email1):
+    try:
+        connection = psycopg2.connect(user="postgres",
+                                      password="postgres",
+                                      host="localhost",
+                                      port="5432",
+                                      database="ProjetoBD2020")
+        cursor = connection.cursor()
+            
+        cursor.execute("SELECT nome_b, tipo_b, data_alug, tempo_disp FROM biblioteca WHERE tipo_b = 'Filme' AND email_ut = '"+ email1 +"'")
+        filmes_comprados = cursor.fetchall()
+        return filmes_comprados
+       
+
+    except (Exception, psycopg2.Error) as error:
+        print("Error", error)
+
+def ver_series_compradas(email1):
+    try:
+        connection = psycopg2.connect(user="postgres",
+                                      password="postgres",
+                                      host="localhost",
+                                      port="5432",
+                                      database="ProjetoBD2020")
+        cursor = connection.cursor()
+            
+        cursor.execute("SELECT nome_b, tipo_b, data_alug, tempo_disp FROM biblioteca WHERE tipo_b = 'Série' AND email_ut = '"+ email1 +"'")
+        series_comprados = cursor.fetchall()
+        return series_comprados
+       
+
+    except (Exception, psycopg2.Error) as error:
+        print("Error", error)
+
+
+
+def ver_documentarios_comprados(email1):
+    try:
+        connection = psycopg2.connect(user="postgres",
+                                      password="postgres",
+                                      host="localhost",
+                                      port="5432",
+                                      database="ProjetoBD2020")
+        cursor = connection.cursor()
+            
+        cursor.execute("SELECT nome_b, tipo_b, data_alug, tempo_disp FROM biblioteca WHERE tipo_b = 'Documentário' AND email_ut = '"+ email1 +"'")
+        documentarios_comprados = cursor.fetchall()
+        return documentarios_comprados
+       
+
+    except (Exception, psycopg2.Error) as error:
+        print("Error", error)
+
+

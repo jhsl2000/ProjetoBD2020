@@ -250,6 +250,7 @@ def documentarios():
 def alugar_produto():
     global screen55
     global id_alugar
+    global Entry_produto_alugar
     screen55 = Toplevel(screen)
     screen55.title("Alugar")
     screen55.geometry("400x300")
@@ -258,19 +259,20 @@ def alugar_produto():
     id_alugar = DoubleVar()
 
     Label(screen55, text="Qual o ID do documentário que pretende alugar?").pack()
-    Entry_documentario = Entry(screen55, textvariable=id_alugar)
-    Entry_documentario.pack()
+    Entry_produto_alugar = Entry(screen55, textvariable=id_alugar)
+    Entry_produto_alugar.pack()
     Button(screen55, height=2, width=10, text='Alugar', command=produto_alugar).pack()
 
 
 
 
 def produto_alugar():
-    global screen
-
+    global screen  
+    
     id_alugar_info = id_alugar.get()
 
     funcoes.alugar(id_alugar_info, email1)
+
 
 
 
@@ -549,7 +551,7 @@ def enviar_mensagem_todos():
     mensagem_todos_info = mensagem_todos.get()
     assunto_todos_info = assunto_todos.get()
     
-    if funcoes.envia_mensagem_todos(mensagem_todos_info, assunto_todos_info) == 'mensagem_aceite':
+    if funcoes.envia_mensagem_todos(mensagem_todos_info, assunto_todos_info, email1) == 'mensagem_aceite':
         Label(screen16, text="Mensagem enviada").pack()
     else:
         Label(screen16, text="Erro no envio da mensagem").pack()
@@ -677,7 +679,7 @@ def main_menu():
     Label(screen3, text="").pack()
     Label(screen3, text="").pack()
     Label(screen3, text="").pack()
-    Button(screen3, height=2, width=12, text="Biblioteca").pack()
+    Button(screen3, height=2, width=12, text="Biblioteca", command=biblioteca).pack()
     Label(screen3, text="").pack()
     Label(screen3, text="").pack()
     Label(screen3, text="").pack()
@@ -692,6 +694,104 @@ def main_menu():
     Label(screen3, text="").pack()
     Label(screen3, text="").pack()
     Button(screen3, text="Logout", fg="red", command=logout).pack()
+
+
+
+def biblioteca():
+    global screen30
+    screen30 = Toplevel()
+    screen30.title("Artigos alugados")
+    screen30.geometry("700x600")
+    screen30.resizable(0, 0)
+    screen30.propagate(0)
+
+    Label(screen30, text="").pack()
+    Label(screen30, text="").pack()
+    Label(screen30, text="").pack()
+    Label(screen30, text="").pack()
+    Label(screen30, text="").pack()
+    Label(screen30, text="").pack()
+    Button(screen30, height=2, width=10, text="Filmes", command=filmes_comprados).pack()
+    Label(screen30, text="").pack()
+    Label(screen30, text="").pack()
+    Label(screen30, text="").pack()
+    Button(screen30, height=2, width=10, text="Series", command=series_compradas).pack()
+    Label(screen30, text="").pack()
+    Label(screen30, text="").pack()
+    Label(screen30, text="").pack()
+    Button(screen30, height=2, width=10, text="Documentários", command=documentarios_comprados).pack()
+    Label(screen30, text="").pack()
+    Label(screen30, text="").pack()
+    Label(screen30, text="").pack()
+
+
+def filmes_comprados():
+    global screen31
+    screen31 = Toplevel(screen)
+    screen31.title("Filmes Comprados")
+    screen31.geometry("1280x720")
+    screen31.resizable(0, 0)
+    screen31.propagate(0)
+    
+    for linha in funcoes.ver_filmes_comprados(email1):
+        Label(screen31, text="").pack()
+        Label(screen31, text="").pack()
+        Label(screen31, text=linha[0]).pack()
+        Label(screen31, text="").pack()
+        Label(screen31, text="Tipo: ").pack()
+        Label(screen31, text=linha[1]).pack()
+        Label(screen31, text="Data da compra: ").pack()
+        Label(screen31, text=linha[2]).pack()
+        Label(screen31, text="Tempo disponível: ").pack()
+        Label(screen31, text=linha[3]).pack()
+
+
+
+
+def series_compradas():
+    global screen32 
+    screen32 = Toplevel(screen)
+    screen32.title("Séries Compradas")
+    screen32.geometry("1280x720")
+    screen32.resizable(0, 0)
+    screen32.propagate(0)
+    
+    for linha in funcoes.ver_series_compradas(email1):
+        Label(screen32, text="").pack()
+        Label(screen32, text="").pack()
+        Label(screen32, text=linha[0]).pack()
+        Label(screen32, text="").pack()
+        Label(screen32, text="Tipo: ").pack()
+        Label(screen32, text=linha[1]).pack()
+        Label(screen32, text="Data da compra: ").pack()
+        Label(screen32, text=linha[2]).pack()
+        Label(screen32, text="Tempo disponível: ").pack()
+        Label(screen32, text=linha[3]).pack()
+
+
+
+
+def documentarios_comprados():
+    global screen33
+    screen33 = Toplevel(screen)
+    screen33.title("Documentários Comprados")
+    screen33.geometry("1280x720")
+    screen33.resizable(0, 0)
+    screen33.propagate(0)
+    
+    for linha in funcoes.ver_documentarios_comprados(email1):
+        Label(screen33, text="").pack()
+        Label(screen33, text="").pack()
+        Label(screen33, text=linha[0]).pack()
+        Label(screen33, text="").pack()
+        Label(screen33, text="Tipo: ").pack()
+        Label(screen33, text=linha[1]).pack()
+        Label(screen33, text="Data da compra: ").pack()
+        Label(screen33, text=linha[2]).pack()
+        Label(screen33, text="Tempo disponível: ").pack()
+        Label(screen33, text=linha[3]).pack()
+
+
 
 
 def admin_main_menu():
