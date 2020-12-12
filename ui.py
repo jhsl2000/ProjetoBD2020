@@ -272,10 +272,14 @@ def alugar_produto():
 
 def produto_alugar():
     global screen  
+    global precototal
+    precototal = DoubleVar()
     
     id_alugar_info = id_alugar.get()
 
     funcoes.alugar(id_alugar_info, email1)
+    precototal = funcoes.alugar(id_alugar_info, email1)
+
 
 
 
@@ -1186,12 +1190,16 @@ def estatisticas_artigos():
     screen25.resizable(0, 0)
     screen25.propagate(0)
 
+    precototal_info =precototal.get()
+
     Label(screen25, text="Total de artigos").pack()
     Label(screen25, text=funcoes.total_artigos(), fg= 'green').pack()
     Label(screen25, text="").pack()
     for linha in funcoes.return_artigos_total_preco():
         Label(screen25, text="Valor total dos artigos adicionados").pack()
         Label(screen25, text=linha[0], fg='blue').pack()
+    Label(screen25, text="Valor total dos artigos alugados").pack()
+    Label(screen25, text=precototal_info, fg='blue').pack()
 
 def adicionar_artigos():
     global screen8

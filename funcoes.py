@@ -741,10 +741,12 @@ def alugar(id_alugar_info, email1):
             cursor.execute("SELECT saldo FROM utilizador WHERE email = '"+ email1 +"'")       
             saldo_now = cursor.fetchone()
             if(saldo_now[0] >= 0):
-                cursor.execute("SELECT id, nome, tipo, tempo_disponivel FROM artigo WHERE id = %s", [id_alugar_info])     
+                cursor.execute("SELECT id, nome, tipo, tempo_disponivel, preco FROM artigo WHERE id = %s", [id_alugar_info])     
                 alug = cursor.fetchall()
                 for linha in alug:
+                    preco_total=linha[4]
                     cursor.execute("INSERT INTO biblioteca (id_b, nome_b, tipo_b, data_alug, total_artigos, tempo_disp, email_ut, utilizador_email) VALUES (%s, %s, %s, CURRENT_TIMESTAMP, nextval('add_artigo'), %s,  '"+ email1 +"', '"+ email1 +"')", [linha[0], linha[1], linha[2], linha[3]])          
+                    return(preco_total)
                 print('Alugado com sucesso!')
             else:
                 print('Não tem saldo suficiente.')
