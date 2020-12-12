@@ -219,7 +219,7 @@ def series():
 def documentarios():
     Fonte = {'Verdana', 20}
     global screen15
-    global id_documentarios
+    global id_documentario
     screen15 = Toplevel(screen)
     screen15.title("Documentários")
     screen15.geometry("1280x720")
@@ -238,8 +238,8 @@ def documentarios():
         Label(screen15, text="---------------").pack()
         
     Label(screen15, text="Qual o ID do documentário que pretende visualizar os detalhes?").pack()
-    Entry_serie = Entry(screen15, textvariable=id_serie)
-    Entry_serie.pack()
+    Entry_documentario = Entry(screen15, textvariable=id_documentario)
+    Entry_documentario.pack()
     Button(screen15, height=2, width=10, text='Ver descrições', command=ver_descricao_documentarios).pack()
 
 
@@ -286,7 +286,7 @@ def ver_descricao_series():
     global screen20
     screen20 = Toplevel(screen)
     screen20.title("Descrição Séries")
-    screen20.geometry("1280x720")
+    screen20.geometry("500x600")
     screen20.resizable(0, 0)
     screen20.propagate(0)
 
@@ -327,7 +327,7 @@ def ver_descricao_documentarios():
     global screen72
     screen72 = Toplevel(screen)
     screen72.title("Descrição Documentários")
-    screen72.geometry("1280x720")
+    screen72.geometry("500x600")
     screen72.resizable(0, 0)
     screen72.propagate(0)
 
