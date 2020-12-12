@@ -1121,6 +1121,8 @@ def alterar_preco():
     id_alterar_info = id_alterar.get()
     novo_preco_info = novo_preco.get()
 
+
+    funcoes.preco_antigo(id_alterar_info)
     funcoes.alterar_preco_admin(id_alterar_info, novo_preco_info)
 
     Entry11.delete(0, END)

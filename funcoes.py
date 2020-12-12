@@ -616,3 +616,24 @@ def return_clientes():
         if (connection):
             cursor.close()
             connection.close()
+
+
+
+def preco_antigo(id_alterar_info):
+    try:
+        connection = psycopg2.connect(user="postgres",
+                                  password="postgres",
+                                  host="localhost",
+                                  port="5432",
+                                  database="ProjetoBD2020")
+        cursor = connection.cursor()
+        #cursor.execute("INSERT INTO hist_preco (id, precos) SELECT (id, preco) FROM artigos WHERE id = %s", [id_alterar_info])
+        cursor.execute("SELECT id, preco FROM artigo WHERE id = %s", [id_alterar_info])
+        filmes = cursor.fetchall()
+        for linha in filmes:
+            cursor.execute("INSERT INTO hist_preco (id, precos, data) VALUES (%s, %s, CURRENT_TIMESTAMP)", [linha[0], linha[1]])
+        
+        connection.commit()
+
+    except (Exception, psycopg2.Error) as error:
+        print("Erro.")
