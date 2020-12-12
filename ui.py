@@ -281,7 +281,7 @@ def ver_descricao_filmes():
     global screen71
     screen71 = Toplevel(screen)
     screen71.title("Descrição Filmes")
-    screen71.geometry("1280x720")
+    screen71.geometry("500x600")
     screen71.resizable(0, 0)
     screen71.propagate(0)
 
@@ -462,6 +462,12 @@ def utilizador_enviar_mensagem():
     assunto_utilizador_info = assunto_utilizador.get()
     mensagem_utilizador_info = mensagem_utilizador.get()
 
+    if funcoes.utilizador_enviar_mensagem(mensagem_utilizador_info, assunto_utilizador_info,email1) == 'mensagem_aceite':
+        Label(screen18, text="Mensagem enviada").pack()
+    else:
+        Label(screen18, text="Erro no envio da mensagem").pack()
+
+
 def utilizador_ver_mensagens():
     global screen22
     screen22 = Toplevel(screen)
@@ -471,14 +477,11 @@ def utilizador_ver_mensagens():
     screen22.propagate(0)
 
     for linha in funcoes.utilizador_ver_todas_mensagens(email1):
-        Label(screen13, text="Destinatario:").pack()
-        Label(screen13, text=linha[0]).pack()
-        Label(screen13, text="Assunto:").pack()
-        Label(screen13, text=linha[1]).pack()
-        Label(screen13, text="Texto:").pack()
-        Label(screen13, text=linha[2]).pack()
-        Label(screen13, text="").pack()
-        Label(screen13, text="---------------").pack()
+        Label(screen22, text="Assunto:").pack()
+        Label(screen22, text=linha[0]).pack()
+        Label(screen22, text="Texto:").pack()
+        Label(screen22, text=linha[1]).pack()
+        Label(screen22, text="---------------").pack()
 
 
 def mensagens_para_um_utilizador():
@@ -558,7 +561,7 @@ def enviar_mensagem():
     assunto_info = assunto.get()
     mensagem_info = mensagem.get()
 
-    if funcoes.seleciona_clientes(mensagem_info, assunto_info, destinatario_info) == 'mensagem_aceite':
+    if funcoes.seleciona_clientes(mensagem_info, assunto_info, destinatario_info,email1) == 'mensagem_aceite':
         Label(screen8, text="Mensagem enviada").pack()
     else:
         Label(screen8, text="Erro no envio da mensagem").pack()
@@ -568,17 +571,19 @@ def admin_caixa_entrada_mensagens():
     global screen9
     screen9 = Toplevel(screen)
     screen9.title("Mensagens")
-    screen9.geometry("600x500")
+    screen9.geometry("400x300")
     screen9.resizable(0, 0)
     screen9.propagate(0)
 
     Label(screen9, text="").pack()
     Label(screen9, text="").pack()
-    Button(screen9, text="Pesquisar por utilizador", command = admin_mensagens_utilizador).pack()
+    Button(screen9, height=2, width=20, text="Pesquisar por utilizador", command = admin_mensagens_utilizador).pack()
     Label(screen9, text="").pack()
     Label(screen9, text="").pack()
-    Button(screen9, text="Ver todas as mensagens enviadas", command = admin_ver_todas_mensagens).pack()
-
+    Button(screen9, height=2, width=25,text="Ver todas as mensagens enviadas", command = admin_ver_todas_mensagens).pack()
+    Label(screen9, text="").pack()
+    Label(screen9, text="").pack()
+    Button(screen9,height=2, width=25 , text="Ver todas as mensagens recebidas", command = admin_ver_todas_mensagens_recebidas).pack()
     
 def admin_mensagens_utilizador():
     global screen11
@@ -614,7 +619,20 @@ def admin_ver_mensagens_utilizador():
         Label(screen12, text="").pack()
         Label(screen12, text="").pack()
 
-  
+def admin_ver_todas_mensagens_recebidas():
+    global screen40
+    screen40 = Toplevel(screen)
+    screen40.title("Mensagens")
+    screen40.geometry("1280x720")
+    screen40.resizable(0, 0)
+    screen40.propagate(0)
+
+    for linha in funcoes.admin_ver_mensagens_recebidas(email1):
+        Label(screen40, text="De:  " + linha[0]).pack()
+        Label(screen40, text="Assunto: " + linha[1]).pack()
+        Label(screen40, text="Texto: " + linha[2]).pack()
+        Label(screen40, text="-----------------").pack()
+
 
 
 def admin_ver_todas_mensagens():
@@ -699,7 +717,7 @@ def admin_main_menu():
     Button(screen3, height=2, width=15, text="Adicionar Artigos", command=adicionar_artigos).pack()
     Label(screen3, text="").pack()
     Label(screen3, text="").pack()
-    Button(screen3, height=2, width=15, text="Ver histórico de preços", command=ver_historico).pack()
+    Button(screen3, height=2, width=18, text="Ver histórico de preços", command=ver_historico).pack()
     Label(screen3, text="").pack()
     Label(screen3, text="").pack()
     Button(screen3, height=2, width=15, text="Adicionar saldo", command=saldo).pack()
@@ -717,8 +735,8 @@ def admin_main_menu():
 def ver_historico():
     global screen81
     screen81 = Toplevel(screen)
-    screen81.title("Mensagens")
-    screen81.geometry("1280x720")
+    screen81.title("Histórico de preços")
+    screen81.geometry("500x600")
     screen81.resizable(0, 0)
     screen81.propagate(0)
     
@@ -887,7 +905,9 @@ def estatisticas_artigos():
     Label(screen25, text="Total de artigos").pack()
     Label(screen25, text=funcoes.total_artigos(), fg= 'green').pack()
     Label(screen25, text="").pack()
-
+    for linha in funcoes.return_artigos_total_preco():
+        Label(screen25, text="Valor total dos artigos adicionados").pack()
+        Label(screen25, text=linha[0], fg='blue').pack()
 
 def adicionar_artigos():
     global screen8
@@ -1208,7 +1228,7 @@ def series_admin():
     global Entry22
     global Entry33 
     screen60 = Toplevel(screen)
-    screen60.title("Filmes")
+    screen60.title("Séries")
     screen60.geometry("1280x720")
     screen60.resizable(0, 0)
     screen60.propagate(0)
@@ -1250,7 +1270,7 @@ def documentarios_admin():
     global Entry22
     global Entry33 
     screen105 = Toplevel(screen)
-    screen105.title("Filmes")
+    screen105.title("Documentários")
     screen105.geometry("1280x720")
     screen105.resizable(0, 0)
     screen105.propagate(0)
@@ -1260,7 +1280,7 @@ def documentarios_admin():
     
     
 
-    for linha in funcoes.ver_series_admin():
+    for linha in funcoes.ver_documentarios_admin():
         Label(screen105, text=linha[0]).pack()
         Label(screen105, text="").pack()
         Label(screen105, text="ID: ").pack()
