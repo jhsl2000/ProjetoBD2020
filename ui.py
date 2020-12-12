@@ -166,14 +166,12 @@ def filmes():
     Fonte = {'Verdana', 20}
     global screen5
     global id_filme
-    global id_filme_alugar
     screen5 = Toplevel(screen)
     screen5.title("Filmes")
     screen5.geometry("1280x720")
     screen5.resizable(0, 0)
     screen5.propagate(0)
     id_filme = DoubleVar()
-    id_filme_alugar = DoubleVar()
     
     
 
@@ -189,10 +187,7 @@ def filmes():
     Entry_filme = Entry(screen5, textvariable=id_filme)
     Entry_filme.pack()
     Button(screen5, height=2, width=10, text='Ver descrições', command=ver_descricao_filmes).pack()
-    Label(screen5, text="Qual o ID do filme que pretende alugar?").pack()
-    Entry_filme = Entry(screen5, textvariable=id_filme_alugar)
-    Entry_filme.pack()
-    Button(screen5, height=2, width=10, text='Alugar', command=ver_descricao_filmes).pack()
+    Button(screen5, height=2, width=10, text='Alugar', command=alugar_produto).pack()
 
 
 def series():
@@ -220,6 +215,7 @@ def series():
     Entry_serie = Entry(screen6, textvariable=id_serie)
     Entry_serie.pack()
     Button(screen6, height=2, width=10, text='Ver descrições', command=ver_descricao_series).pack()
+    Button(screen6, height=2, width=10, text='Alugar', command=alugar_produto).pack()
 
 
 def documentarios():
@@ -247,6 +243,37 @@ def documentarios():
     Entry_documentario = Entry(screen15, textvariable=id_documentario)
     Entry_documentario.pack()
     Button(screen15, height=2, width=10, text='Ver descrições', command=ver_descricao_documentarios).pack()
+    Button(screen15, height=2, width=10, text='Alugar', command=alugar_produto).pack()
+
+
+
+def alugar_produto():
+    global screen55
+    global id_alugar
+    screen55 = Toplevel(screen)
+    screen55.title("Alugar")
+    screen55.geometry("400x300")
+    screen55.resizable(0, 0)
+    screen55.propagate(0)
+    id_alugar = DoubleVar()
+
+    Label(screen55, text="Qual o ID do documentário que pretende alugar?").pack()
+    Entry_documentario = Entry(screen55, textvariable=id_alugar)
+    Entry_documentario.pack()
+    Button(screen55, height=2, width=10, text='Alugar', command=produto_alugar).pack()
+
+
+
+
+def produto_alugar():
+    global screen
+
+    id_alugar_info = id_alugar.get()
+
+    funcoes.alugar(id_alugar_info, email1)
+
+
+
 
 
 def ver_descricao_filmes():

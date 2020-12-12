@@ -266,7 +266,7 @@ def addartigo(tipo_info, nome_info, horas_info, preco_info, realizador_info, ato
                                   database="ProjetoBD2020")
         cursor = connection.cursor()
         #cursor.execute(" INSERT INTO Artigo (tipo, nome, realizador, ator, tempo_disponivel, preco, id) VALUES ('" +tipo_info+ "','" +nome_info +"','" +realizador_info +"','"+ator_info +"', horas_info, preco_info, '7')")
-        cursor.execute("INSERT INTO artigo (id, nome, tipo, realizador, ator, tempo_disponivel, preco) VALUES (nextval('put_id'), %s, %s, %s, %s, %s, %s)", (nome_info, tipo_info, realizador_info, ator_info, horas_info, preco_info))    
+        cursor.execute("INSERT INTO artigo (id, nome, tipo, realizador, ator, tempo_disponivel, preco,administrador_admin_email,administrador_admin_email1) VALUES (nextval('put_id'), %s, %s, %s, %s, %s, %s, '1', '1')", (nome_info, tipo_info, realizador_info, ator_info, horas_info, preco_info))  
         print("Adicionado com sucesso")
         connection.commit()
 
@@ -652,7 +652,35 @@ def ver_precos(id_ver_preco_info):
         cursor.execute("SELECT precos, data FROM hist_preco WHERE id = %s", [id_ver_preco_info])
         precos_antigos = cursor.fetchall()
         return precos_antigos
-       
+
+    except (Exception, psycopg2.Error) as error:
+        print("Error", error)
+
+
+
+
+def alugar(id_alugar_info, email1):
+    try:
+        connection = psycopg2.connect(user="postgres",
+                                      password="postgres",
+                                      host="localhost",
+                                      port="5432",
+                                      database="ProjetoBD2020")
+        cursor = connection.cursor()
+        
+        cursor.execute("SELECT id, nome, tipo, tempo_disponivel FROM artigo WHERE id = %s", [id_alugar_info])     
+        alug = cursor.fetchall()
+        for linha in alug:
+            cursor.execute("INSERT INTO biblioteca (id_b, nome_b, tipo_b, data_alug, total_artigos, tempo_disp, email_ut, utilizador_email) VALUES (%s, %s, %s, CURRENT_TIMESTAMP, nextval('add_artigo'), %s,  '"+ email1 +"', '"+ email1 +"')", [linha[0], linha[1], linha[2], linha[3]])    
+        
+        cursor.execute("SELECT preco FROM artigo WHERE id = %s", [id_alugar_info])       
+        preco_now = cursor.fetchall()
+        for linha in preco_now:
+            cursor.execute("UPDATE utilizador SET saldo = (saldo - %s) WHERE utilizador.email = '"+ email1 +"'", [linha[0]])
+        
+        print('Alugado com sucesso!')
+        connection.commit()
+
 
     except (Exception, psycopg2.Error) as error:
         print("Error", error)
