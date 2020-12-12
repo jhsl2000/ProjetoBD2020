@@ -666,7 +666,7 @@ def admin_main_menu():
     Button(screen3, height=2, width=15, text="Adicionar Artigos", command=adicionar_artigos).pack()
     Label(screen3, text="").pack()
     Label(screen3, text="").pack()
-    Button(screen3, height=2, width=15, text="Alterar preco artigo").pack()
+    Button(screen3, height=2, width=15, text="Ver histórico de preços", command=ver_historico).pack()
     Label(screen3, text="").pack()
     Label(screen3, text="").pack()
     Button(screen3, height=2, width=15, text="Adicionar saldo", command=saldo).pack()
@@ -680,10 +680,145 @@ def admin_main_menu():
     Label(screen3, text="").pack()
     Button(screen3, height=2, width=25, text="Ver estatisticas", command=ver_estatisticas).pack()
 
+
+def ver_historico():
+    global screen81
+    screen81 = Toplevel(screen)
+    screen81.title("Mensagens")
+    screen81.geometry("1280x720")
+    screen81.resizable(0, 0)
+    screen81.propagate(0)
+    
+
+
+    Label(screen81, text="").pack()
+    Label(screen81, text="").pack()
+    Label(screen81, text="").pack()
+    Label(screen81, text="").pack()
+    Label(screen81, text="").pack()
+    Label(screen81, text="").pack()
+    Button(screen81, height=2, width=10, text="Filmes", command=preco_filmes).pack()
+    Label(screen81, text="").pack()
+    Label(screen81, text="").pack()
+    Label(screen81, text="").pack()
+    Button(screen81, height=2, width=10, text="Series", command=series_admin).pack()
+    Label(screen81, text="").pack()
+    Label(screen81, text="").pack()
+    Label(screen81, text="").pack()
+    Button(screen81, height=2, width=10, text="Documentários", command=documentarios_admin).pack()
+    Label(screen81, text="").pack()
+    Label(screen81, text="").pack()
+    Label(screen81, text="").pack()
+
+
+def preco_filmes():
+
+    global screen82
+    global id_ver_preco
+    global Entry10 
+    screen82 = Toplevel(screen)
+    screen82.title("Filmes")
+    screen82.geometry("1280x720")
+    screen82.resizable(0, 0)
+    screen82.propagate(0)
+    id_ver_preco = DoubleVar()
+    
+    
+
+    for linha in funcoes.ver_filmes_admin():
+        Label(screen82, text=linha[0]).pack()
+        Label(screen82, text="").pack()
+        Label(screen82, text="ID: ").pack()
+        Label(screen82, text=linha[1]).pack()
+        Label(screen82, text="Preço: ").pack()
+        Label(screen82, text=linha[2]).pack()
+        Label(screen82, text="---------------").pack()
+    Label(screen82, text="Digite o ID do produto que pretende ver o histórico de preço:").pack()
+    Entry10 = Entry(screen82, textvariable=id_ver_preco)
+    Entry10.pack()
+    Button(screen82, height=2, width=15, text="Visualizar preços", command=ver_preco_antigo).pack()
+
+
+def preco_series():
+
+    global screen84
+    global id_ver_preco
+    global Entry20 
+    screen84 = Toplevel(screen)
+    screen84.title("Séries")
+    screen84.geometry("1280x720")
+    screen84.resizable(0, 0)
+    screen84.propagate(0)
+    id_ver_preco = DoubleVar()
+    
+    
+
+    for linha in funcoes.ver_filmes_admin():
+        Label(screen84, text=linha[0]).pack()
+        Label(screen84, text="").pack()
+        Label(screen84, text="ID: ").pack()
+        Label(screen84, text=linha[1]).pack()
+        Label(screen84, text="Preço: ").pack()
+        Label(screen84, text=linha[2]).pack()
+        Label(screen84, text="---------------").pack()
+    Label(screen84, text="Digite o ID do produto que pretende ver o histórico de preço:").pack()
+    Entry20 = Entry(screen84, textvariable=id_ver_preco)
+    Entry20.pack()
+    Button(screen84, height=2, width=15, text="Visualizar preços", command=ver_preco_antigo).pack()
+
+
+
+def preco_documentario():
+
+    global screen83
+    global id_ver_preco
+    global Entry30
+    screen83 = Toplevel(screen)
+    screen83.title("Documentários")
+    screen83.geometry("1280x720")
+    screen83.resizable(0, 0)
+    screen83.propagate(0)
+    id_ver_preco = DoubleVar()
+    
+    
+
+    for linha in funcoes.ver_documentarios_admin():
+        Label(screen83, text=linha[0]).pack()
+        Label(screen83, text="").pack()
+        Label(screen83, text="ID: ").pack()
+        Label(screen83, text=linha[1]).pack()
+        Label(screen83, text="Preço: ").pack()
+        Label(screen83, text=linha[2]).pack()
+        Label(screen83, text="---------------").pack()
+    Label(screen83, text="Digite o ID do produto que pretende ver o histórico de preço:").pack()
+    Entry30 = Entry(screen83, textvariable=id_ver_preco)
+    Entry30.pack()
+    Button(screen83, height=2, width=15, text="Visualizar preços", command=ver_preco_antigo).pack()
+
+
+def ver_preco_antigo():
+    global screen85
+    screen85 = Toplevel(screen)
+    screen85.title("Preços antigos")
+    screen85.geometry("1280x720")
+    screen85.resizable(0, 0)
+    screen85.propagate(0)
+
+    id_ver_preco_info = id_ver_preco.get()
+    for linha in funcoes.ver_precos(id_ver_preco_info):
+        Label(screen85, text="").pack()
+        Label(screen85, text="Preço antigo: ").pack()
+        Label(screen85, text=linha[0]).pack()
+        Label(screen85, text="Alterado na data: ").pack()
+        Label(screen85, text=linha[1]).pack()
+
+
+
+
 def ver_estatisticas():
     global screen23
     screen23 = Toplevel(screen)
-    screen23.title("Mensagens")
+    screen23.title("Estatísticas")
     screen23.geometry("400x200")
     screen23.resizable(0, 0)
     screen23.propagate(0)
