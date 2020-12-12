@@ -3,6 +3,7 @@ import psycopg2.extras
 
 from tkinter import *
 
+
 import funcoes
 
 
@@ -679,6 +680,10 @@ def main_menu():
     Label(screen3, text="").pack()
     Label(screen3, text="").pack()
     Label(screen3, text="").pack()
+    Button(screen3, height=2, width=12, text="Pesquisar", command=pesquisa).pack()
+    Label(screen3, text="").pack()
+    Label(screen3, text="").pack()
+    Label(screen3, text="").pack()
     Button(screen3, height=2, width=12, text="Biblioteca", command=biblioteca).pack()
     Label(screen3, text="").pack()
     Label(screen3, text="").pack()
@@ -694,6 +699,92 @@ def main_menu():
     Label(screen3, text="").pack()
     Label(screen3, text="").pack()
     Button(screen3, text="Logout", fg="red", command=logout).pack()
+
+
+
+def pesquisa():
+    global screen36
+    screen36 = Toplevel()
+    screen36.title("Pesquisar")
+    screen36.geometry("700x600")
+    screen36.resizable(0, 0)
+    screen36.propagate(0)
+
+    Label(screen36, text="").pack()
+    Button(screen36, height=2, width=15, text="Pesquisa por tipo", command=artigos).pack()
+    Label(screen36, text="").pack()
+    Button(screen36, height=2, width=15, text="Pesquisa por título", command=pesquisa_por_titulo).pack()
+    Label(screen36, text="").pack()
+    Button(screen36, height=2, width=15, text="Pesquisa por tipo", command=pesquisa_por_tipo).pack()
+    Label(screen36, text="").pack()
+    Button(screen36, height=2, width=15, text="Pesquisa por tipo", command=pesquisa_por_tipo).pack()
+    Label(screen36, text="").pack()
+    Button(screen36, height=2, width=15, text="Pesquisa por tipo", command=pesquisa_por_tipo).pack()
+    Label(screen36, text="").pack()
+
+
+
+def pesquisa_por_titulo():
+    global screen200
+    screen200 = Toplevel()
+    screen200.title("Pesquisar")
+    screen200.geometry("700x600")
+    screen200.resizable(0, 0)
+    screen200.propagate(0)
+    global Entry18
+    global titulo_pesquisa
+    screen200.title("Pesquisar")
+    screen200.geometry("700x600")
+    screen200.resizable(0, 0)
+    screen200.propagate(0)
+    screen36.destroy()
+    titulo_pesquisa = StringVar()
+
+    Label(screen200, text="").pack()
+    Label(screen200, text="Qual o título do produto que pretende observar?").pack()
+    Entry18 = Entry(screen200, textvariable=titulo_pesquisa)
+    Button(screen200, height=2, width=15, text="Filmes", command=pesquisa_titulo).pack()
+
+
+def pesquisa_titulo():
+    global screen201
+    screen201 = Toplevel()
+    screen201.title("Pesquisar por Título")
+    screen201.geometry("700x600")
+    screen201.resizable(0, 0)
+    screen201.propagate(0)
+
+    titulo_pesquisa_info = titulo_pesquisa.get()
+    
+    funcoes.pesquisar_titulo(titulo_pesquisa_info)
+
+    for linha in funcoes.pesquisar_titulo(titulo_pesquisa_info)
+        Label(screen201, text="---------------").pack()
+        Label(screen201, text="").pack()
+        Label(screen201, text="").pack()
+        Label(screen201, text=linha[0], font=Fonte).pack()
+        Label(screen201, text="").pack()
+        Label(screen201, text="Tipo: " + linha[1]).pack()
+        Label(screen201, text="").pack()
+        Label(screen201, text="Realizador: " + linha[2]).pack()
+        Label(screen201, text="").pack()
+        Label(screen201, text="Ator: " + linha[3]).pack()
+        Label(screen201, text="").pack()
+        Label(screen201, text="Tempo disponível: ").pack()
+        Label(screen201, text=linha[4]).pack()
+        Label(screen201, text="").pack()
+        Label(screen201, text="Preço: ").pack()
+        Label(screen201, text=linha[5]).pack()
+        Label(screen201, text="").pack()
+        Label(screen201, text="").pack()
+        Label(screen201, text="---------------").pack()
+    
+
+
+
+
+
+
 
 
 

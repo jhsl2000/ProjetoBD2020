@@ -2,6 +2,7 @@ import psycopg2
 import psycopg2.extras
 
 
+
 def insere_novo_user(email_info, password_info, nome_info):
     try:
         connection = psycopg2.connect(user="postgres",
@@ -809,5 +810,26 @@ def ver_documentarios_comprados(email1):
 
     except (Exception, psycopg2.Error) as error:
         print("Error", error)
+
+
+
+
+def pesquisar_titulo(titulo_pesquisa_info):
+    try:
+        connection = psycopg2.connect(user="postgres",
+                                      password="postgres",
+                                      host="localhost",
+                                      port="5432",
+                                      database="ProjetoBD2020")
+        cursor = connection.cursor()
+            
+        cursor.execute("SELECT nome, tipo, realizador, ator, tempo_disponivel, preco FROM artigo WHERE artigo.nome = '"+ titulo_pesquisa_info +"'")
+        titulos = cursor.fetchall()
+        return titulos
+       
+
+    except (Exception, psycopg2.Error) as error:
+        print("Error", error)
+
 
 
