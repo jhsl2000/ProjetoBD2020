@@ -585,7 +585,7 @@ def admin_caixa_entrada_mensagens():
 
     Label(screen9, text="").pack()
     Label(screen9, text="").pack()
-    Button(screen9, height=2, width=20, text="Pesquisar por utilizador", command = admin_mensagens_utilizador).pack()
+    Button(screen9, height=2, width=35, text="Ver mensagens enviadas a 1 utilizador", command = admin_mensagens_utilizador).pack()
     Label(screen9, text="").pack()
     Label(screen9, text="").pack()
     Button(screen9, height=2, width=25,text="Ver todas as mensagens enviadas", command = admin_ver_todas_mensagens).pack()

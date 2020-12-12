@@ -156,7 +156,7 @@ def envia_mensagem(destinatario_info, assunto_info, mensagem_info, email1):
         cursor.execute("SELECT email FROM utilizador WHERE utilizador.email ='" +destinatario_info +"'")
 
         if cursor.rowcount == 1:
-            cursor.execute("INSERT INTO mensagem (texto, assunto, utilizador_email, administrador_email) VALUES ('" +mensagem_info + "', '" +assunto_info + "', '" +destinatario_info + "', '"+email1+"')")
+            cursor.execute("INSERT INTO mensagem (texto, assunto, utilizador_email, administrador_admin_email) VALUES ('" +mensagem_info + "', '" +assunto_info + "', '" +destinatario_info + "', '"+email1+"')")
             connection.commit()
             print("Mensagem enviada")
             return 'mensagem_aceite'
@@ -186,7 +186,7 @@ def envia_mensagem_todos(mensagem_todos_info, assunto_todos_info, email1):
         utilizadores=cursor.fetchall()
 
         for linha in utilizadores:
-            sql ="INSERT INTO mensagem (texto, assunto, utilizador_email,administrador_email) VALUES('"+mensagem_todos_info +"','"+assunto_todos_info +"','"+linha[0]+"', '"+email1+"')"
+            sql ="INSERT INTO mensagem (texto, assunto, utilizador_email,administrador_admin_email) VALUES('"+mensagem_todos_info +"','"+assunto_todos_info +"','"+linha[0]+"', '"+email1+"')"
             print(sql)
             cursor.execute(sql)
             connection.commit()
