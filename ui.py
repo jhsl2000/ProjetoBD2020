@@ -166,12 +166,14 @@ def filmes():
     Fonte = {'Verdana', 20}
     global screen5
     global id_filme
+    global id_filme_alugar
     screen5 = Toplevel(screen)
     screen5.title("Filmes")
     screen5.geometry("1280x720")
     screen5.resizable(0, 0)
     screen5.propagate(0)
     id_filme = DoubleVar()
+    id_filme_alugar = DoubleVar()
     
     
 
@@ -187,6 +189,10 @@ def filmes():
     Entry_filme = Entry(screen5, textvariable=id_filme)
     Entry_filme.pack()
     Button(screen5, height=2, width=10, text='Ver descrições', command=ver_descricao_filmes).pack()
+    Label(screen5, text="Qual o ID do filme que pretende alugar?").pack()
+    Entry_filme = Entry(screen5, textvariable=id_filme_alugar)
+    Entry_filme.pack()
+    Button(screen5, height=2, width=10, text='Alugar', command=ver_descricao_filmes).pack()
 
 
 def series():
